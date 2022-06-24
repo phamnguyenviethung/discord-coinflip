@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const DB = process.env.DB_URL.replace("<password>", process.env.DB_PASSWORD);
+const DB =
+  "mongodb+srv://pnviethung:0922981365a@cluster0.rvdce.mongodb.net/coinflip-bot";
 async function connect() {
   try {
     await mongoose.connect(DB, {
