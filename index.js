@@ -1,23 +1,24 @@
 require("dotenv").config();
-const { Client, Intents } = require("discord.js");
 const db = require("./configs/db.js");
-
-// Server config
 db.connect();
+const { Client, Intents, Collection } = require("discord.js");
 
 // Create a new client instance
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
-// When the client is ready, run this code (only once)
-client.once("ready", () => {
-  console.log("Ready!");
-});
+client.commands = new Collection();
+client.aliases = new Collection();
+client.categories = new Collection();
 
-client.on("message", (message) => {
-  if (message.content === "Hi guys") {
-    message.channel.send("Hi, tớ là bot của Hưng!"); //message.reply('Pong!'); Also If You Want The BOT To Ping The Person Who Used The Command
+["commands", "events"].forEach((handler) =>
+  require(`./handlers/${handler}`)(client)
+);
+
+client.on("messageCreate", (messageCreate) => {
+  if (messageCreate.content === "Hi guys") {
+    messageCreate.channel.send("Hi, tớ là bot của Hưng!"); //message.reply('Pong!'); Also If You Want The BOT To Ping The Person Who Used The Command
   }
 });
 
