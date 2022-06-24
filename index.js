@@ -1,5 +1,9 @@
 require("dotenv").config();
 const { Client, Intents } = require("discord.js");
+const db = require("./configs/db.js");
+
+// Server config
+db.connect();
 
 // Create a new client instance
 const client = new Client({
@@ -12,8 +16,6 @@ client.once("ready", () => {
 });
 
 client.on("message", (message) => {
-  console.log(message.content); //If You Dont Want The Messages In Console Then Remove This Line, This Will Log Messages In Console
-
   if (message.content === "Hi guys") {
     message.channel.send("Hi, tớ là bot của Hưng!"); //message.reply('Pong!'); Also If You Want The BOT To Ping The Person Who Used The Command
   }
