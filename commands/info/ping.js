@@ -3,6 +3,6 @@ module.exports = {
   category: "info",
   aliases: ["p"],
   run: (client, message, args) => {
-    message.reply(`🏓 Pong! \`${client.ws.ping}ms\``);
+    message.reply(`Ping của server là: \`${client.ws.ping}ms\``);
   },
 };

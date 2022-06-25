@@ -4,14 +4,21 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
   {
+    id: {
+      type: Number,
+      require: [true, "Vui lòng cung cấp id"],
+    },
+
     money: {
       type: Number,
-      require: [true, "Vui lòng cung cấp số tiền"],
-      default: 0,
+      default: 1000,
     },
     workAt: Date,
     slutAt: Date,
-    isBanned: Boolean,
+    isBanned: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

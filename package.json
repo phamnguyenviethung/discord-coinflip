@@ -11,10 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/builders": "^0.15.0",
     "cors": "^2.8.5",
     "discord.js": "^13.8.1",
     "dotenv": "^16.0.1",
-    "mongoose": "^6.4.0"
+    "mongoose": "^6.4.0",
+    "underscore": "^1.13.4"
   },
   "devDependencies": {
     "eslint": "^8.18.0",

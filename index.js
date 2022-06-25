@@ -1,4 +1,7 @@
 require("dotenv").config();
+const fs = require("node:fs");
+const _ = require("underscore");
+
 const db = require("./configs/db.js");
 db.connect();
 const { Client, Intents, Collection } = require("discord.js");
@@ -11,17 +14,16 @@ const client = new Client({
 client.commands = new Collection();
 client.aliases = new Collection();
 client.categories = new Collection();
+client.interactions = new Collection();
 
-["commands", "events"].forEach((handler) =>
+["commands", "events", "slashCommand"].forEach((handler) =>
   require(`./handlers/${handler}`)(client)
 );
 
-client.on("messageCreate", (messageCreate) => {
-  if (messageCreate.content === "Hi guys") {
-    messageCreate.channel.send("Hi, tớ là bot của Hưng!"); //message.reply('Pong!'); Also If You Want The BOT To Ping The Person Who Used The Command
-  }
-});
-
-// Login to Discord with your client's token
+// client.on("messageCreate", (message) => {
+//   if (message.content === "Hi guys") {
+//     message.channel.send("Hi, tớ là bot của Hưng!");
+//   }
+// });
 
 client.login(process.env.TOKEN);
