@@ -1,6 +1,4 @@
 require("dotenv").config();
-const fs = require("node:fs");
-const _ = require("underscore");
 
 const db = require("./configs/db.js");
 db.connect();
@@ -15,8 +13,9 @@ client.commands = new Collection();
 client.aliases = new Collection();
 client.categories = new Collection();
 client.interactions = new Collection();
+client.cooldowns = new Collection();
 
-["commands", "events", "slashCommand"].forEach((handler) =>
+["commands", "events"].forEach((handler) =>
   require(`./handlers/${handler}`)(client)
 );
 
