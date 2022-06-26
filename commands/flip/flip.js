@@ -1,8 +1,10 @@
 const User = require("../../app/models/User");
 const _ = require("underscore");
+const { send, reply } = require("../../utils/reply");
+
 module.exports = {
-  name: "flipall",
-  description: "Cùng all in nào các chiến binh",
+  name: "flip",
+  description: "Người không all in là người thất bại",
   type: "CHAT_INPUT",
   options: [
     {
@@ -20,6 +22,14 @@ module.exports = {
           value: "Tails",
         },
       ],
+    },
+    {
+      name: "money",
+      description: "Số tiền bạn muốn đặt",
+      type: "INTEGER",
+      required: true,
+      min_value: 1,
+      max_value: 400000,
     },
   ],
   run: async (client, interaction) => {
@@ -40,23 +50,33 @@ module.exports = {
       "Tails",
     ][_.random(13)];
     const userSide = interaction.options.get("side").value;
+    const userMoneyBet = interaction.options.get("money").value;
+
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
+      if (user.money < userMoneyBet) {
+        return reply(interaction, ` Bạn không đủ tiền! =))`);
+      }
+      send(
+        interaction,
+        `**${interaction.user.username}** đã cược **${userMoneyBet}** vào **${userSide}**`
+      );
+
       if (userSide !== pick) {
-        user.money = 0;
+        user.money -= userMoneyBet;
         user.save();
-        return interaction.reply(
+        return reply(
+          interaction,
           ` Kết quả là **${pick}**. Bạn đã mất hết tiền cược `
         );
       }
-
-      user.money *= 2;
+      user.money += userMoneyBet;
       user.save();
       const formatMoney = user.money.toLocaleString("en-US");
-
-      return interaction.reply(
-        ` Kết quả là **${pick}**.Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là **${formatMoney}** `
+      return reply(
+        interaction,
+        ` Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là **${formatMoney}** `
       );
     } catch (error) {
       console.log(error);

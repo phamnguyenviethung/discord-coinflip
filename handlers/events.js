@@ -1,5 +1,4 @@
 const { readdirSync } = require("fs");
-console.log(readdirSync("./events"));
 
 module.exports = (client) => {
   let count = 0;

@@ -2,19 +2,46 @@ const User = require("../../app/models/User");
 
 module.exports = {
   name: "give",
-  category: "money",
-  run: async (client, message, args) => {
-    console.log(message);
+  description: "Chuyển tiền cho người khác!",
+  type: "CHAT_INPUT",
+  options: [
+    {
+      name: "user",
+      description: "Người bạn muốn chuyền tiền",
+      type: "USER",
+      required: true,
+    },
+    {
+      name: "amount",
+      description: "Số tiền bạn muốn chuyền",
+      type: "INTEGER",
+      required: true,
+      min_value: 0,
+    },
+  ],
+  run: async (client, interaction) => {
+    const { value } = interaction.options.get("amount");
+    const { id, username } = interaction.options.getUser("user");
     try {
-      const user = await User.findOne({ id: message.author.id });
-      if (!user) return message.reply("Bạn chưa đăng ký");
+      const user = await User.findOne({ id: interaction.user.id });
+      if (!user) return interaction.reply("Bạn chưa đăng ký");
+      const payee = await User.findOne({ id });
+      if (!payee)
+        return interaction.reply("Người nhận không đúng hoặc chưa đăng ký");
+      if (user.money <= 0 || user.money < value) {
+        return interaction.reply("Bạn không đủ tiền! :(");
+      }
+      user.money -= value;
+      payee.money += value;
+      user.save();
+      payee.save();
 
-      return message.reply(
-        ` Số coin ${message.author.username} đang có là: **${user.money}** `
+      return interaction.reply(
+        ` **${interaction.user.username}** đã chuyển **${value}** cho **${username}** `
       );
     } catch (error) {
       console.log(error);
-      return message.reply("Có lỗi !!");
+      return interaction.reply("Có lỗi !!");
     }
   },
 };

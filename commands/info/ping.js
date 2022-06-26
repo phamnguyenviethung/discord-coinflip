@@ -1,8 +1,8 @@
 module.exports = {
   name: "ping",
-  category: "info",
-  aliases: ["p"],
-  run: (client, message, args) => {
-    message.reply(`Ping của server là: \`${client.ws.ping}ms\``);
+  description: "Xem độ trễ của bot",
+  type: "CHAT_INPUT",
+  run: async (client, interaction) => {
+    interaction.reply(`🏓 Pong! \`${client.ws.ping}ms\``);
   },
 };

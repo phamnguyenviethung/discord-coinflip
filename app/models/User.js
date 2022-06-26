@@ -13,8 +13,10 @@ const UserSchema = new Schema(
       type: Number,
       default: 1000,
     },
-    workAt: Date,
-    slutAt: Date,
+    timeStamp: {
+      work: Object,
+      slut: Object,
+    },
     isBanned: {
       type: Boolean,
       default: false,
