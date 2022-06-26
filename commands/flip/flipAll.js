@@ -56,11 +56,9 @@ module.exports = {
       if (userSide !== pick) {
         user.money = 0;
         await user.save();
-        setTimeout(() => {
-          return interaction.channel.send(
-            ` Kết quả là **${pick}**. Bạn đã mất hết tiền cược `
-          );
-        }, 5 * 1000);
+        return interaction.channel.send(
+          ` Kết quả là **${pick}**. Bạn đã mất hết tiền cược `
+        );
       }
 
       user.money *= 2;
