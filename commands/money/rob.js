@@ -5,7 +5,7 @@ module.exports = {
   name: "rob",
   description: "Ăn cắp tiền",
   type: "CHAT_INPUT",
-  cooldown: 300,
+  cooldown: 200,
   options: [
     {
       name: "user",
@@ -19,6 +19,7 @@ module.exports = {
       const user = await User.findOne({
         id: interaction.options.getUser("user").id,
       });
+      console.log(user);
       const stealer = await User.findOne({ id: interaction.user.id });
       const fine = 50000;
       const pick = [
@@ -26,6 +27,12 @@ module.exports = {
       ][_.random(20)];
       if (!user || !stealer)
         return interaction.reply("Bạn hoặc nạn nhân chưa đăng ký");
+
+      if (user.health.eat < 30 || user.health.drink < 20) {
+        client.cooldowns.get("rob").delete(interaction.user.id);
+        return interaction.reply("Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
+      }
+
       if (user.money <= 0) {
         return interaction.reply("Mục tiêu đã hết tiền");
       }
@@ -45,6 +52,8 @@ module.exports = {
         (user.money * percent[_.random(percent.length - 1)]) / 100;
 
       user.money -= moneyStolen;
+      user.health.eat -= 5;
+      user.health.drink -= 5;
       stealer.money += moneyStolen;
       user.save();
       stealer.save();

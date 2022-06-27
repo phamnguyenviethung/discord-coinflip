@@ -13,9 +13,15 @@ const UserSchema = new Schema(
       type: Number,
       default: 1000,
     },
-    timeStamp: {
-      work: Object,
-      slut: Object,
+    health: {
+      eat: {
+        type: Number,
+        default: 200,
+      },
+      drink: {
+        type: Number,
+        default: 200,
+      },
     },
     isBanned: {
       type: Boolean,

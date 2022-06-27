@@ -23,10 +23,4 @@ client.cooldowns = new Collection();
   require(`./handlers/${handler}`)(client)
 );
 
-// client.on("messageCreate", (message) => {
-//   if (message.content === "Hi guys") {
-//     message.channel.send("Hi, tớ là bot của Hưng!");
-//   }
-// });
-
 client.login(process.env.TOKEN);
