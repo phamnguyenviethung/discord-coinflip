@@ -26,6 +26,9 @@ module.exports = {
       ][_.random(20)];
       if (!user || !stealer)
         return interaction.reply("Bạn hoặc nạn nhân chưa đăng ký");
+      if (user.money <= 0) {
+        return interaction.reply("Mục tiêu đã hết tiền");
+      }
 
       if (pick === 0) {
         stealer.money -= fine;
