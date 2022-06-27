@@ -58,7 +58,7 @@ module.exports = {
         user.save();
 
         await new Promise((resolve) => {
-          setTimeout(resolve, 2000);
+          setTimeout(resolve, 3200);
         });
         return await interaction.channel.send(
           ` Kết quả là **${pick}**. Bạn đã mất hết tiền cược `
@@ -69,7 +69,7 @@ module.exports = {
       user.save();
 
       await new Promise((resolve) => {
-        setTimeout(resolve, 2000);
+        setTimeout(resolve, 3200);
       });
       return await interaction.channel.send(
         ` Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
