@@ -1,7 +1,6 @@
 const User = require("../../app/models/User");
 const _ = require("underscore");
-const { send, reply } = require("../../utils/reply");
-const waitFor = require("../../utils/waitFor");
+const { formatMoney } = require("../../utils/format");
 module.exports = {
   name: "rob",
   description: "Ăn cắp tiền",
@@ -21,36 +20,42 @@ module.exports = {
         id: interaction.options.getUser("user").id,
       });
       const stealer = await User.findOne({ id: interaction.user.id });
-
+      const fine = 50000;
       const pick = [
-        1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1,
+        1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0,
       ][_.random(20)];
       if (!user || !stealer)
         return interaction.reply("Bạn hoặc nạn nhân chưa đăng ký");
 
       if (pick === 0) {
-        stealer.money -= 300;
+        stealer.money -= fine;
         stealer.save();
-        return interaction.channel.send(
-          ` Ăn cắp thất bại. Bạn bị phạt 300$ (Tiền có thể bị âm) `
+        await new Promise((resolve) => {
+          setTimeout(resolve, 1500);
+        });
+        return await interaction.reply(
+          ` Ăn cắp thất bại. **${interaction.user.username}** bị phạt \`${fine}\` (Tiền có thể bị âm) `
         );
       }
-      const moneyStolen = (user.money * 40) / 100;
+      const percent = [10, 15, 20, 25, 30, 45];
+      const moneyStolen =
+        (user.money * percent[_.random(percent.length - 1)]) / 100;
 
       user.money -= moneyStolen;
       stealer.money += moneyStolen;
       user.save();
       stealer.save();
-      const formatMoney = moneyStolen.toLocaleString("en-US");
-
-      return interaction.channel.send(
-        ` **${interaction.user.username}** đã ăn cắp **${formatMoney}** của **${
-          interaction.options.getUser("user").username
-        }** `
+      await new Promise((resolve) => {
+        setTimeout(resolve, 1500);
+      });
+      return await interaction.reply(
+        ` **${interaction.user.username}** đã ăn cắp \`${formatMoney(
+          user.money
+        )}\` của **${interaction.options.getUser("user").username}** `
       );
     } catch (error) {
       console.log(error);
-      return interaction.channel.send("Có lỗi");
+      return interaction.reply("Rob: Có lỗi");
     }
   },
 };

@@ -1,4 +1,5 @@
 const User = require("../../app/models/User");
+const { formatMoney } = require("../../utils/format");
 
 module.exports = {
   name: "give",
@@ -37,11 +38,13 @@ module.exports = {
       payee.save();
 
       return interaction.reply(
-        ` **${interaction.user.username}** đã chuyển **${value}** cho **${username}** `
+        ` **${interaction.user.username}** đã chuyển **${formatMoney(
+          value
+        )}** cho **${username}** `
       );
     } catch (error) {
       console.log(error);
-      return interaction.reply("Có lỗi !!");
+      return interaction.reply("Give: Có lỗi !!");
     }
   },
 };

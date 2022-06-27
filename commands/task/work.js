@@ -1,24 +1,25 @@
 const User = require("../../app/models/User");
+const _ = require("underscore");
 const { formatMoney } = require("../../utils/format");
 
 module.exports = {
-  name: "cash",
-  description: "Xem số tiền bạn đang có!",
+  name: "work",
+  description: "Cùng nhau quậch nào ",
+  cooldown: 250,
   type: "CHAT_INPUT",
   run: async (client, interaction) => {
-    console.log(interaction);
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
-
+      const gift = _.random(800, 8000);
+      user.money += gift;
+      user.save();
       return interaction.reply(
-        ` Số coin ${interaction.user.username} đang có là: **${formatMoney(
-          user.money
-        )}** `
+        `**${interaction.user.username}** đã kiếm được \`${formatMoney(gift)}\``
       );
     } catch (error) {
       console.log(error);
-      return interaction.reply("Cash: Có lỗi !!");
+      return interaction.reply("Work: Có lỗi !!");
     }
   },
 };

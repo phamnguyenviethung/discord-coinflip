@@ -1,6 +1,6 @@
 const User = require("../../app/models/User");
 const _ = require("underscore");
-const { send, reply } = require("../../utils/reply");
+const { formatMoney } = require("../../utils/format");
 
 module.exports = {
   name: "flip",
@@ -56,31 +56,35 @@ module.exports = {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
       if (user.money < userMoneyBet) {
-        return reply(interaction, ` Bạn không đủ tiền! =))`);
+        return interaction.reply(` Bạn không đủ tiền! =))`);
       }
-      send(
-        interaction,
-        `**${interaction.user.username}** đã cược **${userMoneyBet}** vào **${userSide}**`
+      interaction.reply(
+        `**${interaction.user.username}** đã cược \`${userMoneyBet}\` vào **${userSide}**`
       );
 
       if (userSide !== pick) {
         user.money -= userMoneyBet;
         user.save();
-        return reply(
-          interaction,
+        await new Promise((resolve) => {
+          setTimeout(resolve, 3000);
+        });
+        return await interaction.channel.send(
           ` Kết quả là **${pick}**. Bạn đã mất hết tiền cược `
         );
       }
       user.money += userMoneyBet;
       user.save();
-      const formatMoney = user.money.toLocaleString("en-US");
-      return reply(
-        interaction,
-        ` Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là **${formatMoney}** `
+      await new Promise((resolve) => {
+        setTimeout(resolve, 3000);
+      });
+      return await interaction.channel.send(
+        ` Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
+          user.money
+        )}\` `
       );
     } catch (error) {
       console.log(error);
-      return interaction.reply("Có lỗi !!");
+      return interaction.reply("Flip:Có lỗi !!");
     }
   },
 };
