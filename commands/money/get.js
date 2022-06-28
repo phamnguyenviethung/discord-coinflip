@@ -13,7 +13,7 @@ module.exports = {
       // user.money += 678910;
       // user.save();
 
-      return interaction.reply(` get cái cc `);
+      return interaction.reply(` Chức năng đã đóng `);
     } catch (error) {
       console.log(error);
       return interaction.reply("Get: Có lỗi !!");

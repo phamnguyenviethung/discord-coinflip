@@ -62,7 +62,9 @@ module.exports = {
         return interaction.reply(` Bạn không đủ tiền! =))`);
       }
       interaction.reply(
-        `**${interaction.user.username}** đã cược \`${userMoneyBet}\` vào **${userSide}**`
+        `**${interaction.user.username}** đã cược \`${formatMoney(
+          userMoneyBet
+        )}\` vào **${userSide}**`
       );
 
       if (userSide !== pick) {

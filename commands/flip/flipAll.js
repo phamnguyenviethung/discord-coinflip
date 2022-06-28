@@ -53,7 +53,9 @@ module.exports = {
       }
 
       interaction.reply(
-        `**${interaction.user.username}** đã all in vào **${userSide}**`
+        `**${interaction.user.username}** đã all in **${formatMoney(
+          user.money
+        )}** vào **${userSide}**`
       );
       if (userSide !== pick) {
         user.money = 0;

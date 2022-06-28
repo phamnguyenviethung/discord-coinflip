@@ -1,3 +1,3 @@
 module.exports.formatMoney = (money) => {
-  return money.toLocaleString("en-US") + "$";
+  return money.toFixed(0).toLocaleString("en-US") + "$";
 };

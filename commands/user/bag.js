@@ -1,8 +1,9 @@
 const User = require("../../app/models/User");
+const { formatMoney } = require("../../utils/format");
 
 module.exports = {
-  name: "health",
-  description: "Kiếm tra sức khỏe",
+  name: "bag",
+  description: "Kiếm tra balo",
   type: "CHAT_INPUT",
 
   run: async (client, interaction) => {
@@ -11,11 +12,11 @@ module.exports = {
       if (!user) return interaction.reply("Bạn chưa đăng ký");
 
       return interaction.reply(
-        `Food: **${user.health.eat}** // Water: **${user.health.drink}**`
+        `Nhựa: **${user.metal.plastic}** // Sắt: **${user.metal.iron}**`
       );
     } catch (error) {
       console.log(error);
-      return interaction.reply("checkHealth: có lỗi");
+      return interaction.reply("bag: có lỗi");
     }
   },
 };

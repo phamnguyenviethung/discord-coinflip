@@ -1,4 +1,6 @@
 const { Collection } = require("discord.js");
+const dayjs = require("dayjs");
+require("dayjs/locale/vi");
 module.exports = (client, interaction) => {
   if (!interaction.isCommand()) return;
   const command = client.interactions.get(interaction.commandName);
@@ -13,8 +15,12 @@ module.exports = (client, interaction) => {
 
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
+      const dayjsTime = dayjs()
+        .locale("vi")
+        .add(timeLeft, "seconds")
+        .format("H:mm:ss");
       return interaction.reply(
-        `Vui lòng chờ \`${timeLeft.toFixed(1)}\` giây để sử dụng lệnh này!`
+        `Vui lòng chờ để sử dụng. Bạn có thể quay lại vào lúc **${dayjsTime}**`
       );
     }
   }

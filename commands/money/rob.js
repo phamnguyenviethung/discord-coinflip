@@ -1,11 +1,12 @@
 const User = require("../../app/models/User");
 const _ = require("underscore");
+const dayjs = require("dayjs");
 const { formatMoney } = require("../../utils/format");
 module.exports = {
   name: "rob",
   description: "Ăn cắp tiền",
   type: "CHAT_INPUT",
-  cooldown: 200,
+  cooldown: 800,
   options: [
     {
       name: "user",
@@ -16,53 +17,56 @@ module.exports = {
   ],
   run: async (client, interaction) => {
     try {
-      const user = await User.findOne({
+      const victim = await User.findOne({
         id: interaction.options.getUser("user").id,
       });
-      console.log(user);
       const stealer = await User.findOne({ id: interaction.user.id });
-      const fine = 50000;
-      const pick = [
-        1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0,
-      ][_.random(20)];
-      if (!user || !stealer)
+      if (!victim || !stealer)
         return interaction.reply("Bạn hoặc nạn nhân chưa đăng ký");
+      if (victim.id === stealer.id) {
+        client.cooldowns.get("rob").delete(interaction.user.id);
+        return interaction.reply("Đừng ăn cắp cuả chính mình =( ");
+      }
+      const fine = 10000;
+      const pick = _.random(1, 10);
+      console.log(victim.health);
 
-      if (user.health.eat < 30 || user.health.drink < 20) {
+      if (stealer.health.eat < 30 || stealer.health.drink < 20) {
         client.cooldowns.get("rob").delete(interaction.user.id);
         return interaction.reply("Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
 
-      if (user.money <= 0) {
+      if (victim.money <= 0) {
         return interaction.reply("Mục tiêu đã hết tiền");
       }
-
-      if (pick === 0) {
+      if (pick <= 7) {
         stealer.money -= fine;
         stealer.save();
+
         await new Promise((resolve) => {
           setTimeout(resolve, 1500);
         });
         return await interaction.reply(
-          ` Ăn cắp thất bại. **${interaction.user.username}** bị phạt \`${fine}\` (Tiền có thể bị âm) `
+          ` Ăn cắp thất bại. **${
+            interaction.user.username
+          }** bị phạt \`${formatMoney(fine)}\` `
         );
       }
-      const percent = [10, 15, 20, 25, 30, 45];
-      const moneyStolen =
-        (user.money * percent[_.random(percent.length - 1)]) / 100;
+      const percent = 15;
+      const moneyStolen = (victim.money * percent) / 100;
 
-      user.money -= moneyStolen;
-      user.health.eat -= 5;
-      user.health.drink -= 5;
+      victim.money -= moneyStolen;
+      victim.health.eat -= 10;
+      victim.health.drink -= 10;
       stealer.money += moneyStolen;
-      user.save();
+      victim.save();
       stealer.save();
       await new Promise((resolve) => {
         setTimeout(resolve, 1500);
       });
       return await interaction.reply(
         ` **${interaction.user.username}** đã ăn cắp \`${formatMoney(
-          user.money
+          victim.money
         )}\` của **${interaction.options.getUser("user").username}** `
       );
     } catch (error) {
