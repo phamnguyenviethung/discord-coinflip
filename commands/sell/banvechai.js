@@ -31,7 +31,7 @@ module.exports = {
         setTimeout(resolve, 1200);
       });
       return await interaction.reply(
-        ` Bạn đã bán ve chai được **${formatMoney(user.money)}**`
+        ` Bạn đã bán ve chai được **${formatMoney(sellprice)}**`
       );
     } catch (error) {
       console.log(error);
