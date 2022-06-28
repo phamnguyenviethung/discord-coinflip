@@ -45,7 +45,7 @@ module.exports = {
         await new Promise((resolve) => {
           setTimeout(resolve, 1500);
         });
-        client.users.fetch(interaction.user.id).then((user) => {
+        client.users.fetch(victim.id).then((user) => {
           try {
             user.send(
               `Alo cậu ơi, **${interaction.user.username}** có ý định ăn cắp tiền của bạn nhưng đã thất bại.`
@@ -73,7 +73,7 @@ module.exports = {
         setTimeout(resolve, 1500);
       });
 
-      client.users.fetch(interaction.user.id).then((user) => {
+      client.users.fetch(victim.id).then((user) => {
         try {
           user.send(
             `Alo cậu ơi, **${
