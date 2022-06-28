@@ -27,22 +27,7 @@ module.exports = {
     try {
       const user = await User.findOne({ id: interaction.user.id });
       const userSide = interaction.options.get("side").value;
-      const pick = [
-        "Heads",
-        "Tails",
-        "Heads",
-        "Tails",
-        "Heads",
-        "Tails",
-        "Heads",
-        "Heads",
-        "Tails",
-        "Tails",
-        "Tails",
-        "Heads",
-        "Heads",
-        "Tails",
-      ][_.random(13)];
+      const pick = _.random(1, 10) >= 5 ? "Heads" : "Tails";
 
       if (!user) return interaction.channel.send("Bạn chưa đăng ký");
       if (user.health.eat < 25 || user.health.drink < 20) {

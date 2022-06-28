@@ -33,22 +33,7 @@ module.exports = {
     },
   ],
   run: async (client, interaction) => {
-    const pick = [
-      "Heads",
-      "Tails",
-      "Heads",
-      "Tails",
-      "Heads",
-      "Tails",
-      "Heads",
-      "Heads",
-      "Tails",
-      "Tails",
-      "Tails",
-      "Heads",
-      "Heads",
-      "Tails",
-    ][_.random(13)];
+    const pick = _.random(1, 10) >= 5 ? "Heads" : "Tails";
     const userSide = interaction.options.get("side").value;
     const userMoneyBet = interaction.options.get("money").value;
 

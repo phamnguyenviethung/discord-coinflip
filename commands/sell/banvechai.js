@@ -5,6 +5,7 @@ module.exports = {
   name: "banvechai",
   description: "Bán ve chai",
   type: "CHAT_INPUT",
+  cooldown: 500,
   run: async (client, interaction) => {
     try {
       const user = await User.findOne({ id: interaction.user.id });
@@ -16,8 +17,8 @@ module.exports = {
       }
 
       const price = {
-        iron: 300,
-        plastic: 250,
+        iron: 250,
+        plastic: 200,
       };
 
       const sellprice = iron * price.iron + plastic * price.plastic;

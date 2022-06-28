@@ -7,11 +7,11 @@ module.exports = {
   cooldown: 1,
   run: async (client, interaction) => {
     try {
-      // const user = await User.findOne({ id: interaction.user.id });
-      // if (!user) return interaction.reply("Bạn chưa đăng ký");
+        // const user = await User.findOne({ id: interaction.user.id });
+        // if (!user) return interaction.reply("Bạn chưa đăng ký");
 
-      // user.money += 678910;
-      // user.save();
+        // user.money += 678910;
+        // user.save();
 
       return interaction.reply(` Chức năng đã đóng `);
     } catch (error) {

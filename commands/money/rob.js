@@ -29,7 +29,6 @@ module.exports = {
       }
       const fine = 10000;
       const pick = _.random(1, 10);
-      console.log(victim.health);
 
       if (stealer.health.eat < 30 || stealer.health.drink < 20) {
         client.cooldowns.get("rob").delete(interaction.user.id);

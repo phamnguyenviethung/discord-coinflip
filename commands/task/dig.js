@@ -5,7 +5,7 @@ const { formatMoney } = require("../../utils/format");
 module.exports = {
   name: "dig",
   description: "Cùng nhau dig nào ",
-  cooldown: 20,
+  cooldown: 25,
   type: "CHAT_INPUT",
   run: async (client, interaction) => {
     try {
@@ -19,10 +19,10 @@ module.exports = {
 
       const pick = _.random(1, 10);
 
-      user.health.eat -= 2;
-      user.health.drink -= 2;
-      if (pick <= 5) {
-        const quantity = _.random(3, 5);
+      user.health.eat -= 4;
+      user.health.drink -= 4;
+      if (pick <= 7) {
+        const quantity = _.random(2, 4);
         user.metal.plastic += quantity;
 
         user.save();

@@ -7,7 +7,7 @@ module.exports = {
   type: "CHAT_INPUT",
 
   run: async (client, interaction) => {
-    const price = 150;
+    const price = 100;
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
@@ -15,7 +15,7 @@ module.exports = {
         return interaction.reply(` Bạn không đủ tiền! =))`);
       }
       user.money -= price;
-      user.health.drink += 25;
+      user.health.drink += 30;
       user.save();
 
       return interaction.reply(
