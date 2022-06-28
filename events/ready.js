@@ -1,3 +1,3 @@
-module.exports = (client, msg, args) => {
+module.exports = async (client, msg, args) => {
   console.log("Bot is ready!");
 };

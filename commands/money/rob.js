@@ -6,7 +6,7 @@ module.exports = {
   name: "rob",
   description: "Ăn cắp tiền",
   type: "CHAT_INPUT",
-  cooldown: 800,
+  cooldown: 0,
   options: [
     {
       name: "user",
@@ -45,6 +45,15 @@ module.exports = {
         await new Promise((resolve) => {
           setTimeout(resolve, 1500);
         });
+        client.users.fetch(interaction.user.id).then((user) => {
+          try {
+            user.send(
+              `Alo cậu ơi, **${interaction.user.username}** có ý định ăn cắp tiền của bạn nhưng đã thất bại.`
+            );
+          } catch (err) {
+            console.log("Robfail: có lỗi");
+          }
+        });
         return await interaction.reply(
           ` Ăn cắp thất bại. **${
             interaction.user.username
@@ -62,6 +71,20 @@ module.exports = {
       stealer.save();
       await new Promise((resolve) => {
         setTimeout(resolve, 1500);
+      });
+
+      client.users.fetch(interaction.user.id).then((user) => {
+        try {
+          user.send(
+            `Alo cậu ơi, **${
+              interaction.user.username
+            }** đã ăn cắp \`${formatMoney(
+              victim.money
+            )}\`của cậu.Hãy làm gì đó đi`
+          );
+        } catch (err) {
+          console.log("Robfail: có lỗi");
+        }
       });
       return await interaction.reply(
         ` **${interaction.user.username}** đã ăn cắp \`${formatMoney(
