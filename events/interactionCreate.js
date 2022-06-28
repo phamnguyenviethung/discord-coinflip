@@ -21,7 +21,7 @@ module.exports = (client, interaction) => {
         .format("H:mm:ss");
       return interaction.reply(
         `Vui lòng chờ để sử dụng. Bạn có thể quay lại sau **${timeLeft.toFixed(
-          0
+          1
         )} giây**`
       );
     }
