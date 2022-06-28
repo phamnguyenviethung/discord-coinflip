@@ -22,7 +22,7 @@ module.exports = (client, interaction) => {
       return interaction.reply(
         `Vui lòng chờ để sử dụng. Bạn có thể quay lại sau **${timeLeft.toFixed(
           0
-        )}**`
+        )} giây**`
       );
     }
   }
