@@ -20,7 +20,9 @@ module.exports = (client, interaction) => {
         .add(timeLeft, "seconds")
         .format("H:mm:ss");
       return interaction.reply(
-        `Vui lòng chờ để sử dụng. Bạn có thể quay lại vào lúc **${dayjsTime}**`
+        `Vui lòng chờ để sử dụng. Bạn có thể quay lại sau **${timeLeft.toFixed(
+          0
+        )}**`
       );
     }
   }
