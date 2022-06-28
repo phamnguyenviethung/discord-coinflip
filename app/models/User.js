@@ -23,16 +23,30 @@ const UserSchema = new Schema(
         default: 200,
       },
     },
-    metal: {
-      iron: {
+    inventory: {
+      cloth: {
         type: Number,
         default: 0,
       },
-      plastic: {
+      wire: {
+        type: Number,
+        default: 0,
+      },
+      tape: {
         type: Number,
         default: 0,
       },
     },
+    // metal: {
+    //   iron: {
+    //     type: Number,
+    //     default: 0,
+    //   },
+    //   plastic: {
+    //     type: Number,
+    //     default: 0,
+    //   },
+    // },
     isBanned: {
       type: Boolean,
       default: false,

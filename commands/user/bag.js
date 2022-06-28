@@ -10,9 +10,9 @@ module.exports = {
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
-
+      console.log(user.inventory.wire);
       return interaction.reply(
-        `Nhựa: **${user.metal.plastic}** // Sắt: **${user.metal.iron}**`
+        `Plastic: **${user.inventory.plastic}**\nIron: **${user.inventory.iron}**\nTape: **${user.inventory.tape}**\nWire: **${user.inventory.wire}**\nCloth: **${user.inventory.cloth}**`
       );
     } catch (error) {
       console.log(error);

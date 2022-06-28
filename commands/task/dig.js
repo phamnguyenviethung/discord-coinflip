@@ -1,11 +1,11 @@
 const User = require("../../app/models/User");
 const _ = require("underscore");
-const { formatMoney } = require("../../utils/format");
+const { random } = require("chance-percent");
 
 module.exports = {
   name: "dig",
   description: "Cùng nhau dig nào ",
-  cooldown: 25,
+  cooldown: 30,
   type: "CHAT_INPUT",
   run: async (client, interaction) => {
     try {
@@ -17,26 +17,42 @@ module.exports = {
         return interaction.reply("Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
 
-      const pick = _.random(1, 10);
+      const randomQuantity = _.random(1, 10);
 
-      user.health.eat -= 4;
-      user.health.drink -= 4;
-      if (pick <= 7) {
-        const quantity = _.random(2, 4);
-        user.metal.plastic += quantity;
+      // Plastic - Cloth - Tape - Iron - Wire
+      const options = [
+        { value: "plastic", percentage: 35 },
+        { value: "cloth", percentage: 30 },
+        { value: "tape", percentage: 20 },
+        { value: "iron", percentage: 14 },
+        { value: "wire", percentage: 1 },
+      ];
+      const randomItem = random(options);
+      user.health.eat -= 3;
+      user.health.drink -= 3;
 
-        user.save();
-        return interaction.reply(
-          `**${interaction.user.username}** đã đào được **${quantity} nhựa**`
-        );
-      } else {
-        const quantity = _.random(1, 3);
-        user.metal.iron += quantity;
-        user.save();
-        return interaction.reply(
-          `**${interaction.user.username}** đã đào được **${quantity} sắt**`
-        );
-      }
+      user.inventory[randomItem] += randomQuantity;
+      user.save();
+      return interaction.reply(
+        `**${interaction.user.username}** đã đào được **${randomQuantity} ${randomItem}**`
+      );
+
+      // if (randomQuantity <= 7) {
+      //   const quantity = _.random(2, 4);
+      //   user.inventory.plastic += quantity;
+
+      //   user.save();
+      //   return interaction.reply(
+      //     `**${interaction.user.username}** đã đào được **${quantity} nhựa**`
+      //   );
+      // } else {
+      //   const quantity = _.random(1, 3);
+      //   user.inventory.iron += quantity;
+      //   user.save();
+      //   return interaction.reply(
+      //     `**${interaction.user.username}** đã đào được **${quantity} sắt**`
+      //   );
+      // }
     } catch (error) {
       console.log(error);
       return interaction.reply("Dig: Có lỗi !!");

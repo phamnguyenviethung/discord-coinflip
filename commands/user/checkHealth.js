@@ -9,7 +9,6 @@ module.exports = {
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
-
       return interaction.reply(
         `Food: **${user.health.eat}** // Water: **${user.health.drink}**`
       );
