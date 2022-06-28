@@ -6,7 +6,7 @@ module.exports = {
   name: "rob",
   description: "Ăn cắp tiền",
   type: "CHAT_INPUT",
-  cooldown: 0,
+  cooldown: 1200,
   options: [
     {
       name: "user",
