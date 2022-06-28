@@ -1,7 +1,7 @@
-const User = require("../../app/models/User");
+const User = require("../app/models/User");
 const _ = require("underscore");
 const dayjs = require("dayjs");
-const { formatMoney } = require("../../utils/format");
+const { formatMoney } = require("../utils/format");
 module.exports = {
   name: "rob",
   description: "Ăn cắp tiền",
