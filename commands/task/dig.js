@@ -13,7 +13,7 @@ module.exports = {
       if (!user) return interaction.reply("Bạn chưa đăng ký");
 
       if (user.health.eat < 10 || user.health.drink < 5) {
-        client.cooldowns.get("rob").delete(interaction.user.id);
+        client.cooldowns.get("dig").delete(interaction.user.id);
         return interaction.reply("Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
 
