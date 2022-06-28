@@ -36,6 +36,14 @@ const UserSchema = new Schema(
         type: Number,
         default: 0,
       },
+      iron: {
+        type: Number,
+        default: 0,
+      },
+      plastic: {
+        type: Number,
+        default: 0,
+      },
     },
     // metal: {
     //   iron: {
