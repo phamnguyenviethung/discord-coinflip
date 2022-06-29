@@ -14,6 +14,10 @@ module.exports = {
       if (user.money < price) {
         return interaction.reply(` Bạn không đủ tiền! =))`);
       }
+      if (user.health.drink >= 500) {
+        return interaction.reply(` Bạn không khát nước.`);
+      }
+
       user.money -= price;
       user.health.drink += 30;
       user.save();
