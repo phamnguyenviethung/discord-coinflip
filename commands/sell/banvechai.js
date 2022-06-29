@@ -5,15 +5,43 @@ module.exports = {
   name: "banvechai",
   description: "Bán ve chai",
   type: "CHAT_INPUT",
-  cooldown: 500,
+  cooldown: 10,
+  options: [
+    {
+      name: "type",
+      description: "Chọn thứ cần bán",
+      required: true,
+      type: "STRING",
+      choices: [
+        {
+          name: "Plastic",
+          value: "plastic",
+        },
+        {
+          name: "Iron",
+          value: "iron",
+        },
+      ],
+    },
+    {
+      name: "amount",
+      description: "Số lượng muốn bán",
+      type: "INTEGER",
+      required: true,
+      min_value: 1,
+    },
+  ],
   run: async (client, interaction) => {
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.channel.send("Bạn chưa đăng ký");
-      const { plastic, iron } = user.metal;
+      const type = interaction.options.get("type").value;
+      const amount = interaction.options.get("amount").value;
 
-      if (plastic === 0 && iron === 0) {
-        return interaction.channel.send("Bạn không có để bán");
+      const { plastic, iron } = user.inventory;
+
+      if (user.inventory[type] <= 0) {
+        return interaction.reply("Bạn không có để bán");
       }
 
       const price = {
@@ -21,10 +49,10 @@ module.exports = {
         plastic: 200,
       };
 
-      const sellprice = iron * price.iron + plastic * price.plastic;
+      const sellprice =
+        type === "plastic" ? price.plastic * amount : price.iron * amount;
 
-      user.metal.iron = 0;
-      user.metal.plastic = 0;
+      user.inventory[type] -= amount;
       user.money += sellprice;
       user.save();
 
@@ -32,7 +60,9 @@ module.exports = {
         setTimeout(resolve, 1200);
       });
       return await interaction.reply(
-        ` Bạn đã bán ve chai được **${formatMoney(sellprice)}**`
+        ` Bạn đã bán **${amount + " " + type}** được **${formatMoney(
+          sellprice
+        )}**`
       );
     } catch (error) {
       console.log(error);
