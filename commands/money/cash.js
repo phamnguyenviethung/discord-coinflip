@@ -6,7 +6,6 @@ module.exports = {
   description: "Xem số tiền bạn đang có!",
   type: "CHAT_INPUT",
   run: async (client, interaction) => {
-    console.log(interaction);
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
