@@ -44,17 +44,12 @@ const UserSchema = new Schema(
         type: Number,
         default: 0,
       },
+      knife: {
+        type: Number,
+        default: 0,
+      },
     },
-    // metal: {
-    //   iron: {
-    //     type: Number,
-    //     default: 0,
-    //   },
-    //   plastic: {
-    //     type: Number,
-    //     default: 0,
-    //   },
-    // },
+
     isBanned: {
       type: Boolean,
       default: false,
