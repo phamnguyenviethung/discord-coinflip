@@ -31,7 +31,7 @@ module.exports = {
 
       if (!user) return interaction.channel.send("Bạn chưa đăng ký");
       if (user.health.eat < 25 || user.health.drink < 20) {
-        return interaction.reply("Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
+        return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
       if (user.money <= 0) {
         return interaction.reply(` Bạn không đủ tiền! =))`);
@@ -40,7 +40,7 @@ module.exports = {
       interaction.reply(
         `**${interaction.user.username}** đã all in **${formatMoney(
           user.money
-        )}** vào **${userSide}**`
+        )}** vào **${userSide}** 🙅‍♂️🙅‍♂️🙅‍♂️`
       );
       if (userSide !== pick) {
         user.money = 0;
@@ -52,7 +52,7 @@ module.exports = {
           setTimeout(resolve, 3200);
         });
         return await interaction.channel.send(
-          ` Kết quả là **${pick}**. Bạn đã mất hết tiền cược. Nhà cái tặng bạn *1 chai nước* và *1 ổ bánh mì*`
+          `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược. Nhà cái tặng bạn *1 chai nước* và *1 ổ bánh mì*`
         );
       }
 
@@ -65,7 +65,7 @@ module.exports = {
         setTimeout(resolve, 3200);
       });
       return await interaction.channel.send(
-        ` Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
+        `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
           user.money
         )}\` `
       );

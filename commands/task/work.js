@@ -14,7 +14,7 @@ module.exports = {
 
       if (user.health.eat < 25 || user.health.drink < 20) {
         client.cooldowns.get("work").delete(interaction.user.id);
-        return interaction.reply("Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
+        return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
 
       const gift = _.random(800, 8000);
@@ -23,7 +23,9 @@ module.exports = {
       user.health.drink -= 2;
       user.save();
       return interaction.reply(
-        `**${interaction.user.username}** đã kiếm được \`${formatMoney(gift)}\``
+        `💰 **${interaction.user.username}** đã kiếm được \`${formatMoney(
+          gift
+        )}\``
       );
     } catch (error) {
       console.log(error);

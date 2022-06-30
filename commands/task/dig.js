@@ -14,7 +14,7 @@ module.exports = {
 
       if (user.health.eat < 10 || user.health.drink < 5) {
         client.cooldowns.get("dig").delete(interaction.user.id);
-        return interaction.reply("Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
+        return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
 
       const randomQuantity = _.random(1, 10);
@@ -34,7 +34,7 @@ module.exports = {
       user.inventory[randomItem] += randomQuantity;
       user.save();
       return interaction.reply(
-        `**${interaction.user.username}** đã đào được **${randomQuantity} ${randomItem}**`
+        `🧑‍🌾 **${interaction.user.username}** đã đào được **${randomQuantity} ${randomItem}**`
       );
 
       // if (randomQuantity <= 7) {

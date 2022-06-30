@@ -2,7 +2,7 @@ const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
 
 module.exports = {
-  name: "give",
+  name: "bank",
   description: "Chuyển tiền cho người khác!",
   type: "CHAT_INPUT",
   options: [
@@ -41,7 +41,7 @@ module.exports = {
       payee.save();
 
       return interaction.reply(
-        ` **${interaction.user.username}** đã chuyển **${formatMoney(
+        `🤑 **${interaction.user.username}** đã chuyển **${formatMoney(
           value
         )}** cho **${username}** `
       );

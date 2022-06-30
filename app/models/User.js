@@ -13,6 +13,14 @@ const UserSchema = new Schema(
       type: Number,
       default: 1000,
     },
+    atm: {
+      type: Number,
+      default: 0,
+    },
+    money: {
+      type: Number,
+      default: 1000,
+    },
     job: {
       type: String,
       default: "jobless",

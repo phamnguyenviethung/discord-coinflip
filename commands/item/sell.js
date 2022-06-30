@@ -17,7 +17,7 @@ module.exports = {
   name: "sell",
   description: "Bán đồ cho người khác!",
   type: "CHAT_INPUT",
-  permissions: ["989447620294504458"],
+  permissions: ["989447620294504458", "992033393674043423"],
   options: [
     {
       name: "user",

@@ -41,7 +41,7 @@ module.exports = {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
       if (user.health.eat < 25 || user.health.drink < 20) {
-        return interaction.reply("Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
+        return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
       if (user.money < userMoneyBet) {
         return interaction.reply(` Bạn không đủ tiền! =))`);
@@ -61,7 +61,7 @@ module.exports = {
           setTimeout(resolve, 3200);
         });
         return await interaction.channel.send(
-          ` Kết quả là **${pick}**. Bạn đã mất hết tiền cược. Nhà cái tặng bạn *1 chai nước* và *1 ổ bánh mì* `
+          `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược. Nhà cái tặng bạn *1 chai nước* và *1 ổ bánh mì* 🍹 `
         );
       }
       user.money += userMoneyBet;
@@ -72,7 +72,7 @@ module.exports = {
         setTimeout(resolve, 3200);
       });
       return await interaction.channel.send(
-        ` Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
+        `🎉🎉🎉  Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
           user.money
         )}\` `
       );
