@@ -120,13 +120,18 @@ module.exports = {
           user.inventory.tape -= 2;
           customer.inventory.sting += amount;
           customer.money -= price;
+          user.money += price;
           user.save();
           customer.save();
           interaction.user.send(
-            `Bạn đã bán *${amount} water* cho **${customerInteraction.username}**`
+            `💳 Bạn đã bán *${amount} sting* cho **${
+              customerInteraction.username
+            }** với giá ${formatMoney(price)}`
           );
           customerInteraction.send(
-            `Bạn đã mua *${amount} water* từ **${interaction.user.username}**`
+            `💳 Bạn đã mua *${amount} sting* từ **${
+              interaction.user.username
+            }** với giá ${formatMoney(price)}`
           );
 
           interaction.deleteReply();
