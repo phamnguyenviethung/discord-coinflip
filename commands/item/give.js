@@ -2,7 +2,7 @@ const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
 
 module.exports = {
-  name: "giveitem",
+  name: "give",
   description: "Ship đồ cho người khác!",
   type: "CHAT_INPUT",
   options: [
