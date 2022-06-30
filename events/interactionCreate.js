@@ -10,7 +10,7 @@ module.exports = (client, interaction) => {
 
   // Permisson checker
 
-  if (!interaction.member.permissions.has(command.permissions || [])) {
+  if ((!interaction.member.permissions.has(command.permissions || []), false)) {
     return interaction.reply("Bạn không có quyền thực hiện lệnh này");
   }
 
