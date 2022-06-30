@@ -5,6 +5,7 @@ module.exports = {
   description: "Kiếm tra sức khỏe",
   type: "CHAT_INPUT",
 
+
   run: async (client, interaction) => {
     try {
       const user = await User.findOne({ id: interaction.user.id });

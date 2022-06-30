@@ -7,6 +7,14 @@ module.exports = (client, interaction) => {
   if (!command) interaction.reply("Lệnh không hợp lệ");
   if (!client.cooldowns.has(command.name))
     client.cooldowns.set(command.name, new Collection());
+
+  // Permisson checker
+
+  if (!interaction.member.permissions.has(command.permissions || [])) {
+    return interaction.reply("Bạn không có quyền thực hiện lệnh này");
+  }
+
+  // cooldown
   const now = Date.now();
   const timestamps = client.cooldowns.get(command.name);
   const cooldownAmount = (command.cooldown || 5) * 1000;

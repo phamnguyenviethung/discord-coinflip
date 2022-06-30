@@ -2,31 +2,27 @@ const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
 
 module.exports = {
-  name: "drink",
-  description: "Uống gì đó đê!!!",
+  name: "Sting",
+  description: "Uống Sting",
   type: "CHAT_INPUT",
-  cooldown: 90,
 
   run: async (client, interaction) => {
-    const price = 80;
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
-      if (user.money < price) {
-        return interaction.reply(` Bạn không đủ tiền! =))`);
+      if (user.inventory <= 0) {
+        return interaction.reply(` Bạn không có`);
       }
       if (user.health.drink >= 500) {
         return interaction.reply(` Bạn không khát nước.`);
       }
 
-      user.money -= price;
-      user.health.drink += 5;
+      user.inventory.sting -= 1;
+      user.health.drink += 30;
       user.save();
 
       return interaction.reply(
-        `${
-          interaction.user.username
-        } vừa uống  1 chai **coca** giá \`${formatMoney(price)}\``
+        `${interaction.user.username} vừa uống  1 chai **sting** giá `
       );
     } catch (error) {
       console.log(error);

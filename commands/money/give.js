@@ -29,6 +29,9 @@ module.exports = {
       const payee = await User.findOne({ id });
       if (!payee)
         return interaction.reply("Người nhận không đúng hoặc chưa đăng ký");
+      if (user.id === payee.id) {
+        return interaction.reply("Bạn không thể dùng lên chính mình");
+      }
       if (user.money <= 0 || user.money < value) {
         return interaction.reply("Bạn không đủ tiền! :(");
       }

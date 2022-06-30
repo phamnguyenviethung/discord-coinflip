@@ -62,6 +62,10 @@ module.exports = {
       const payee = await User.findOne({ id });
       if (!payee)
         return interaction.reply("Người nhận không đúng hoặc chưa đăng ký");
+      if (user.id === payee.id) {
+        return interaction.reply("Bạn không thể dùng lên chính mình");
+      }
+
       if (user.inventory[itemName] <= 0) {
         return interaction.reply("Bạn không có để đưa");
       }

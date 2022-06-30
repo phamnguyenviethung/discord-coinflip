@@ -13,6 +13,12 @@ const UserSchema = new Schema(
       type: Number,
       default: 1000,
     },
+    job: {
+      type: String,
+      default: "jobless",
+      lowercase: true,
+      trim: true,
+    },
     health: {
       eat: {
         type: Number,
@@ -21,6 +27,18 @@ const UserSchema = new Schema(
       drink: {
         type: Number,
         default: 200,
+      },
+    },
+    storage: {
+      water: {
+        bottle: {
+          type: Number,
+          default: 0,
+        },
+        volume: {
+          type: Number,
+          default: 0,
+        },
       },
     },
     inventory: {
@@ -41,6 +59,10 @@ const UserSchema = new Schema(
         default: 0,
       },
       plastic: {
+        type: Number,
+        default: 0,
+      },
+      sting: {
         type: Number,
         default: 0,
       },
