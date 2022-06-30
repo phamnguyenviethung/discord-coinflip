@@ -22,7 +22,7 @@ module.exports = {
       user.save();
 
       return interaction.reply(
-        `${interaction.user.username} vừa uống  1 chai **sting** giá `
+        `${interaction.user.username} vừa uống  1 chai **sting**`
       );
     } catch (error) {
       console.log(error);

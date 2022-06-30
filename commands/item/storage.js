@@ -33,7 +33,10 @@ module.exports = {
         text += `${formatKey}: **${user.storage[type][key]}**\n`;
       });
 
-      return interaction.reply(text);
+      return interaction.reply({
+        content: text,
+        ephemeral: true,
+      });
     } catch (error) {
       console.log(error);
       return interaction.reply("storage: có lỗi");
