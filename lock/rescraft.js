@@ -1,4 +1,4 @@
-const Craft = require("../../app/models/Craft");
+const Craft = require("../app/models/Craft");
 module.exports = {
   name: "res",
   description: "Đăng ký chơi Coinflip",
