@@ -7,7 +7,11 @@ const { formatMoney } = require("../../../utils/format");
 module.exports = async (client, interaction, data) => {
   try {
     const { user } = data;
-
+    if (user.inventory.shovel <= 0) {
+      return interaction.reply(
+        `Bạn không có xẻng. Hãy sử dụng code \`svl\` để craft`
+      );
+    }
     const randomQuantity = _.random(3, 8);
     const randomMoney = _.random(1000, 5000);
 
@@ -28,9 +32,10 @@ module.exports = async (client, interaction, data) => {
       );
     }
 
-    user.health.eat -= 5;
-    user.health.drink -= 5;
+    user.health.eat -= 10;
+    user.health.drink -= 10;
     user.money += randomMoney;
+    user.inventory.shovel -= 1;
 
     user.inventory[randomItem] += randomQuantity;
     user.save();

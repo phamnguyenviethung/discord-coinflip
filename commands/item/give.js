@@ -1,5 +1,19 @@
 const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
+const { category } = require("../../utils/category");
+const choices = [];
+const alreadyHas = [];
+Object.keys(category).forEach((key) => {
+  category[key].forEach((item) => {
+    if (!alreadyHas.includes(item)) {
+      alreadyHas.push(item);
+      choices.push({
+        name: item,
+        value: item,
+      });
+    }
+  });
+});
 
 module.exports = {
   name: "give",
@@ -16,32 +30,7 @@ module.exports = {
       name: "item",
       description: "Item muốn đưa",
       type: "STRING",
-      choices: [
-        {
-          name: "Plastic",
-          value: "plastic",
-        },
-        {
-          name: "Iron",
-          value: "iron",
-        },
-        {
-          name: "Tape",
-          value: "tape",
-        },
-        {
-          name: "Wire",
-          value: "wire",
-        },
-        {
-          name: "Cloth",
-          value: "cloth",
-        },
-        {
-          name: "Knife",
-          value: "knife",
-        },
-      ],
+      choices,
       required: true,
     },
     {
@@ -77,7 +66,7 @@ module.exports = {
       return interaction.reply(
         ` **${interaction.user.username}** đã đưa **${
           value + " " + itemName
-        }** cho **${username}** `
+        }** cho **${username}**. Bạn còn lại ${user.inventory[itemName]} cái`
       );
     } catch (error) {
       console.log(error);

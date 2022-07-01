@@ -6,6 +6,7 @@ module.exports = {
   description: "Kiếm tra kho",
   permissions: [],
   type: "CHAT_INPUT",
+  permissions: ["989447620294504458", "992033393674043423"],
   options: [
     {
       name: "type",

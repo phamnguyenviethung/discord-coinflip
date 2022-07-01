@@ -27,10 +27,10 @@ module.exports = {
       const result = craftItem.result;
       const validItem = [];
 
-      let notEnoughText = "";
+      let reportCostText = "";
 
       require.forEach((reqItem) => {
-        notEnoughText += `**${reqItem.name}**: ${reqItem.amount}\n`;
+        reportCostText += `**${reqItem.name}**: ${reqItem.amount}\n`;
 
         if (
           user.inventory[reqItem.name] !== undefined &&
@@ -43,7 +43,7 @@ module.exports = {
 
       if (validItem.length !== require.length) {
         return interaction.reply(
-          `Bạn không có đủ đồ.\nYêu cầu tối thiểu:\n${notEnoughText}`
+          `Bạn không có đủ đồ.\nYêu cầu tối thiểu:\n${reportCostText}`
         );
       }
       const update = {
@@ -54,7 +54,13 @@ module.exports = {
         update[item.name] = user.inventory[item.name] -= item.amount;
       });
 
+      let resultText = "";
+
       result.forEach((item) => {
+        resultText =
+          result.length === 1
+            ? `**${item.amount} ${item.name}**`
+            : `**${item.name}**: ${item.amount}\n`;
         update[item.name] = user.inventory[item.name] += item.amount;
       });
 
@@ -62,8 +68,12 @@ module.exports = {
         { id: interaction.user.id },
         { inventory: update }
       );
-      console.log(update);
-      return interaction.reply(`Craft thành công`);
+
+      interaction.user.send(`Bạn nhận được \n${resultText}`);
+
+      return interaction.reply(
+        `Craft thành công. Bạn đã tiêu tốn:\n${reportCostText}`
+      );
     } catch (error) {
       console.log(error);
       return interaction.reply("craft: có lỗi");

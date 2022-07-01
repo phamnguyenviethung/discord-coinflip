@@ -35,10 +35,10 @@ module.exports = {
     const user = await User.findOne({ id: interaction.user.id });
     const data = { user };
     if (!user) return interaction.reply("Bạn chưa đăng ký");
-    // if (user.health.eat < 10 || user.health.drink < 5) {
-    //   client.cooldowns.get("job").delete(interaction.user.id);
-    //   return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
-    // }
+    if (user.health.eat < 10 || user.health.drink < 5) {
+      client.cooldowns.get("work").delete(interaction.user.id);
+      return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
+    }
 
     switch (jobType) {
       case "dig":

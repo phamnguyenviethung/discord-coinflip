@@ -86,6 +86,10 @@ const UserSchema = new Schema(
         type: Number,
         default: 0,
       },
+      shovel: {
+        type: Number,
+        default: 0,
+      },
       carp: {
         type: Number,
         default: 0,
