@@ -6,7 +6,7 @@ const User = require("../../app/models/User");
 module.exports = {
   name: "work",
   description: "Cùng nhau quậch nào ",
-  cooldown: 90,
+  cooldown: 45,
   type: "CHAT_INPUT",
   options: [
     {
