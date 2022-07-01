@@ -2,6 +2,7 @@ const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
 const { jobID } = require("../../config");
 const { MessageActionRow, MessageButton } = require("discord.js");
+const _ = require("underscore");
 
 let choices = [];
 Object.keys(jobID).forEach((key) => {
@@ -123,19 +124,24 @@ module.exports = {
           user.money += price;
           user.save();
           customer.save();
+
+          const billID = _.random(10, 500);
+
           interaction.user.send(
             `💳 Bạn đã bán *${amount} sting* cho **${
               customerInteraction.username
-            }** với giá ${formatMoney(price)}`
+            }** với giá ${formatMoney(price)}. Mã giao dịch ${billID}`
           );
           customerInteraction.send(
             `💳 Bạn đã mua *${amount} sting* từ **${
               interaction.user.username
-            }** với giá ${formatMoney(price)}`
+            }** với giá ${formatMoney(price)}. Mã giao dịch ${billID}`
           );
 
           interaction.deleteReply();
-          return interaction.channel.send("Đã mua hàng thành công");
+          return interaction.channel.send(
+            `Giao dịch **#${billID}** thành công`
+          );
         }
 
         if (userClickedInfo?.customId === "no") {
