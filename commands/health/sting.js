@@ -14,11 +14,21 @@ module.exports = {
       if (user.health.drink >= 500) {
         return interaction.reply(` Bạn không khát nước.`);
       }
+
       if (user.job === "water") {
+        if (user.storage.water.bottle <= 0 || user.storage.water.volume <= 0) {
+          return interaction.reply({
+            content: "Bạn không đủ hàng để bán. Hãy đi chế tạo",
+            ephemeral: true,
+          });
+        }
+
         user.storage.water.bottle -= 1;
         user.storage.water.volume -= 1;
         user.inventory.plastic -= 8;
         user.inventory.tape -= 2;
+        user.health.drink += 30;
+        user.save();
 
         return interaction.reply(
           `${interaction.user.username} vừa uống  1 chai **sting**`
