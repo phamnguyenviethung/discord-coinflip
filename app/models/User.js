@@ -36,13 +36,13 @@ const UserSchema = new Schema(
         type: Number,
         default: 200,
       },
+      strength: {
+        type: Number,
+        default: 200,
+      },
     },
     storage: {
       water: {
-        bottle: {
-          type: Number,
-          default: 0,
-        },
         volume: {
           type: Number,
           default: 0,
@@ -75,6 +75,42 @@ const UserSchema = new Schema(
         default: 0,
       },
       knife: {
+        type: Number,
+        default: 0,
+      },
+      huntingrifle: {
+        type: Number,
+        default: 0,
+      },
+      fishingrod: {
+        type: Number,
+        default: 0,
+      },
+      carp: {
+        type: Number,
+        default: 0,
+      },
+      perch: {
+        type: Number,
+        default: 0,
+      },
+      phattom: {
+        type: Number,
+        default: 0,
+      },
+      shark: {
+        type: Number,
+        default: 0,
+      },
+      rabbit: {
+        type: Number,
+        default: 0,
+      },
+      bird: {
+        type: Number,
+        default: 0,
+      },
+      tiger: {
         type: Number,
         default: 0,
       },

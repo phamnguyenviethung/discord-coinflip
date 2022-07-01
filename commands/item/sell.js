@@ -68,7 +68,7 @@ module.exports = {
           ephemeral: true,
         });
 
-      if (user.storage.water.bottle <= 0 || user.storage.water.volume <= 0) {
+      if (user.storage.water.volume <= 0) {
         return interaction.reply({
           content: "Bạn không đủ hàng để bán. Hãy đi chế tạo",
           ephemeral: true,
@@ -109,13 +109,20 @@ module.exports = {
 
         if (userClickedInfo?.customId === "yes") {
           if (customer.money <= 0) {
+            interaction.deleteReply();
             return interaction.channel.send({
               content: "Bạn không còn tiền",
               ephemeral: true,
             });
           }
+          if (customer.inventory.sting > 30) {
+            interaction.deleteReply();
+            return interaction.channel.send({
+              content: "Bạn đã có 30 chai rồi.",
+              ephemeral: true,
+            });
+          }
 
-          user.storage.water.bottle -= amount;
           user.storage.water.volume -= amount;
           user.inventory.plastic -= 8;
           user.inventory.tape -= 2;

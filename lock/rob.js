@@ -32,7 +32,7 @@ module.exports = {
 
       if (stealer.health.eat < 30 || stealer.health.drink < 20) {
         client.cooldowns.get("rob").delete(interaction.user.id);
-        return interaction.reply("Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
+        return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
 
       if (victim.money <= 0) {

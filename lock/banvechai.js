@@ -1,6 +1,6 @@
-const User = require("../../app/models/User");
+const User = require("../app/models/User");
 const _ = require("underscore");
-const { formatMoney } = require("../../utils/format");
+const { formatMoney } = require("../utils/format");
 module.exports = {
   name: "banvechai",
   description: "Bán ve chai",
