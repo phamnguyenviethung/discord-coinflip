@@ -39,13 +39,14 @@ module.exports = {
       type: "INTEGER",
       required: true,
       min_value: 0,
+      max_value: 30,
     },
     {
       name: "price",
       description: "Số tiền bạn muốn bán",
       type: "INTEGER",
       required: true,
-      min_value: 1,
+      min_value: 0,
     },
   ],
   run: async (client, interaction) => {

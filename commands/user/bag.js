@@ -14,6 +14,7 @@ module.exports = {
   name: "bag",
   description: "Kiếm tra balo",
   type: "CHAT_INPUT",
+  cooldown: 0,
   options: [
     {
       name: "type",

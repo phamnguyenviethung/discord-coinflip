@@ -3,25 +3,47 @@ const User = require("../../../app/models/User");
 const _ = require("underscore");
 const { random } = require("chance-percent");
 const { formatMoney } = require("../../../utils/format");
+const { category } = require("../../../utils/category");
 
 module.exports = async (client, interaction, data) => {
   try {
     const { user } = data;
+    const require = {
+      sting: 5,
+      meat: 5,
+    };
     if (user.inventory.shovel <= 0) {
       return interaction.reply(
         `Bạn không có xẻng. Hãy sử dụng code \`svl\` để craft`
       );
     }
-    const randomQuantity = _.random(3, 8);
-    const randomMoney = _.random(1000, 5000);
+    let text = "";
+    Object.keys(require).forEach((key) => {
+      text += `+ **${key}**: ${require[key]}\n`;
+    });
+    let isValid = true;
 
-    // Cloth - Plastic - Tape - Iron - Wire
+    Object.keys(require).forEach((key) => {
+      if (user.inventory[key] < require[key]) {
+        isValid = false;
+      }
+    });
+    if (!isValid) {
+      client.cooldowns.get("work").delete(interaction.user.id);
+      return interaction.reply(
+        `Bạn không đủ thức ăn để dùng trong 1 tuần làm việc.\n- Yêu cầu:\n${text}`
+      );
+    }
+
+    const randomQuantity = _.random(1, 4);
+    const randomMoney = _.random(3000, 8000);
+
     const options = [
-      { value: "cloth", percentage: 34 },
-      { value: "plastic", percentage: 25 },
-      { value: "tape", percentage: 20 },
-      { value: "iron", percentage: 15 },
-      { value: "empty", percentage: 5 },
+      { value: "cloth", percentage: 30 },
+      { value: "tape", percentage: 24 },
+      { value: "empty", percentage: 20 },
+      { value: "plastic", percentage: 15 },
+      { value: "iron", percentage: 10 },
       { value: "wire", percentage: 1 },
     ];
     const randomItem = random(options);
@@ -32,13 +54,28 @@ module.exports = async (client, interaction, data) => {
       );
     }
 
-    user.health.eat -= 10;
-    user.health.drink -= 10;
-    user.money += randomMoney;
-    user.inventory.shovel -= 1;
+    const update = {
+      ...user.inventory,
+    };
+    for (let key in require) {
+      update[key] = user.inventory[key] - require[key];
+    }
 
-    user.inventory[randomItem] += randomQuantity;
-    user.save();
+    await User.findOneAndUpdate(
+      { id: interaction.user.id },
+      {
+        health: {
+          eat: (user.health.eat -= 10),
+          drink: (user.health.drink -= 10),
+        },
+        money: (user.money += randomMoney),
+        inventory: {
+          ...update,
+          shovel: (user.inventory.shovel -= 1),
+          [randomItem]: (user.inventory[randomItem] += randomQuantity),
+        },
+      }
+    );
     return interaction.reply(
       `🧑‍🌾 **${
         interaction.user.username

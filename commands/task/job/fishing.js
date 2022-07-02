@@ -1,15 +1,37 @@
 const _ = require("underscore");
 const { random } = require("chance-percent");
 const { formatMoney } = require("../../../utils/format");
+const User = require("../../../app/models/User");
+
 module.exports = async (client, interaction, data) => {
   try {
     const { user } = data;
+    const require = {
+      sting: 5,
+      meat: 5,
+    };
     if (user.inventory.fishingrod <= 0) {
       return interaction.reply(
         `Bạn không có cần câu. Hãy sử dụng code \`fsr\` để craft`
       );
     }
+    let text = "";
+    Object.keys(require).forEach((key) => {
+      text += `+ **${key}**: ${require[key]}\n`;
+    });
+    let isValid = true;
 
+    Object.keys(require).forEach((key) => {
+      if (user.inventory[key] < require[key]) {
+        isValid = false;
+      }
+    });
+    if (!isValid) {
+      client.cooldowns.get("work").delete(interaction.user.id);
+      return interaction.reply(
+        `Bạn không đủ thức ăn để dùng trong 1 tuần làm việc.\n- Yêu cầu:\n${text}`
+      );
+    }
     const randomQuantity = _.random(2, 6);
     const randomMoney = _.random(1000, 5000);
 
@@ -29,13 +51,28 @@ module.exports = async (client, interaction, data) => {
       );
     }
 
-    user.health.eat -= 5;
-    user.health.drink -= 5;
-    user.money += randomMoney;
-    user.inventory.fishingrod -= 1;
+    const update = {
+      ...user.inventory,
+    };
+    for (let key in require) {
+      update[key] = user.inventory[key] - require[key];
+    }
 
-    user.inventory[randomItem] += randomQuantity;
-    user.save();
+    await User.findOneAndUpdate(
+      { id: interaction.user.id },
+      {
+        health: {
+          eat: (user.health.eat -= 6),
+          drink: (user.health.drink -= 6),
+        },
+        money: (user.money += randomMoney),
+        inventory: {
+          ...update,
+          fishingrod: (user.inventory.fishingrod -= 1),
+          [randomItem]: (user.inventory[randomItem] += randomQuantity),
+        },
+      }
+    );
     return interaction.reply(
       `🧑‍🌾 **${
         interaction.user.username
