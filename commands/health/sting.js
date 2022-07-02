@@ -42,6 +42,7 @@ module.exports = {
       user.inventory.plastic -= 6;
       user.inventory.tape -= 2;
       user.inventory.cloth -= 5;
+      user.inventory.sting -= 1;
       user.health.drink += 40;
 
       user.save();
