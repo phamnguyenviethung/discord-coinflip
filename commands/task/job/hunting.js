@@ -27,12 +27,12 @@ module.exports = async (client, interaction, data) => {
     if (!isValid) {
       client.cooldowns.get("work").delete(interaction.user.id);
       return interaction.reply(
-        `Bạn không đủ thức ăn để dùng trong 1 tuần làm việc.\n- Yêu cầu:\n${text}`
+        `Bạn không đủ lương thực để dùng trong 1 tuần làm việc mệt mỏi.\n- Yêu cầu:\n${text}`
       );
     }
 
     const randomQuantity = _.random(2, 6);
-    const randomMoney = _.random(1000, 5000);
+    const randomMoney = _.random(7000, 15000);
 
     // Cloth - Plastic - Tape - Iron - Wire
     const options = [
