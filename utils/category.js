@@ -5,5 +5,5 @@ module.exports.category = {
   weapon: ["knife", "huntingrifle"],
   drink: ["sting"],
   tool: ["huntingrifle", "fishingrod", "shovel"],
-  eat: ["carp", "perch", "rabbit", "bird", "phattom"],
+  eat: ["carp", "perch", "rabbit", "bird", "phattom", "meat"],
 };

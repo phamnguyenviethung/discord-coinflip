@@ -2,9 +2,8 @@ const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
 const { category } = require("../../utils/category");
 
-const categories = ["fishing", "hunting", "dig", "weapon", "drink", "tool"];
 const choices = [];
-categories.forEach((item) => {
+Object.keys(category).forEach((item) => {
   choices.push({
     name: item,
     value: item,
