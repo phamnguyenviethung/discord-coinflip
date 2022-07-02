@@ -9,7 +9,7 @@ module.exports = {
     {
       name: "amount",
       description: "Số lượng bạn muốn mua",
-      type: "NUMBER",
+      type: "INTEGER",
       required: true,
       min_value: 1,
       max_value: 99,
