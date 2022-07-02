@@ -6,7 +6,7 @@ module.exports = async (client, interaction, data) => {
   try {
     const { user } = data;
     const require = {
-      sting: 6,
+      sting: 2,
     };
     if (user.inventory.huntingrifle <= 0) {
       return interaction.reply(
@@ -32,7 +32,7 @@ module.exports = async (client, interaction, data) => {
     }
 
     const randomQuantity = _.random(2, 6);
-    const randomMoney = _.random(7000, 15000);
+    const randomMoney = _.random(5000, 10000);
 
     // Cloth - Plastic - Tape - Iron - Wire
     const options = [

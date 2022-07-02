@@ -62,6 +62,26 @@ module.exports = {
           content: "Bạn chưa đăng ký",
           ephemeral: true,
         });
+      const require = {
+        cloth: 2,
+        plastic: 5,
+        tape: 2,
+      };
+
+      let isValid = true;
+      let text = "";
+      Object.keys(require).forEach((key) => {
+        text += `+ **${key}**: ${require[key] * amount}\n`;
+        if (user.inventory[key] < require[key] * amount) {
+          isValid = false;
+        }
+      });
+      if (!isValid)
+        return interaction.reply({
+          content: ` Để sản xuất **${amount} chai nước** thì bạn cần:\n${text}`,
+          ephemeral: true,
+        });
+
       const customer = await User.findOne({ id: customerInteraction.id });
       if (!customer)
         return interaction.reply({
@@ -125,11 +145,14 @@ module.exports = {
           }
 
           user.storage.water.volume -= amount;
-          user.inventory.plastic -= 8;
-          user.inventory.tape -= 2;
+          user.inventory.plastic -= 5 * amount;
+          user.inventory.tape -= 2 * amount;
+          user.inventory.cloth -= 2 * amount;
+
           customer.inventory.sting += amount;
           customer.money -= price;
           user.money += price;
+
           user.save();
           customer.save();
 

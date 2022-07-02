@@ -9,8 +9,8 @@ module.exports = async (client, interaction, data) => {
   try {
     const { user } = data;
     const require = {
-      sting: 5,
-      meat: 5,
+      sting: 1,
+      meat: 2,
     };
     if (user.inventory.shovel <= 0) {
       return interaction.reply(
@@ -36,14 +36,14 @@ module.exports = async (client, interaction, data) => {
     }
 
     const randomQuantity = _.random(1, 4);
-    const randomMoney = _.random(8000, 16000);
+    const randomMoney = _.random(5000, 10000);
 
     const options = [
       { value: "cloth", percentage: 30 },
       { value: "tape", percentage: 24 },
-      { value: "empty", percentage: 20 },
-      { value: "plastic", percentage: 15 },
-      { value: "iron", percentage: 10 },
+      { value: "plastic", percentage: 20 },
+      { value: "iron", percentage: 15 },
+      { value: "empty", percentage: 10 },
       { value: "wire", percentage: 1 },
     ];
     const randomItem = random(options);
@@ -65,8 +65,8 @@ module.exports = async (client, interaction, data) => {
       { id: interaction.user.id },
       {
         health: {
-          eat: (user.health.eat - 10),
-          drink: (user.health.drink - 10),
+          eat: user.health.eat - 10,
+          drink: user.health.drink - 10,
         },
         money: (user.money += randomMoney),
         inventory: {
