@@ -33,6 +33,9 @@ module.exports = {
       if (user.inventory[food] < 5) {
         return interaction.reply("Cần tối thiểu là 5 con để chế biến");
       }
+      if (user.inventory.gas < 2) {
+        return interaction.reply("Cần tối thiểu là 2 bình gas để chế biến");
+      }
 
       interaction.reply(`${interaction.user.username} đang nấu **${food}** 🍖`);
       await new Promise((resolve) => {
@@ -44,6 +47,7 @@ module.exports = {
       });
 
       user.inventory[food] -= 5;
+      user.inventory.gas -= 2;
       user.inventory.meat += 20;
       user.save();
 

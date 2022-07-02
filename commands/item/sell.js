@@ -88,7 +88,6 @@ module.exports = {
           content: "Người nhận không đúng hoặc chưa đăng ký",
           ephemeral: true,
         });
-
       if (user.storage.water.volume <= 0) {
         return interaction.reply({
           content: "Bạn không đủ hàng để bán. Hãy đi chế tạo",

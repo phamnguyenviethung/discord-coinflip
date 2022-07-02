@@ -122,6 +122,10 @@ const UserSchema = new Schema(
         type: Number,
         default: 0,
       },
+      gas: {
+        type: Number,
+        default: 0,
+      },
     },
 
     isBanned: {

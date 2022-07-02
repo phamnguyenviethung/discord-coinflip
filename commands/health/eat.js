@@ -17,7 +17,7 @@ module.exports = {
         );
       }
 
-      if (user.health.eat >= 099999) {
+      if (user.health.eat >= 250) {
         return interaction.reply(` Bạn không đói.`);
       }
 

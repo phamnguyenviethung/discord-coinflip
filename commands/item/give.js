@@ -55,8 +55,8 @@ module.exports = {
         return interaction.reply("Bạn không thể dùng lên chính mình");
       }
 
-      if (user.inventory[itemName] <= 0) {
-        return interaction.reply("Bạn không có để đưa");
+      if (user.inventory[itemName] <= 0 || user.inventory[itemName] < value) {
+        return interaction.reply("Bạn không đủ để đưa");
       }
       user.inventory[itemName] -= value;
       payee.inventory[itemName] += value;
