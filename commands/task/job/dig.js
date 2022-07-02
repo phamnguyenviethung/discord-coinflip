@@ -65,8 +65,8 @@ module.exports = async (client, interaction, data) => {
       { id: interaction.user.id },
       {
         health: {
-          eat: (user.health.eat -= 10),
-          drink: (user.health.drink -= 10),
+          eat: (user.health.eat - 10),
+          drink: (user.health.drink - 10),
         },
         money: (user.money += randomMoney),
         inventory: {
