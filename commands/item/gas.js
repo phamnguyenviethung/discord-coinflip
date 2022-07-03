@@ -17,7 +17,7 @@ module.exports = {
   ],
 
   run: async (client, interaction) => {
-    const price = 3500;
+    const price = 2500;
     const amount = interaction.options.get("amount").value;
     try {
       const user = await User.findOne({ id: interaction.user.id });
