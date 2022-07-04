@@ -31,8 +31,8 @@ module.exports = async (client, interaction, data) => {
         `Thật không may, **${interaction.user.username}** đã không săn được gì.`
       );
     }
-    user.health.eat -= 8;
-    user.health.drink -= 8;
+    user.health.eat -= 10;
+    user.health.drink -= 10;
     user.inventory.huntingrifle -= 1;
     user.inventory[randomItem] += randomQuantity;
     user.money += randomMoney;

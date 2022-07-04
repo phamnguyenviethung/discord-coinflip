@@ -35,8 +35,8 @@ module.exports = {
       if (user.inventory[food] < 5) {
         return interaction.reply("Cần tối thiểu là 5 con để chế biến");
       }
-      if (user.inventory.gas < 2) {
-        return interaction.reply("Cần tối thiểu là 2 bình gas để chế biến");
+      if (user.inventory.gas < 1) {
+        return interaction.reply("Cần tối thiểu là 1 bình gas để chế biến");
       }
 
       interaction.reply(`${interaction.user.username} đang nấu **${food}** 🍖`);

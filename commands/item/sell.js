@@ -39,7 +39,7 @@ module.exports = {
       type: "INTEGER",
       required: true,
       min_value: 0,
-      max_value: 70,
+      max_value: 30,
     },
     {
       name: "price",
@@ -135,10 +135,10 @@ module.exports = {
               ephemeral: true,
             });
           }
-          if (customer.inventory.sting > 70) {
+          if (customer.inventory.sting > 50) {
             interaction.deleteReply();
             return interaction.channel.send({
-              content: "Bạn đã có 70 chai rồi.",
+              content: "Bạn đã có 50 chai rồi.",
               ephemeral: true,
             });
           }
