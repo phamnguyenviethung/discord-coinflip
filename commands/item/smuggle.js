@@ -53,7 +53,7 @@ module.exports = {
       }
 
       if (
-        user.inventory[animal] < require[animal].amount &&
+        user.inventory[animal] < require[animal].amount ||
         user.inventory[animal] <= 0
       )
         return interaction.reply(
