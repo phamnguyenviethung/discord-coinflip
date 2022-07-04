@@ -14,8 +14,8 @@ module.exports = async (client, interaction, data) => {
       );
     }
 
-    const randomQuantity = _.random(4, 8);
-    const randomMoney = _.random(9000, 14000);
+    const randomQuantity = _.random(2, 6);
+    const randomMoney = _.random(6000, 12000);
 
     const options = [
       { value: "bird", percentage: 40 },
@@ -31,8 +31,8 @@ module.exports = async (client, interaction, data) => {
         `Thật không may, **${interaction.user.username}** đã không săn được gì.`
       );
     }
-    user.health.eat -= 10;
-    user.health.drink -= 10;
+    user.health.eat -= 12;
+    user.health.drink -= 12;
     user.inventory.huntingrifle -= 1;
     user.inventory[randomItem] += randomQuantity;
     user.money += randomMoney;
