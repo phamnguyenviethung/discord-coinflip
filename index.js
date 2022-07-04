@@ -1,9 +1,7 @@
 require("dotenv").config();
-const dayjs = require("dayjs");
 const db = require("./configs/db.js");
 db.connect();
 const { Client, Intents, Collection } = require("discord.js");
-
 // Create a new client instance
 const client = new Client({
   intents: [
@@ -14,7 +12,6 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-client.aliases = new Collection();
 client.categories = new Collection();
 client.interactions = new Collection();
 client.cooldowns = new Collection();

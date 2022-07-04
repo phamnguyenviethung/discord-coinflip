@@ -1,5 +1,4 @@
 const { Collection } = require("discord.js");
-const dayjs = require("dayjs");
 require("dayjs/locale/vi");
 module.exports = (client, interaction) => {
   if (!interaction.isCommand()) return;
@@ -23,10 +22,7 @@ module.exports = (client, interaction) => {
 
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
-      const dayjsTime = dayjs()
-        .locale("vi")
-        .add(timeLeft, "seconds")
-        .format("H:mm:ss");
+
       return interaction.reply(
         `Vui lòng chờ để sử dụng. Bạn có thể quay lại sau **${timeLeft.toFixed(
           1
@@ -36,5 +32,6 @@ module.exports = (client, interaction) => {
   }
   timestamps.set(interaction.user.id, now);
   setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+
   command.run(client, interaction);
 };
