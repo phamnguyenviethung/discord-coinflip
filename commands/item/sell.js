@@ -135,10 +135,10 @@ module.exports = {
               ephemeral: true,
             });
           }
-          if (customer.inventory.sting > 50) {
+          if (customer.inventory.sting > 30) {
             interaction.deleteReply();
             return interaction.channel.send({
-              content: "Bạn đã có 50 chai rồi.",
+              content: "Bạn đã có 30 chai rồi.",
               ephemeral: true,
             });
           }
