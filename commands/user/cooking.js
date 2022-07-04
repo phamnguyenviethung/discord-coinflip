@@ -5,10 +5,12 @@ const { category } = require("../../utils/category");
 
 const choices = [];
 category.eat.forEach((item) => {
-  choices.push({
-    name: item,
-    value: item,
-  });
+  if (item !== "meat") {
+    choices.push({
+      name: item,
+      value: item,
+    });
+  }
 });
 module.exports = {
   name: "cooking",
@@ -46,9 +48,9 @@ module.exports = {
         setTimeout(resolve, 2000);
       });
 
-      user.inventory[food] -= 5;
-      user.inventory.gas -= 2;
-      user.inventory.meat += 20;
+      user.inventory[food] -= 3;
+      user.inventory.gas -= 1;
+      user.inventory.meat += 10;
       user.save();
 
       return interaction.channel.send(

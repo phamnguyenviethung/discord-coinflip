@@ -64,9 +64,9 @@ module.exports = {
       payee.save();
 
       return interaction.reply(
-        ` **${interaction.user.username}** đã đưa **${
+        `🚚🚚🚚**${interaction.user.username}** đã gửi **${
           value + " " + itemName
-        }** cho **${username}**. Bạn còn lại ${user.inventory[itemName]} cái`
+        }** cho **${username}**.`
       );
     } catch (error) {
       console.log(error);

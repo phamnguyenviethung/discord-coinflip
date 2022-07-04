@@ -118,6 +118,10 @@ const UserSchema = new Schema(
         type: Number,
         default: 0,
       },
+      rhino: {
+        type: Number,
+        default: 0,
+      },
       meat: {
         type: Number,
         default: 0,

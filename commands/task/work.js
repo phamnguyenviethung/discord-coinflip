@@ -6,7 +6,7 @@ const User = require("../../app/models/User");
 module.exports = {
   name: "work",
   description: "Cùng nhau quậch nào ",
-  cooldown: 50,
+  cooldown: 60,
   type: "CHAT_INPUT",
   options: [
     {
@@ -35,9 +35,15 @@ module.exports = {
     const user = await User.findOne({ id: interaction.user.id });
     const data = { user };
     if (!user) return interaction.reply("Bạn chưa đăng ký");
-    if (user.health.eat < 10 || user.health.drink < 5) {
+
+    const limit = jobType === "hunting" ? 100 : 60;
+    if (user.health.eat < limit || user.health.drink < 60) {
       client.cooldowns.get("work").delete(interaction.user.id);
-      return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
+      return interaction.reply(
+        `Bạn đã kiệt sức. Để tiếp tục làm việc, bạn cần có ít nhất **${
+          jobType === "hunting" ? 100 : 60
+        } food và 60 drink**`
+      );
     }
 
     switch (jobType) {

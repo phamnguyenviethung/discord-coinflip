@@ -39,7 +39,7 @@ module.exports = {
       type: "INTEGER",
       required: true,
       min_value: 0,
-      max_value: 30,
+      max_value: 70,
     },
     {
       name: "price",
@@ -128,25 +128,25 @@ module.exports = {
         const userClickedInfo = collection.first();
 
         if (userClickedInfo?.customId === "yes") {
-          if (customer.money <= 0) {
+          if (customer.money <= 0 || customer.money < price) {
             interaction.deleteReply();
             return interaction.channel.send({
               content: "Bạn không còn tiền",
               ephemeral: true,
             });
           }
-          if (customer.inventory.sting > 30) {
+          if (customer.inventory.sting > 70) {
             interaction.deleteReply();
             return interaction.channel.send({
-              content: "Bạn đã có 30 chai rồi.",
+              content: "Bạn đã có 70 chai rồi.",
               ephemeral: true,
             });
           }
 
           user.storage.water.volume -= amount;
-          user.inventory.plastic -= 5 * amount;
-          user.inventory.tape -= 2 * amount;
-          user.inventory.cloth -= 2 * amount;
+          user.inventory.plastic -= 2 * amount;
+          user.inventory.tape -= 1 * amount;
+          user.inventory.cloth -= 1 * amount;
 
           customer.inventory.sting += amount;
           customer.money -= price;

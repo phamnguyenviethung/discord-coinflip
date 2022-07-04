@@ -17,12 +17,12 @@ module.exports = {
         );
       }
 
-      if (user.health.eat >= 250) {
+      if (user.health.eat >= 350) {
         return interaction.reply(` Bạn không đói.`);
       }
 
-      user.inventory.meat -= 2;
-      user.health.eat += 40;
+      user.inventory.meat -= 1;
+      user.health.eat += 45;
       user.save();
 
       return interaction.reply(
