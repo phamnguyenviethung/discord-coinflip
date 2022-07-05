@@ -57,7 +57,7 @@ module.exports = {
       let resultText = "";
 
       result.forEach((item) => {
-        resultText += `**${item.name}**: ${item.amount}\n`;
+        resultText += `+ **${item.name}**: ${item.amount}\n`;
         update[item.name] = user.inventory[item.name] += item.amount;
       });
 

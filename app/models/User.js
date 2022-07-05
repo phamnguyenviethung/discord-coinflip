@@ -11,7 +11,11 @@ const UserSchema = new Schema(
 
     money: {
       type: Number,
-      default: 1000,
+      default: 10000,
+    },
+    bankloan: {
+      type: Number,
+      default: 0,
     },
     atm: {
       type: Number,
@@ -127,6 +131,10 @@ const UserSchema = new Schema(
         default: 0,
       },
       gas: {
+        type: Number,
+        default: 0,
+      },
+      maycay: {
         type: Number,
         default: 0,
       },
