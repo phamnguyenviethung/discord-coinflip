@@ -92,7 +92,7 @@ module.exports = {
 
       collector.on("collect", async (i) => {
         if (!i.isButton()) return; // if collected is not button then return
-
+        console.log(i.interaction);
         if (i.customId.startsWith("rps")) {
           await i.deferUpdate(); // deferring the interaction so it will not load so long
           let move = i.customId.split("_")[1]; // split the button custom ID to 2 parts (it will split in the _ ), and define the hand sign which is rock, paper and scissors as the variable
