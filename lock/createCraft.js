@@ -1,26 +1,35 @@
 const Craft = require("../app/models/Craft");
 module.exports = {
-  name: "res",
-  description: "Đăng ký chơi Coinflip",
+  name: "createcraft",
+  description: "create craft",
   type: "CHAT_INPUT",
+  permissions: ["ADMINSTRATOR"],
   run: async (client, interaction) => {
     try {
       await Craft.create({
-        code: "svl",
+        code: "knife",
         require: [
+          {
+            name: "iron",
+            amount: 50,
+            category: "metal",
+          },
           {
             name: "cloth",
             amount: 10,
+            category: "metal",
           },
           {
-            name: "iron",
-            amount: 100,
+            name: "tape",
+            amount: 5,
+            category: "metal",
           },
         ],
         result: [
           {
-            name: "shovel",
-            amount: 20,
+            name: "knife",
+            amount: 1,
+            category: "weapon",
           },
         ],
       });

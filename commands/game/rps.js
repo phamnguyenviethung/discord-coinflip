@@ -1,11 +1,11 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
 
 module.exports = {
   name: "rps",
   description: "Chơi game rps",
   type: "CHAT_INPUT",
+  cooldown: 5,
   options: [
     {
       name: "money",
@@ -16,13 +16,10 @@ module.exports = {
     },
   ],
 
-  run: async (client, interaction) => {
+  run: async (client, interaction, user) => {
     const money = interaction.options.get("money").value;
 
     try {
-      const user = await User.findOne({ id: interaction.user.id });
-      if (!user) return interaction.reply("Bạn chưa đăng ký");
-
       if (user.money <= 0 || user.money < money) {
         return interaction.reply("Bạn không đủ tiền");
       }
@@ -81,18 +78,16 @@ module.exports = {
       // define variables
       let win = 0; // 0 is Loss, 1 is Tie and 2 is win
       let userMove;
-
-      const filter = (interaction) => !interaction.user.bot; // filter out bots
+      const filter = (bInteraction) =>
+        interaction.user.id === bInteraction.user.id && !interaction.user.bot;
       const collector = interaction.channel.createMessageComponentCollector({
-        // create a message component collctor with some options below
-        filter, // apply the filter defined above
-        componentType: "BUTTON", // button collector
-        time: 10000, // 10 seconds
+        filter,
+        componentType: "BUTTON",
+        time: 10 * 1000,
       });
 
       collector.on("collect", async (i) => {
         if (!i.isButton()) return; // if collected is not button then return
-        console.log(i.interaction);
         if (i.customId.startsWith("rps")) {
           await i.deferUpdate(); // deferring the interaction so it will not load so long
           let move = i.customId.split("_")[1]; // split the button custom ID to 2 parts (it will split in the _ ), and define the hand sign which is rock, paper and scissors as the variable
@@ -139,7 +134,10 @@ module.exports = {
             ? (user.money += 0)
             : (user.money += money);
           user.save();
-
+          interaction.channel.send("Và kết quả là.....");
+          await new Promise((resolve) => {
+            setTimeout(resolve, 3200);
+          });
           interaction.channel.send(
             `**${interaction.user.username}** ${
               win == 0 ? "đã thua" : win == 1 ? "được hoàn lại" : "ăn được"

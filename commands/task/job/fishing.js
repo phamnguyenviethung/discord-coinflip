@@ -1,13 +1,11 @@
 const _ = require("underscore");
 const { random } = require("chance-percent");
-const { formatMoney } = require("../../../utils/format");
-const User = require("../../../app/models/User");
 
 module.exports = async (client, interaction, data) => {
   try {
     const { user } = data;
 
-    if (user.inventory.fishingrod <= 0) {
+    if (user.inventory.tool.fishingrod <= 0) {
       return interaction.reply(
         `Bạn không có cần câu. Hãy sử dụng code \`fsr\` để craft`
       );
@@ -22,38 +20,33 @@ module.exports = async (client, interaction, data) => {
         `Bạn đã kiệt sức. Để tiếp tục làm việc, bạn cần có ít nhất **${limit.eat} eat và ${limit.drink} drink**`
       );
     }
-    const randomQuantity = _.random(4, 10);
-    const randomMoney = _.random(7000, 12000);
+    const randomQuantity = _.random(3, 6);
 
-    // Cloth - Plastic - Tape - Iron - Wire
     const options = [
-      { value: "perch", percentage: 40 },
+      { value: "perch", percentage: 35 },
       { value: "carp", percentage: 30 },
-      { value: "phattom", percentage: 19 },
+      { value: "phattom", percentage: 24 },
       { value: "empty", percentage: 10 },
       { value: "shark", percentage: 1 },
     ];
     const randomItem = random(options);
 
     if (randomItem === "empty") {
+      user.inventory.tool.fishingrod -= 1;
+      user.save();
       return interaction.reply(
         `Thật không may, **${interaction.user.username}** đã không câu được gì.`
       );
     }
 
-    user.health.eat -= 8;
-    user.health.drink -= 8;
-    user.inventory.fishingrod -= 1;
-    user.inventory[randomItem] += randomQuantity;
-    user.money += randomMoney;
+    user.health.eat -= 6;
+    user.health.drink -= 6;
+    user.inventory.tool.fishingrod -= 1;
+    user.inventory.fishing[randomItem] += randomQuantity;
     user.save();
 
     return interaction.reply(
-      `🧑‍🌾 **${
-        interaction.user.username
-      }** đã câu được **${randomQuantity} ${randomItem}** và kiếm được **${formatMoney(
-        randomMoney
-      )}**`
+      `🧑‍🌾 **${interaction.user.username}** đã câu được **${randomQuantity} ${randomItem}**`
     );
   } catch (error) {
     console.log(error);

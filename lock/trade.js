@@ -1,6 +1,7 @@
-const User = require("../../app/models/User");
-const { category } = require("../../utils/category");
-const choices = [];
+const User = require("../app/models/User");
+const { formatMoney } = require("../utils/format");
+const { category } = require("../utils/category");
+const choices = ["money"];
 const alreadyHas = [];
 Object.keys(category).forEach((key) => {
   category[key].forEach((item) => {
@@ -15,25 +16,39 @@ Object.keys(category).forEach((key) => {
 });
 
 module.exports = {
-  name: "give",
-  description: "Đưa đồ cho người khác!",
+  name: "trade",
+  description: "Trade đồ với người khác",
   type: "CHAT_INPUT",
   options: [
     {
       name: "user",
-      description: "Người bạn muốn ship",
+      description: "Người bạn muốn trade",
       type: "USER",
       required: true,
     },
     {
-      name: "item",
-      description: "Item muốn đưa",
+      name: "uitem",
+      description: "Đồ của bạn",
       type: "STRING",
       choices,
       required: true,
     },
     {
-      name: "amount",
+      name: "uamount",
+      description: "Số lượng",
+      type: "INTEGER",
+      required: true,
+      min_value: 1,
+    },
+    {
+      name: "oitem",
+      description: "Đồ của người khác",
+      type: "STRING",
+      choices,
+      required: true,
+    },
+    {
+      name: "oamount",
       description: "Số lượng",
       type: "INTEGER",
       required: true,
@@ -41,10 +56,11 @@ module.exports = {
     },
   ],
   run: async (client, interaction, user) => {
-    const { value } = interaction.options.get("amount");
     const { id, username } = interaction.options.getUser("user");
-    const itemName = interaction.options.get("item").value;
-
+    const { value: uamount } = interaction.options.get("uamount");
+    const { value: iamount } = interaction.options.get("iamount");
+    const uitem = interaction.options.get("uitem").value;
+    const oitem = interaction.options.get("oitem").value;
     try {
       const payee = await User.findOne({ id });
       if (!payee)
@@ -52,20 +68,12 @@ module.exports = {
       if (user.id === payee.id) {
         return interaction.reply("Bạn không thể dùng lên chính mình");
       }
-      let key;
-      Object.keys(user.inventory).forEach((k) => {
-        if (user.inventory[k].hasOwnProperty(itemName)) {
-          key = k;
-        }
-      });
-      if (
-        user.inventory[key][itemName] <= 0 ||
-        user.inventory[key][itemName] < value
-      ) {
+
+      if (user.inventory[itemName] <= 0 || user.inventory[itemName] < value) {
         return interaction.reply("Bạn không đủ để đưa");
       }
-      user.inventory[key][itemName] -= value;
-      payee.inventory[key][itemName] += value;
+      user.inventory[itemName] -= value;
+      payee.inventory[itemName] += value;
       user.save();
       payee.save();
 

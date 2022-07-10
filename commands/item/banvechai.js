@@ -1,6 +1,6 @@
-const User = require("../app/models/User");
+const User = require("../../app/models/User");
 const _ = require("underscore");
-const { formatMoney } = require("../utils/format");
+const { formatMoney } = require("../../utils/format");
 module.exports = {
   name: "banvechai",
   description: "Bán ve chai",
@@ -31,37 +31,33 @@ module.exports = {
       min_value: 1,
     },
   ],
-  run: async (client, interaction) => {
+  run: async (client, interaction, user) => {
     try {
-      const user = await User.findOne({ id: interaction.user.id });
-      if (!user) return interaction.channel.send("Bạn chưa đăng ký");
       const type = interaction.options.get("type").value;
       const amount = interaction.options.get("amount").value;
 
-      const { plastic, iron } = user.inventory;
-
-      if (user.inventory[type] <= 0) {
+      if (
+        user.inventory.metal[type] <= 0 ||
+        user.inventory.metal[type] < amount
+      ) {
         return interaction.reply("Bạn không có để bán");
       }
 
       const price = {
-        iron: 250,
-        plastic: 200,
+        iron: 5000,
+        plastic: 2000,
       };
 
-      const sellprice =
-        type === "plastic" ? price.plastic * amount : price.iron * amount;
-
-      user.inventory[type] -= amount;
-      user.money += sellprice;
+      user.inventory.metal[type] -= amount;
+      user.money += price[type] * amount;
       user.save();
 
       await new Promise((resolve) => {
         setTimeout(resolve, 1200);
       });
       return await interaction.reply(
-        ` Bạn đã bán **${amount + " " + type}** được **${formatMoney(
-          sellprice
+        ` Bạn đã bán **${amount + " " + type}** với giá **${formatMoney(
+          price[type] * amount
         )}**`
       );
     } catch (error) {

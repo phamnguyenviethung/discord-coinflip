@@ -23,13 +23,11 @@ module.exports = {
       ],
     },
   ],
-  run: async (client, interaction) => {
+  run: async (client, interaction, user) => {
     try {
-      const user = await User.findOne({ id: interaction.user.id });
       const userSide = interaction.options.get("side").value;
       const pick = _.random(1, 10) > 5 ? "Heads" : "Tails";
 
-      if (!user) return interaction.channel.send("Bạn chưa đăng ký");
       if (user.health.eat < 25 || user.health.drink < 20) {
         return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
@@ -44,19 +42,17 @@ module.exports = {
       );
       if (userSide !== pick) {
         user.money = 0;
-        user.health.eat += _.random(0, 5);
-        user.health.drink += _.random(0, 3);
         user.save();
 
         await new Promise((resolve) => {
           setTimeout(resolve, 3200);
         });
         return await interaction.channel.send(
-          `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược. Nhà cái tặng bạn *1 chai nước* và *1 ổ bánh mì*`
+          `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
         );
       }
 
-      user.money *= 2;
+      user.money *= 3;
       user.health.eat -= 1;
       user.health.drink -= 1;
       user.save();

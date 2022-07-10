@@ -6,12 +6,11 @@ const UserSchema = new Schema(
   {
     id: {
       type: Number,
-      require: [true, "Vui lòng cung cấp id"],
     },
 
     money: {
       type: Number,
-      default: 10000,
+      default: 20 * 1000,
     },
     bankloan: {
       type: Number,
@@ -21,125 +20,158 @@ const UserSchema = new Schema(
       type: Number,
       default: 0,
     },
-    money: {
-      type: Number,
-      default: 1000,
-    },
-    job: {
-      type: String,
-      default: "jobless",
-      lowercase: true,
-      trim: true,
-    },
     health: {
       eat: {
         type: Number,
-        default: 200,
+        default: 150,
       },
       drink: {
         type: Number,
-        default: 200,
+        default: 150,
       },
-      strength: {
+      stress: {
         type: Number,
-        default: 200,
+        default: 150,
       },
     },
-    storage: {
-      water: {
-        volume: {
+    inventory: {
+      metal: {
+        cloth: {
+          type: Number,
+          default: 20,
+        },
+        wire: {
+          type: Number,
+          default: 0,
+        },
+        tape: {
+          type: Number,
+          default: 20,
+        },
+        iron: {
+          type: Number,
+          default: 15,
+        },
+        plastic: {
+          type: Number,
+          default: 20,
+        },
+      },
+      food: {
+        meat: {
+          type: Number,
+          default: 5,
+        },
+        noodle: {
+          type: Number,
+          default: 5,
+        },
+        rice: {
+          type: Number,
+          default: 5,
+        },
+        bread: {
+          type: Number,
+          default: 5,
+        },
+        corn: {
+          type: Number,
+          default: 0,
+        },
+        carrot: {
+          type: Number,
+          default: 0,
+        },
+        salad: {
+          type: Number,
+          default: 0,
+        },
+        peanut: {
+          type: Number,
+          default: 0,
+        },
+        tomato: {
+          type: Number,
+          default: 0,
+        },
+      },
+      drink: {
+        sting: {
+          type: Number,
+          default: 10,
+        },
+      },
+      weapon: {
+        knife: {
+          type: Number,
+          default: 0,
+        },
+      },
+      tool: {
+        huntingrifle: {
+          type: Number,
+          default: 10,
+        },
+        fishingrod: {
+          type: Number,
+          default: 10,
+        },
+        shovel: {
+          type: Number,
+          default: 10,
+        },
+        gas: {
+          type: Number,
+          default: 10,
+        },
+        fuel: {
+          type: Number,
+          default: 10,
+        },
+      },
+      fishing: {
+        carp: {
+          type: Number,
+          default: 0,
+        },
+        perch: {
+          type: Number,
+          default: 0,
+        },
+        phattom: {
+          type: Number,
+          default: 0,
+        },
+        shark: {
+          type: Number,
+          default: 0,
+        },
+      },
+      hunting: {
+        rabbit: {
+          type: Number,
+          default: 0,
+        },
+        tiger: {
+          type: Number,
+          default: 0,
+        },
+        rhino: {
           type: Number,
           default: 0,
         },
       },
     },
-    inventory: {
-      cloth: {
+    timestamps: {
+      jail: {
         type: Number,
-        default: 0,
+        default: null,
       },
-      wire: {
+      health: {
         type: Number,
-        default: 0,
-      },
-      tape: {
-        type: Number,
-        default: 0,
-      },
-      iron: {
-        type: Number,
-        default: 0,
-      },
-      plastic: {
-        type: Number,
-        default: 0,
-      },
-      sting: {
-        type: Number,
-        default: 0,
-      },
-      knife: {
-        type: Number,
-        default: 0,
-      },
-      huntingrifle: {
-        type: Number,
-        default: 0,
-      },
-      fishingrod: {
-        type: Number,
-        default: 0,
-      },
-      shovel: {
-        type: Number,
-        default: 0,
-      },
-      carp: {
-        type: Number,
-        default: 0,
-      },
-      perch: {
-        type: Number,
-        default: 0,
-      },
-      phattom: {
-        type: Number,
-        default: 0,
-      },
-      shark: {
-        type: Number,
-        default: 0,
-      },
-      rabbit: {
-        type: Number,
-        default: 0,
-      },
-      bird: {
-        type: Number,
-        default: 0,
-      },
-      tiger: {
-        type: Number,
-        default: 0,
-      },
-      rhino: {
-        type: Number,
-        default: 0,
-      },
-      meat: {
-        type: Number,
-        default: 0,
-      },
-      gas: {
-        type: Number,
-        default: 0,
-      },
-      maycay: {
-        type: Number,
-        default: 0,
+        default: null,
       },
     },
-
     isBanned: {
       type: Boolean,
       default: false,

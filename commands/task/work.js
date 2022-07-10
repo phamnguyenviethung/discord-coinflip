@@ -1,7 +1,7 @@
 const dig = require("./job/dig");
 const hunting = require("./job/hunting");
 const fishing = require("./job/fishing");
-const User = require("../../app/models/User");
+const farm = require("./job/farm");
 
 module.exports = {
   name: "work",
@@ -27,14 +27,16 @@ module.exports = {
           name: "Hunting",
           value: "hunting",
         },
+        {
+          name: "Farming",
+          value: "farm",
+        },
       ],
     },
   ],
-  run: async (client, interaction) => {
+  run: async (client, interaction, user) => {
     const jobType = interaction.options.get("job").value;
-    const user = await User.findOne({ id: interaction.user.id });
     const data = { user };
-    if (!user) return interaction.reply("Bạn chưa đăng ký");
 
     const limit = jobType === "hunting" ? 100 : 60;
     if (user.health.eat < limit || user.health.drink < 60) {
@@ -55,6 +57,9 @@ module.exports = {
         break;
       case "hunting":
         hunting(client, interaction, data);
+        break;
+      case "farm":
+        farm(client, interaction, data);
         break;
 
       default:

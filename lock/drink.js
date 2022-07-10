@@ -15,7 +15,7 @@ module.exports = {
       if (user.money < price) {
         return interaction.reply(` Bạn không đủ tiền! =))`);
       }
-      if (user.health.drink >= 500) {
+      if (user.health.drink >= 19999) {
         return interaction.reply(` Bạn không khát nước.`);
       }
 

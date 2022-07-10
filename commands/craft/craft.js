@@ -1,6 +1,5 @@
 const Craft = require("../../app/models/Craft");
 const User = require("../../app/models/User");
-const { formatMoney } = require("../../utils/format");
 
 module.exports = {
   name: "craft",
@@ -15,12 +14,10 @@ module.exports = {
     },
   ],
 
-  run: async (client, interaction) => {
+  run: async (client, interaction, user) => {
     const code = interaction.options.get("code").value;
     try {
-      const user = await User.findOne({ id: interaction.user.id });
       const craftItem = await Craft.findOne({ code, isWorking: true });
-      if (!user) return interaction.reply("Bạn chưa đăng ký");
       if (!craftItem) return interaction.reply("Sai code hoặc không tồn tại");
 
       const require = craftItem.require;
@@ -51,14 +48,16 @@ module.exports = {
       };
 
       validItem.forEach((item) => {
-        update[item.name] = user.inventory[item.name] -= item.amount;
+        update[item.name] = user.inventory[item.category][item.name] -=
+          item.amount;
       });
 
       let resultText = "";
 
       result.forEach((item) => {
         resultText += `+ **${item.name}**: ${item.amount}\n`;
-        update[item.name] = user.inventory[item.name] += item.amount;
+        update[item.name] = user.inventory[item.category][item.name] +=
+          item.amount;
       });
 
       await User.findOneAndUpdate(

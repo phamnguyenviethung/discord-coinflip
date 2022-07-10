@@ -1,10 +1,10 @@
 module.exports.category = {
-  fishing: ["carp", "perch", "phattom", "shark", "fishingrod", "gas"],
-  hunting: ["rabbit", "bird", "tiger", "rhino", "huntingrifle"],
-  dig: ["iron", "plastic", "cloth", "wire", "tape", "shovel", "maycay"],
+  fishing: ["carp", "perch", "phattom", "shark"],
+  hunting: ["rabbit", "tiger", "rhino"],
+  metal: ["iron", "plastic", "cloth", "wire", "tape", "shovel", "maycay"],
   weapon: ["knife", "huntingrifle"],
   drink: ["sting"],
-  tool: ["huntingrifle", "fishingrod", "shovel", "gas", "maycay"],
-  eat: ["carp", "perch", "bird", "phattom", "meat"],
+  tool: ["huntingrifle", "fishingrod", "shovel", "gas", "maycay", "fuel"],
+  eat: ["noodle", "rice", "bread"],
   smuggle: ["tiger", "rhino", "rabbit"],
 };

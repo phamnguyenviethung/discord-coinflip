@@ -22,6 +22,11 @@ const CraftSchema = new Schema(
           type: String,
         },
         amount: Number,
+        category: {
+          lowercase: true,
+          trim: true,
+          type: String,
+        },
       },
     ],
     result: [
@@ -32,6 +37,11 @@ const CraftSchema = new Schema(
           type: String,
         },
         amount: Number,
+        category: {
+          lowercase: true,
+          trim: true,
+          type: String,
+        },
       },
     ],
   },

@@ -1,24 +1,27 @@
 const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
-const { jobID } = require("../../config");
+const { category } = require("../../utils/category");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const _ = require("underscore");
 
-let choices = [];
-Object.keys(jobID).forEach((key) => {
-  if (jobID[key] > 0) {
-    choices.push({
-      name: key.toLocaleLowerCase(),
-      value: key.toLocaleLowerCase(),
-    });
-  }
+const choices = [];
+const alreadyHas = [];
+Object.keys(category).forEach((key) => {
+  category[key].forEach((item) => {
+    if (!alreadyHas.includes(item)) {
+      alreadyHas.push(item);
+      choices.push({
+        name: item,
+        value: item,
+      });
+    }
+  });
 });
 
 module.exports = {
   name: "sell",
   description: "Bán đồ cho người khác!",
   type: "CHAT_INPUT",
-  permissions: ["989447620294504458", "992033393674043423"],
   options: [
     {
       name: "user",
@@ -27,7 +30,7 @@ module.exports = {
       required: true,
     },
     {
-      name: "type",
+      name: "item",
       description: "Bạn muốn bán gì",
       type: "STRING",
       choices,
@@ -38,67 +41,44 @@ module.exports = {
       description: "Số lượng bạn muốn bán",
       type: "INTEGER",
       required: true,
-      min_value: 0,
-      max_value: 30,
+      min_value: 1,
     },
     {
       name: "price",
       description: "Số tiền bạn muốn bán",
       type: "INTEGER",
       required: true,
-      min_value: 0,
+      min_value: 1,
     },
   ],
-  run: async (client, interaction) => {
+  run: async (client, interaction, user) => {
     const customerInteraction = interaction.options.getUser("user");
     const amount = interaction.options.get("amount").value;
-    const type = interaction.options.get("type").value;
+    const item = interaction.options.get("item").value;
     const price = interaction.options.get("price").value;
 
     try {
-      const user = await User.findOne({ id: interaction.user.id });
-      if (!user)
-        return interaction.reply({
-          content: "Bạn chưa đăng ký",
-          ephemeral: true,
-        });
-      const require = {
-        cloth: 2,
-        plastic: 5,
-        tape: 2,
-      };
-
-      let isValid = true;
-      let text = "";
-      Object.keys(require).forEach((key) => {
-        text += `+ **${key}**: ${require[key] * amount}\n`;
-        if (user.inventory[key] < require[key] * amount) {
-          isValid = false;
-        }
-      });
-      if (!isValid)
-        return interaction.reply({
-          content: ` Để sản xuất **${amount} chai nước** thì bạn cần:\n${text}`,
-          ephemeral: true,
-        });
-
+      // customer checker
       const customer = await User.findOne({ id: customerInteraction.id });
       if (!customer)
         return interaction.reply({
           content: "Người nhận không đúng hoặc chưa đăng ký",
           ephemeral: true,
         });
-      if (user.storage.water.volume <= 0) {
-        return interaction.reply({
-          content: "Bạn không đủ hàng để bán. Hãy đi chế tạo",
-          ephemeral: true,
-        });
+      // item checker
+      let key;
+      Object.keys(user.inventory).forEach((k) => {
+        if (user.inventory[k].hasOwnProperty(item)) {
+          key = k;
+        }
+      });
+      if (
+        user.inventory[key][item] <= 0 ||
+        user.inventory[key][item] < amount
+      ) {
+        return interaction.reply("Bạn không đủ để bán");
       }
-
-      if (user.job === "jobless") {
-        return interaction.reply("Đây không phải nghề của bạn");
-      }
-
+      // send msg
       const row = new MessageActionRow()
         .addComponents(
           new MessageButton()
@@ -119,7 +99,7 @@ module.exports = {
       const collector = interaction.channel.createMessageComponentCollector({
         filter,
         max: 1,
-        time: 30 * 1000,
+        time: 60 * 1000,
       });
 
       collector.on("collect", (i) => {});
@@ -135,30 +115,19 @@ module.exports = {
               ephemeral: true,
             });
           }
-          if (customer.inventory.sting > 30) {
-            interaction.deleteReply();
-            return interaction.channel.send({
-              content: "Bạn đã có 30 chai rồi.",
-              ephemeral: true,
-            });
-          }
 
-          user.storage.water.volume -= amount;
-          user.inventory.plastic -= 2 * amount;
-          user.inventory.tape -= 1 * amount;
-          user.inventory.cloth -= 1 * amount;
-
-          customer.inventory.sting += amount;
-          customer.money -= price;
           user.money += price;
+          user.inventory[key][item] -= amount;
+          customer.inventory[key][item] += amount;
+          customer.money -= price;
 
           user.save();
           customer.save();
 
-          const billID = _.random(10, 500);
+          const billID = _.random(100, 999);
 
           interaction.user.send(
-            `💳 Bạn đã bán *${amount} sting* cho **${
+            `💳 Bạn đã bán *${amount} ${item}* cho **${
               customerInteraction.username
             }** với giá ${formatMoney(price)}. Mã giao dịch ${billID}`
           );
@@ -186,9 +155,7 @@ module.exports = {
       return interaction.reply({
         content: `${customerInteraction.username} ơi, ${
           interaction.user.username
-        } bán **${amount + " " + type} với giá ${formatMoney(
-          price
-        )}**. Cậu hãy mua đi ạ`,
+        } bán **${amount + " " + item} với giá ${formatMoney(price)}**.`,
         components: [row],
       });
     } catch (error) {
