@@ -48,8 +48,8 @@ module.exports = async (client, interaction) => {
         return interaction.reply("Bạn chưa đăng ký");
       }
 
-      const now = dayjs().locale("vi");
-      const userTime = dayjs(user.timestamps.jail);
+      // const now = dayjs().locale("vi");
+      // const userTime = dayjs(user.timestamps.jail);
 
       // const isBefore = now.isBefore(userTime, "DD/MM/YYYY H:mm:ss");
 
