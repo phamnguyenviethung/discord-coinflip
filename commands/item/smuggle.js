@@ -70,7 +70,7 @@ module.exports = {
       await new Promise((resolve) => {
         setTimeout(resolve, 2000);
       });
-      if (pick >= 11) {
+      if (pick >= 6) {
         user.money += gift;
         user.inventory.hunting[animal] -= amount;
         user.health.drink -= 30;
@@ -88,9 +88,9 @@ module.exports = {
         user.timestamps.jail = time;
         user.save();
         interaction.channel.send(
-          `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam tới **${time.format(
-            "DD/MM/YYYY HH:mm:ss"
-          )}**`
+          `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam tới **${time
+            .locale("vi")
+            .format("DD/MM/YYYY HH:mm:ss")}**`
         );
       }
     } catch (error) {
