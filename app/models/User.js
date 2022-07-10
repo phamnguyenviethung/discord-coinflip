@@ -10,7 +10,7 @@ const UserSchema = new Schema(
 
     money: {
       type: Number,
-      default: 20 * 1000,
+      default: 200000,
     },
     bankloan: {
       type: Number,
@@ -162,15 +162,15 @@ const UserSchema = new Schema(
         },
       },
     },
-    timestamps: {
-      jail: {
-        type: Number,
-        default: null,
-      },
-      health: {
-        type: Number,
-        default: null,
-      },
+    // timestamps: {
+    //   jail: {
+    //     type: Number,
+    //     default: null,
+    //   },
+    //   health: {
+    //     type: Number,
+    //     default: null,
+    //   },
     },
     isBanned: {
       type: Boolean,
