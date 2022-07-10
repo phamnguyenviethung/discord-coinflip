@@ -171,7 +171,6 @@ const UserSchema = new Schema(
     //     type: Number,
     //     default: null,
     //   },
-    },
     isBanned: {
       type: Boolean,
       default: false,
