@@ -51,15 +51,15 @@ module.exports = async (client, interaction) => {
       const now = dayjs().locale("vi");
       const userTime = dayjs(user.timestamps.jail);
 
-      const isBefore = now.isBefore(userTime, "DD/MM/YYYY H:mm:ss");
+      // const isBefore = now.isBefore(userTime, "DD/MM/YYYY H:mm:ss");
 
-      if (isBefore) {
-        return interaction.reply(
-          `Bạn đang bị bắt. Bạn sẽ trở lại với cộng đồng vào **${userTime.format(
-            "DD/MM/YYYY H:mm:ss"
-          )}**`
-        );
-      }
+      // if (isBefore) {
+      //   return interaction.reply(
+      //     `Bạn đang bị bắt. Bạn sẽ trở lại với cộng đồng vào **${userTime.format(
+      //       "DD/MM/YYYY H:mm:ss"
+      //     )}**`
+      //   );
+      // }
     }
 
     command.run(client, interaction, user);
