@@ -92,8 +92,8 @@ module.exports = {
           `💸 Giao dịch thành công. Bạn nhận được **${formatMoney(gift)}**`
         );
       } else {
-        const time = dayjs().locale("vi").add(3, "minutes");
-        user.health.drink -= 30;
+        const time = dayjs().locale("vi").add(8, "minutes");
+        user.health.drink -= 80;
         user.health.eat -= 50;
         user.inventory.hunting[animal] -= amount;
         user.timestamps.jail = time.valueOf();
@@ -102,7 +102,7 @@ module.exports = {
         user.inventory.weapon.knife -= 1;
         user.save();
         interaction.channel.send(
-          `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam **3 phút**`
+          `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam **8 phút**`
         );
       }
     } catch (error) {
