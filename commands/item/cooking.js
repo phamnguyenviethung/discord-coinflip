@@ -59,21 +59,23 @@ module.exports = {
 
     try {
       //  recipe check
-      let isRecipeValid = false;
+      let isRecipeValid = true;
       let recipeText = "";
       for (let key in recipe) {
         if (key === food) {
           Object.keys(recipe[key]).forEach((item) => {
             recipeText += `- **${item}**: ${recipe[key][item] * amount} \n`;
-            if (user.inventory.food[item] >= key[item]) {
+            if (user.inventory.food[item] < recipe[key][item]) {
               user.inventory.food[item] += recipe[key][item] * amount;
-              isRecipeValid = true;
+              isRecipeValid = false;
             }
           });
         }
       }
       if (!isRecipeValid) {
-        return interaction.reply(`Bạn không đủ nguyên liệu.\n${recipeText}`);
+        return interaction.reply(
+          `Bạn không đủ nguyên liệu Để chế biến **${amount} ${food}**, cần các nguyên liệu sau:\n${recipeText}`
+        );
       }
 
       // gas check
@@ -90,12 +92,16 @@ module.exports = {
         setTimeout(resolve, 2000);
       });
 
+      for (let key in recipe[food]) {
+        user.inventory.food[key] -= recipe[food][key];
+      }
+
       user.inventory.gas -= 2;
       user.inventory.food[food] += amount;
       user.save();
 
       return interaction.channel.send(
-        `Bạn đã chế biến **${food}** thành công `
+        `Bạn đã chế biến **${amount} ${food}** thành công `
       );
     } catch (error) {
       console.log(error);

@@ -10,13 +10,13 @@ module.exports = async (client, interaction, data) => {
       );
     }
 
-    const randomQuantity = _.random(1, 3);
+    const randomQuantity = _.random(2, 5);
 
     const options = [
-      { value: "empty", percentage: 45 },
-      { value: "rabbit", percentage: 25 },
-      { value: "tiger", percentage: 20 },
-      { value: "rhino", percentage: 10 },
+      { value: "empty", percentage: 40 },
+      { value: "rabbit", percentage: 30 },
+      { value: "tiger", percentage: 25 },
+      { value: "rhino", percentage: 5 },
     ];
     const randomItem = random(options);
 
@@ -29,7 +29,6 @@ module.exports = async (client, interaction, data) => {
     }
     user.health.eat -= 10;
     user.health.drink -= 10;
-
     user.inventory.tool.huntingrifle -= 1;
     user.inventory.hunting[randomItem] += randomQuantity;
     user.save();
