@@ -40,7 +40,7 @@ module.exports = {
         return interaction.reply(` Bạn không đủ tiền! =))`);
       }
       if (pickJail <= 3) {
-        const time = dayjs().locale("vi").add(5, "minutes");
+        const time = dayjs().locale("vi").add(2, "minutes");
         user.health.eat -= 1;
         user.health.drink -= 1;
         user.timestamps.jail = time.valueOf();

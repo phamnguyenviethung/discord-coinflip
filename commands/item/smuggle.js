@@ -68,7 +68,7 @@ module.exports = {
       await new Promise((resolve) => {
         setTimeout(resolve, 2000);
       });
-      if (pick >= 6) {
+      if (pick >= 4) {
         user.money += gift;
         user.inventory.hunting[animal] -= amount;
         user.health.drink -= 30;
