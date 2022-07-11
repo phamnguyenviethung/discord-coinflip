@@ -68,7 +68,7 @@ module.exports = {
       await new Promise((resolve) => {
         setTimeout(resolve, 2000);
       });
-      if (pick >= 11) {
+      if (pick >= 6) {
         user.money += gift;
         user.inventory.hunting[animal] -= amount;
         user.health.drink -= 30;
@@ -79,16 +79,14 @@ module.exports = {
           `💸 Giao dịch thành công. Bạn nhận được **${formatMoney(gift)}**`
         );
       } else {
-        const time = dayjs().locale("vi").add(_.random(3, 7), "minutes");
+        const time = dayjs().locale("vi").add(5, "minutes");
         user.health.drink -= 30;
         user.health.eat -= 50;
         user.inventory.hunting[animal] -= amount;
         user.timestamps.jail = time.valueOf();
         user.save();
         interaction.channel.send(
-          `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam tới **${time
-            .locale("vi")
-            .format("DD/MM/YYYY HH:mm:ss")}**`
+          `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam **5 phút**`
         );
       }
     } catch (error) {

@@ -106,6 +106,14 @@ const UserSchema = new Schema(
           type: Number,
           default: 0,
         },
+        taser: {
+          type: Number,
+          default: 0,
+        },
+        shotgun: {
+          type: Number,
+          default: 0,
+        },
       },
       tool: {
         huntingrifle: {
@@ -127,6 +135,10 @@ const UserSchema = new Schema(
         fuel: {
           type: Number,
           default: 10,
+        },
+        eletricgrid: {
+          type: Number,
+          default: 0,
         },
       },
       fishing: {

@@ -1,4 +1,4 @@
-const Craft = require("../../app/models/Craft");
+const Craft = require("../app/models/Craft");
 module.exports = {
   name: "cc",
   description: "create craft",
@@ -6,7 +6,7 @@ module.exports = {
   run: async (client, interaction) => {
     try {
       await Craft.create({
-        code: "cc",
+        code: "hrn",
         require: [
           {
             name: "cloth",
@@ -26,17 +26,17 @@ module.exports = {
           {
             name: "carrot",
             amount: 8,
-            category: "fishing",
+            category: "food",
           },
           {
             name: "corn",
             amount: 10,
-            category: "fishing",
+            category: "food",
           },
         ],
         result: [
           {
-            name: "cocaine",
+            name: "heroin",
             amount: 5,
             category: "pill",
           },

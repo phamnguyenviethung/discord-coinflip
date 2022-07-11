@@ -6,9 +6,7 @@ module.exports = async (client, interaction, data) => {
     const { user } = data;
 
     if (user.inventory.tool.shovel <= 0) {
-      return interaction.reply(
-        `Bạn không có xẻng. Hãy sử dụng code \`svl\` để craft`
-      );
+      return interaction.reply(`Bạn không có xẻng. Hãy sử dụng \`/shopping\``);
     }
 
     const randomQuantity = _.random(4, 8);
@@ -33,6 +31,7 @@ module.exports = async (client, interaction, data) => {
 
     user.health.eat -= 5;
     user.health.drink -= 5;
+    user.health.stress += 5;
     user.inventory.tool.shovel -= 1;
     user.inventory.metal[randomItem] += randomQuantity;
     user.save();

@@ -6,7 +6,7 @@ module.exports = async (client, interaction, data) => {
 
     if (user.inventory.tool.huntingrifle <= 0) {
       return interaction.reply(
-        `Bạn không có súng săn. Hãy sử dụng code \`hrl\` để craft`
+        `Bạn không có súng săn. Hãy sử dụng \`/shopping\``
       );
     }
 
@@ -29,6 +29,8 @@ module.exports = async (client, interaction, data) => {
     }
     user.health.eat -= 10;
     user.health.drink -= 10;
+    user.health.stress += 6;
+
     user.inventory.tool.huntingrifle -= 1;
     user.inventory.hunting[randomItem] += randomQuantity;
     user.save();

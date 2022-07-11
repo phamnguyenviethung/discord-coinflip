@@ -6,7 +6,7 @@ const farm = require("./job/farm");
 module.exports = {
   name: "work",
   description: "Cùng nhau quậch nào ",
-  cooldown: 60,
+  cooldown: 45,
   type: "CHAT_INPUT",
   options: [
     {
@@ -38,7 +38,7 @@ module.exports = {
     const jobType = interaction.options.get("job").value;
     const data = { user };
 
-    const limit = jobType === "hunting" ? 100 : 60;
+    const limit = 60;
     if (user.health.eat < limit || user.health.drink < 60) {
       client.cooldowns.get("work").delete(interaction.user.id);
       return interaction.reply(

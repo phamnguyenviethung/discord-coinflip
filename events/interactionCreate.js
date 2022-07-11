@@ -1,6 +1,8 @@
 const { Collection } = require("discord.js");
 const User = require("../app/models/User");
 const dayjs = require("dayjs");
+const relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
 require("dayjs/locale/vi");
 
 module.exports = async (client, interaction) => {
@@ -55,8 +57,9 @@ module.exports = async (client, interaction) => {
 
       if (isBefore) {
         return interaction.reply(
-          `Bạn đang bị bắt. Bạn sẽ trở lại với cộng đồng vào **${userTime.format(
-            "DD/MM/YYYY H:mm:ss"
+          `Bạn đang bị bắt. Bạn sẽ được tái hòa nhập cộng đồng sau **${now.to(
+            userTime,
+            true
           )}**`
         );
       }

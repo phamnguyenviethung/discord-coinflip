@@ -7,7 +7,7 @@ module.exports = async (client, interaction, data) => {
 
     if (user.inventory.tool.fishingrod <= 0) {
       return interaction.reply(
-        `Bạn không có cần câu. Hãy sử dụng code \`fsr\` để craft`
+        `Bạn không có cần câu. Hãy sử dụng \`/shopping\``
       );
     }
     const limit = {
@@ -41,6 +41,8 @@ module.exports = async (client, interaction, data) => {
 
     user.health.eat -= 6;
     user.health.drink -= 6;
+    user.health.stress += 5;
+
     user.inventory.tool.fishingrod -= 1;
     user.inventory.fishing[randomItem] += randomQuantity;
     user.save();

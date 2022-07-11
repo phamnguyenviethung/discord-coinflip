@@ -1,6 +1,7 @@
 require("dotenv").config();
 const db = require("./configs/db.js");
 db.connect();
+
 const { Client, Intents, Collection } = require("discord.js");
 // Create a new client instance
 const client = new Client({

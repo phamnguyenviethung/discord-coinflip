@@ -7,5 +7,6 @@ module.exports.category = {
   tool: ["huntingrifle", "fishingrod", "shovel", "gas", "maycay", "fuel"],
   eat: ["noodle", "rice", "bread"],
   smuggle: ["tiger", "rhino", "rabbit"],
-  // pill: ["marijuana ", "cocaine", "heroin", "ecstasy"],
 };
+
+// module.exports.pill = ["marijuana ", "cocaine", "heroin", "ecstasy"];
