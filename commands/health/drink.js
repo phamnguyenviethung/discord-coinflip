@@ -10,6 +10,9 @@ module.exports = {
       if (user.health.drink >= 400) {
         return interaction.reply(` Bạn không khát nước.`);
       }
+      if (user.money <= 0) {
+        return interaction.reply(` Bạn không đủ tiền`);
+      }
 
       user.money -= 1200;
       user.health.drink += 30;
