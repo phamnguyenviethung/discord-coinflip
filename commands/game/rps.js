@@ -1,5 +1,5 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-const { formatMoney } = require("../utils/format");
+const { formatMoney } = require("../../utils/format");
 
 module.exports = {
   name: "rps",

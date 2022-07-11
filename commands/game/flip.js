@@ -56,7 +56,7 @@ module.exports = {
         user.money -= userMoneyBet;
         user.save();
         return interaction.channel.send(
-          `🚓🚓🚓 Police ập vào. Bạn bị tạm giam **5 phút**`
+          `🚓🚓🚓 Police ập vào. Bạn bị tạm giam **2 phút**`
         );
       }
 
