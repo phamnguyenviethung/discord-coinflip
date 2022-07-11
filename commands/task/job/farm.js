@@ -16,7 +16,7 @@ module.exports = async (client, interaction, data) => {
     ];
     const randomItem = random(options);
 
-    user.health.eat -= 8;
+    user.health.eat -= 2;
     user.health.drink -= 8;
     user.inventory.food[randomItem] += randomQuantity;
     user.save();
