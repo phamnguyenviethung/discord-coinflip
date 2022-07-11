@@ -2,7 +2,7 @@ const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
 
 const choices = [];
-["gas", "fuel", "fishingrod", "shovel"].forEach((item) => {
+["gas", "fuel", "fishingrod", "shovel", "huntingrifle"].forEach((item) => {
   choices.push({
     name: item,
     value: item,
@@ -35,8 +35,9 @@ module.exports = {
   run: async (client, interaction) => {
     const price = {
       fuel: 800,
-      shovel: 2500,
-      fishingrod: 1500,
+      shovel: 3000,
+      fishingrod: 2000,
+      huntingrifle: 5500,
       gas: 500,
     };
     const item = interaction.options.get("item").value;

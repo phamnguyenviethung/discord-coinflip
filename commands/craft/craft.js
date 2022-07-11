@@ -30,9 +30,9 @@ module.exports = {
         reportCostText += `**${reqItem.name}**: ${reqItem.amount}\n`;
 
         if (
-          user.inventory[reqItem.name] !== undefined &&
-          user.inventory[reqItem.name] > reqItem.amount &&
-          user.inventory[reqItem.name] > 0
+          user.inventory[reqItem.category][reqItem.name] !== undefined &&
+          user.inventory[reqItem.category][reqItem.name] > reqItem.amount &&
+          user.inventory[reqItem.category][reqItem.name] > 0
         ) {
           validItem.push(reqItem);
         }

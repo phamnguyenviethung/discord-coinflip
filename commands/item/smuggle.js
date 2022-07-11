@@ -36,10 +36,20 @@ module.exports = {
   ],
 
   run: async (client, interaction, user) => {
+    if (
+      user.inventory.weapon.knife <= 0 ||
+      user.inventory.weapon.taser <= 0 ||
+      user.inventory.tool.mask <= 0
+    ) {
+      return interaction.reply(
+        "Bạn phải có ít nhất 1 **knife**, **mask** và **taser**"
+      );
+    }
+
     const require = {
-      rabbit: _.random(5000, 15000),
-      tiger: _.random(20000, 50000),
-      rhino: _.random(90000, 200000),
+      rabbit: _.random(30000, 70000),
+      tiger: _.random(100000, 200000),
+      rhino: _.random(300000, 50000),
     };
     const animal = interaction.options.get("animal").value;
     const amount = interaction.options.get("amount").value;
@@ -73,20 +83,26 @@ module.exports = {
         user.inventory.hunting[animal] -= amount;
         user.health.drink -= 30;
         user.health.eat -= 50;
+        user.inventory.weapon.taser -= 1;
+        user.inventory.tool.mask -= 1;
+        user.inventory.weapon.knife -= 1;
         user.save();
 
         interaction.channel.send(
           `💸 Giao dịch thành công. Bạn nhận được **${formatMoney(gift)}**`
         );
       } else {
-        const time = dayjs().locale("vi").add(5, "minutes");
+        const time = dayjs().locale("vi").add(3, "minutes");
         user.health.drink -= 30;
         user.health.eat -= 50;
         user.inventory.hunting[animal] -= amount;
         user.timestamps.jail = time.valueOf();
+        user.inventory.weapon.taser -= 1;
+        user.inventory.tool.mask -= 1;
+        user.inventory.weapon.knife -= 1;
         user.save();
         interaction.channel.send(
-          `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam **5 phút**`
+          `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam **3 phút**`
         );
       }
     } catch (error) {

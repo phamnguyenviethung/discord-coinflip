@@ -6,39 +6,19 @@ module.exports = {
   run: async (client, interaction) => {
     try {
       await Craft.create({
-        code: "hrn",
+        code: "mask",
         require: [
           {
             name: "cloth",
-            amount: 2,
+            amount: 60,
             category: "metal",
-          },
-          {
-            name: "tape",
-            amount: 2,
-            category: "metal",
-          },
-          {
-            name: "perch",
-            amount: 10,
-            category: "fishing",
-          },
-          {
-            name: "carrot",
-            amount: 8,
-            category: "food",
-          },
-          {
-            name: "corn",
-            amount: 10,
-            category: "food",
           },
         ],
         result: [
           {
-            name: "heroin",
-            amount: 5,
-            category: "pill",
+            name: "mask",
+            amount: 1,
+            category: "tool",
           },
         ],
       });
