@@ -6,7 +6,7 @@ const farm = require("./job/farm");
 module.exports = {
   name: "work",
   description: "Cùng nhau quậch nào ",
-  cooldown: 45,
+  cooldown: 30,
   type: "CHAT_INPUT",
   options: [
     {
