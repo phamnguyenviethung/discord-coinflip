@@ -1,8 +1,6 @@
 const User = require("../../app/models/User");
 const _ = require("underscore");
 const { formatMoney } = require("../../utils/format");
-const dayjs = require("dayjs");
-require("dayjs/locale/vi");
 module.exports = {
   name: "flip",
   description: "Người không all in là người thất bại",
@@ -38,7 +36,6 @@ module.exports = {
     const pick = _.random(1, 10) > 5 ? "Heads" : "Tails";
     const userSide = interaction.options.get("side").value;
     const userMoneyBet = interaction.options.get("money").value;
-    const pickJail = _.random(1, 10);
 
     try {
       if (user.health.eat < 25 || user.health.drink < 20) {
@@ -46,18 +43,6 @@ module.exports = {
       }
       if (user.money < userMoneyBet || user.money <= 0) {
         return interaction.reply(` Bạn không đủ tiền! =))`);
-      }
-
-      if (pickJail <= 3) {
-        const time = dayjs().locale("vi").add(2, "minutes");
-        user.health.eat -= 1;
-        user.health.drink -= 1;
-        user.timestamps.jail = time.valueOf();
-        user.money -= userMoneyBet;
-        user.save();
-        return interaction.channel.send(
-          `🚓🚓🚓 Police ập vào. Bạn bị tạm giam **2 phút**`
-        );
       }
 
       interaction.reply(
@@ -76,7 +61,7 @@ module.exports = {
           `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
         );
       }
-      user.money += userMoneyBet * 3;
+      user.money += userMoneyBet * 2.5;
       user.health.eat -= 1;
       user.health.drink -= 1;
       user.save();

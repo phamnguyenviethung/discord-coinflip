@@ -1,8 +1,6 @@
 const User = require("../../app/models/User");
 const _ = require("underscore");
 const { formatMoney } = require("../../utils/format");
-const dayjs = require("dayjs");
-require("dayjs/locale/vi");
 module.exports = {
   name: "flipall",
   description: "Cùng all in nào các chiến binh",
@@ -31,24 +29,12 @@ module.exports = {
     try {
       const userSide = interaction.options.get("side").value;
       const pick = _.random(1, 10) > 5 ? "Heads" : "Tails";
-      const pickJail = _.random(1, 10);
 
       if (user.health.eat < 25 || user.health.drink < 20) {
         return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
       if (user.money <= 0) {
         return interaction.reply(` Bạn không đủ tiền! =))`);
-      }
-      if (pickJail <= 3) {
-        const time = dayjs().locale("vi").add(2, "minutes");
-        user.health.eat -= 1;
-        user.health.drink -= 1;
-        user.timestamps.jail = time.valueOf();
-        user.money = 0;
-        user.save();
-        return interaction.channel.send(
-          `🚓🚓🚓 Police ập vào. Bạn bị tạm giam **2 phút**`
-        );
       }
 
       interaction.reply(
@@ -68,7 +54,7 @@ module.exports = {
         );
       }
 
-      user.money *= 3;
+      user.money *= 2.5;
       user.health.eat -= 1;
       user.health.drink -= 1;
       user.save();
