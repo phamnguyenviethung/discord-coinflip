@@ -8,16 +8,16 @@ module.exports = async (client, interaction, data) => {
     const randomQuantity = _.random(2, 5);
 
     const options = [
-      { value: "salad", percentage: 25 },
+      { value: "salad", percentage: 35 },
       { value: "tomato", percentage: 25 },
       { value: "peanut", percentage: 25 },
-      { value: "corn", percentage: 20 },
+      { value: "corn", percentage: 10 },
       { value: "carrot", percentage: 5 },
     ];
     const randomItem = random(options);
 
-    user.health.eat -= 5;
-    user.health.drink -= 5;
+    user.health.eat -= 8;
+    user.health.drink -= 8;
     user.inventory.food[randomItem] += randomQuantity;
     user.save();
 

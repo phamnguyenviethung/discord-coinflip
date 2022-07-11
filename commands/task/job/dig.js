@@ -11,7 +11,7 @@ module.exports = async (client, interaction, data) => {
       );
     }
 
-    const randomQuantity = _.random(4, 10);
+    const randomQuantity = _.random(4, 8);
 
     const options = [
       { value: "cloth", percentage: 35 },

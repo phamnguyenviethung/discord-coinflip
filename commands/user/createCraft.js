@@ -1,35 +1,44 @@
-const Craft = require("../app/models/Craft");
+const Craft = require("../../app/models/Craft");
 module.exports = {
-  name: "createcraft",
+  name: "cc",
   description: "create craft",
   type: "CHAT_INPUT",
-  permissions: ["ADMINSTRATOR"],
   run: async (client, interaction) => {
     try {
       await Craft.create({
-        code: "knife",
+        code: "cc",
         require: [
           {
-            name: "iron",
-            amount: 50,
-            category: "metal",
-          },
-          {
             name: "cloth",
-            amount: 10,
+            amount: 2,
             category: "metal",
           },
           {
             name: "tape",
-            amount: 5,
+            amount: 2,
             category: "metal",
+          },
+          {
+            name: "perch",
+            amount: 10,
+            category: "fishing",
+          },
+          {
+            name: "carrot",
+            amount: 8,
+            category: "fishing",
+          },
+          {
+            name: "corn",
+            amount: 10,
+            category: "fishing",
           },
         ],
         result: [
           {
-            name: "knife",
-            amount: 1,
-            category: "weapon",
+            name: "cocaine",
+            amount: 5,
+            category: "pill",
           },
         ],
       });

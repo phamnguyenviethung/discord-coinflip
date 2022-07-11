@@ -1,8 +1,7 @@
-const User = require("../../app/models/User");
 const { category } = require("../../utils/category");
-const chocies = [];
+const choices = [];
 category.eat.forEach((item) => {
-  chocies.push({
+  choices.push({
     name: item,
     value: item,
   });
@@ -18,7 +17,7 @@ module.exports = {
       description: "Chọn món",
       required: true,
       type: "STRING",
-      chocies,
+      choices,
     },
   ],
   run: async (client, interaction, user) => {

@@ -161,16 +161,35 @@ const UserSchema = new Schema(
           default: 0,
         },
       },
+      pill: {
+        marijuana: {
+          type: Number,
+          default: 0,
+        },
+        cocaine: {
+          type: Number,
+          default: 0,
+        },
+        heroin: {
+          type: Number,
+          default: 0,
+        },
+        ecstasy: {
+          type: Number,
+          default: 0,
+        },
+      },
     },
-    // timestamps: {
-    //   jail: {
-    //     type: Number,
-    //     default: null,
-    //   },
-    //   health: {
-    //     type: Number,
-    //     default: null,
-    //   },
+    timestamps: {
+      jail: {
+        type: Number,
+        default: null,
+      },
+      health: {
+        type: Number,
+        default: null,
+      },
+    },
     isBanned: {
       type: Boolean,
       default: false,

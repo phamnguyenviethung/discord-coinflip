@@ -44,7 +44,7 @@ module.exports = {
       }
 
       const price = {
-        iron: 5000,
+        iron: 4000,
         plastic: 2000,
       };
 

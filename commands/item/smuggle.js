@@ -17,7 +17,7 @@ module.exports = {
   name: "smuggle",
   description: "Buôn lậu gì đó đi",
   type: "CHAT_INPUT",
-  cooldown: 20,
+  cooldown: 0,
   options: [
     {
       name: "animal",
@@ -31,11 +31,11 @@ module.exports = {
       description: "Nhập số lượng",
       required: true,
       type: "NUMBER",
-      min_value: 0,
+      min_value: 1,
     },
   ],
 
-  run: async (client, interaction) => {
+  run: async (client, interaction, user) => {
     const require = {
       rabbit: _.random(5000, 15000),
       tiger: _.random(20000, 50000),
@@ -44,9 +44,6 @@ module.exports = {
     const animal = interaction.options.get("animal").value;
     const amount = interaction.options.get("amount").value;
     try {
-      const user = await User.findOne({ id: interaction.user.id });
-      if (!user) return interaction.reply("Bạn chưa đăng ký");
-
       if (user.health.eat < 100 || user.health < 100) {
         client.cooldowns.get("smuggle").delete(interaction.user.id);
         return interaction.reply(
@@ -54,10 +51,11 @@ module.exports = {
         );
       }
 
-      if (user.inventory[animal] < amount || user.inventory[animal] <= 0)
-        return interaction.reply(
-          `Cần tối thiểu **${amount + " " + animal}** để buôn`
-        );
+      if (
+        user.inventory.hunting[animal] < amount ||
+        user.inventory.hunting[animal] <= 0
+      )
+        return interaction.reply(`Cần tối thiểu **1 con** để buôn`);
 
       const pick = _.random(1, 10);
       const gift = amount * require[animal];
@@ -70,7 +68,7 @@ module.exports = {
       await new Promise((resolve) => {
         setTimeout(resolve, 2000);
       });
-      if (pick >= 6) {
+      if (pick >= 11) {
         user.money += gift;
         user.inventory.hunting[animal] -= amount;
         user.health.drink -= 30;
@@ -81,11 +79,11 @@ module.exports = {
           `💸 Giao dịch thành công. Bạn nhận được **${formatMoney(gift)}**`
         );
       } else {
-        const time = dayjs().locale("vi").add(_.random(5, 10), "minutes");
+        const time = dayjs().locale("vi").add(_.random(3, 7), "minutes");
         user.health.drink -= 30;
         user.health.eat -= 50;
         user.inventory.hunting[animal] -= amount;
-        user.timestamps.jail = time;
+        user.timestamps.jail = time.valueOf();
         user.save();
         interaction.channel.send(
           `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam tới **${time
