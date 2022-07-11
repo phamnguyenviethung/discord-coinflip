@@ -41,9 +41,22 @@ module.exports = {
       if (user.health.eat < 25 || user.health.drink < 20) {
         return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
-      if (user.money < userMoneyBet) {
+      if (user.money < userMoneyBet || user.money <= 0) {
         return interaction.reply(` Bạn không đủ tiền! =))`);
       }
+
+      if (pickJail <= 3) {
+        const time = dayjs().locale("vi").add(5, "minutes");
+        user.health.eat -= 1;
+        user.health.drink -= 1;
+        user.timestamps.jail = time.valueOf();
+        user.money -= userMoneyBet;
+        user.save();
+        return interaction.channel.send(
+          `🚓🚓🚓 Police ập vào. Bạn bị tạm giam **5 phút**`
+        );
+      }
+
       interaction.reply(
         `**${interaction.user.username}** đã cược \`${formatMoney(
           userMoneyBet
