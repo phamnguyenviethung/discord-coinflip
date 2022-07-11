@@ -1,7 +1,8 @@
 const User = require("../../app/models/User");
 const _ = require("underscore");
 const { formatMoney } = require("../../utils/format");
-
+const dayjs = require("dayjs");
+require("dayjs/locale/vi");
 module.exports = {
   name: "flip",
   description: "Người không all in là người thất bại",
