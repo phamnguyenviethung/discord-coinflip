@@ -33,6 +33,10 @@ module.exports = {
         return interaction.reply(` Bạn không đói.`);
       }
 
+      if (user.inventory.food[food] <= 0) {
+        return interaction.reply(`Bạn không có để ăn`);
+      }
+
       user.inventory.food[food] -= 1;
       user.health.eat += values[food];
       user.save();
