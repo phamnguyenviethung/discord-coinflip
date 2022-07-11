@@ -69,11 +69,11 @@ module.exports = {
       });
 
       user.inventory.gas -= 1;
-      user.inventory.food[food] += amount;
+      user.inventory.food[type] += amount;
       user.save();
 
       return interaction.channel.send(
-        `Bạn đã chế biến **${food}** thành công `
+        `Bạn đã chế biến **${type}** thành công `
       );
     } catch (error) {
       console.log(error);
