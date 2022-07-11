@@ -60,7 +60,7 @@ module.exports = {
           `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
         );
       }
-      user.money += userMoneyBet * 2;
+      user.money += userMoneyBet * 3;
       user.health.eat -= 1;
       user.health.drink -= 1;
       user.save();
