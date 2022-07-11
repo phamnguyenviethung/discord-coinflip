@@ -6,6 +6,7 @@ module.exports = {
   name: "flip",
   description: "Người không all in là người thất bại",
   type: "CHAT_INPUT",
+  cooldown: 15,
   options: [
     {
       name: "side",
@@ -36,6 +37,7 @@ module.exports = {
     const pick = _.random(1, 10) > 5 ? "Heads" : "Tails";
     const userSide = interaction.options.get("side").value;
     const userMoneyBet = interaction.options.get("money").value;
+    const pickJail = _.random(1, 10);
 
     try {
       if (user.health.eat < 25 || user.health.drink < 20) {

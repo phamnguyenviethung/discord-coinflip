@@ -7,6 +7,8 @@ module.exports = {
   name: "flipall",
   description: "Cùng all in nào các chiến binh",
   type: "CHAT_INPUT",
+  cooldown: 15,
+
   options: [
     {
       name: "side",
