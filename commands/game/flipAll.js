@@ -28,7 +28,7 @@ module.exports = {
   run: async (client, interaction, user) => {
     try {
       const userSide = interaction.options.get("side").value;
-      const pick = _.random(1, 10) > 5 ? "Heads" : "Tails";
+      const pick = _.random(1, 30) < 15 ? "Heads" : "Tails";
 
       if (user.health.eat < 25 || user.health.drink < 20) {
         return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
