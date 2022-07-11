@@ -29,9 +29,8 @@ module.exports = async (client, interaction, data) => {
       );
     }
 
-    user.health.eat -= 5;
-    user.health.drink -= 5;
-    user.health.stress += 5;
+    user.health.eat -= 15;
+    user.health.drink -= 15;
     user.inventory.tool.shovel -= 1;
     user.inventory.metal[randomItem] += randomQuantity;
     user.save();

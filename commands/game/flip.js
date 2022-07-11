@@ -62,8 +62,8 @@ module.exports = {
         );
       }
       user.money += userMoneyBet * 2.5;
-      user.health.eat -= 1;
-      user.health.drink -= 1;
+      user.health.eat -= 10;
+      user.health.drink -= 10;
       user.save();
       await new Promise((resolve) => {
         setTimeout(resolve, 3200);

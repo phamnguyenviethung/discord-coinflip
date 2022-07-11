@@ -24,9 +24,9 @@ module.exports = {
     const food = interaction.options.get("food").value;
 
     const values = {
-      bread: 15,
-      rice: 40,
-      noodle: 70,
+      bread: 10,
+      rice: 30,
+      noodle: 50,
     };
     try {
       if (user.health.eat >= 350) {

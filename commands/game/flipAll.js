@@ -1,4 +1,3 @@
-const User = require("../../app/models/User");
 const _ = require("underscore");
 const { formatMoney } = require("../../utils/format");
 module.exports = {
@@ -55,8 +54,8 @@ module.exports = {
       }
 
       user.money *= 2.5;
-      user.health.eat -= 1;
-      user.health.drink -= 1;
+      user.health.eat -= 10;
+      user.health.drink -= 10;
       user.save();
 
       await new Promise((resolve) => {

@@ -14,13 +14,13 @@ module.exports = {
         return interaction.reply(` Bạn không đủ tiền`);
       }
 
-      user.money -= 1200;
-      user.health.drink += 30;
+      user.money -= 2000;
+      user.health.drink += 35;
 
       user.save();
 
       return interaction.reply(
-        `${interaction.user.username} vừa uống  1 chai **sting** giá 800$`
+        `${interaction.user.username} vừa uống  1 chai **sting** giá 2000$`
       );
     } catch (error) {
       console.log(error);
