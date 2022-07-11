@@ -60,19 +60,19 @@ const UserSchema = new Schema(
       food: {
         meat: {
           type: Number,
-          default: 5,
+          default: 2,
         },
         noodle: {
           type: Number,
-          default: 5,
+          default: 2,
         },
         rice: {
           type: Number,
-          default: 5,
+          default: 2,
         },
         bread: {
           type: Number,
-          default: 5,
+          default: 2,
         },
         corn: {
           type: Number,
