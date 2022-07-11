@@ -70,6 +70,7 @@ module.exports = {
 
       user.inventory.gas -= 1;
       user.inventory.food[type] += amount;
+      user.inventory.food.meat += recipe[type] * amount;
       user.save();
 
       return interaction.channel.send(
