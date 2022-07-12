@@ -21,6 +21,10 @@ module.exports = {
           name: "Iron",
           value: "iron",
         },
+        {
+          name: "Wire",
+          value: "wire",
+        },
       ],
     },
     {
