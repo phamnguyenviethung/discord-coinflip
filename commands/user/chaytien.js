@@ -12,9 +12,9 @@ module.exports = {
 
   run: async (client, interaction, user) => {
     try {
-      if (user.money < 20000000) {
+      if (user.money < 40000000) {
         return interaction.reply(
-          "Bạn không đủ tiền để chạy án. **Tối thiểu là 20 triệu**"
+          "Bạn không đủ tiền để chạy án. **Tối thiểu là 40 triệu**"
         );
       }
       const roll = _.random(1, 30) >= 15;
@@ -25,18 +25,20 @@ module.exports = {
       const isBefore = now.isBefore(userTime, "DD/MM/YYYY H:mm:ss");
       if (isBefore) {
         if (roll) {
-          user.timestamps.jail = userTime.add(3, "minute");
+          user.timestamps.jail = userTime.add(5, "minute");
           user.money -= 150000000;
 
           user.save();
           return interaction.reply(
-            `Thất bại, bạn bị phạt thêm 3 phút và trả 8 triệu tiền chạy án`
+            `Thất bại, bạn bị phạt thêm 5 phút và trả 15 triệu tiền chạy án`
           );
         } else {
-          user.timestamps.jail = null;
+          user.timestamps.jail = userTime.subtract(2, "minutes");
           user.money -= 20000000;
           user.save();
-          return interaction.reply(`Bạn đã trốn thành công`);
+          return interaction.reply(
+            `Thật không may, bạn chỉ được giảm nhẹ tôi chứ không thoát được. Bạn trả 20 triệu tiền chạy án`
+          );
         }
       } else {
         return interaction.reply(`Bạn không trong tù`);
