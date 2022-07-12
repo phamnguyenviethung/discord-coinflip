@@ -85,7 +85,7 @@ module.exports = {
               )}** vì đánh bạc sai quy định`
             );
           } else {
-            const min = 5;
+            const min = 10;
             const time = dayjs().locale("vi").add(min, "minutes");
             const fine = _.random(1, 4) * 1000000;
             user.bankloan += fine;
