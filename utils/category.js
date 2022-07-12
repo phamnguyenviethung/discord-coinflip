@@ -9,4 +9,4 @@ module.exports.category = {
   smuggle: ["tiger", "rhino", "rabbit"],
 };
 
-// module.exports.pill = ["marijuana ", "cocaine", "heroin", "ecstasy"];
+module.exports.food = ["corn", "carrot", "salad", "tomato", "peanut"];
