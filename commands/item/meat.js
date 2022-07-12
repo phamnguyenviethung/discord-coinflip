@@ -46,7 +46,7 @@ module.exports = {
         user.inventory.fishing[type] <= 0
       ) {
         return interaction.reply(
-          `Bạn không đủ nguyên liệu.\n Bạn cần **${
+          `Bạn không đủ nguyên liệu.\nBạn cần **${
             recipe[type] * amount
           } ${type}** để chế biến ra **${amount} meat**`
         );
