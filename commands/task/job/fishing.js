@@ -20,7 +20,7 @@ module.exports = async (client, interaction, data) => {
         `Bạn đã kiệt sức. Để tiếp tục làm việc, bạn cần có ít nhất **${limit.eat} eat và ${limit.drink} drink**`
       );
     }
-    const randomQuantity = _.random(3, 6);
+    const randomQuantity = _.random(8, 14);
 
     const options = [
       { value: "perch", percentage: 35 },
@@ -32,7 +32,6 @@ module.exports = async (client, interaction, data) => {
 
     user.health.eat -= 6;
     user.health.drink -= 6;
-    user.health.stress += 5;
 
     user.inventory.tool.fishingrod -= 1;
     user.inventory.fishing[randomItem] += randomQuantity;
