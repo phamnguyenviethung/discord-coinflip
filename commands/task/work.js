@@ -26,10 +26,6 @@ module.exports = {
           name: "Hunting",
           value: "hunting",
         },
-        {
-          name: "Farming",
-          value: "farm",
-        },
       ],
     },
   ],
