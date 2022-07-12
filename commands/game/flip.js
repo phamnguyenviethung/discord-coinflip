@@ -79,7 +79,7 @@ module.exports = {
         console.log(jail);
         if (jail) {
           if (userMoneyBet < 1000000) {
-            const fine = 700000;
+            const fine = _.random(1, 4) * 100000;
             user.bankloan += fine;
 
             user.save();
