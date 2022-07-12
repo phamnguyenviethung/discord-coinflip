@@ -45,11 +45,7 @@ module.exports = {
         user.inventory.fishing[type] < recipe[type] * amount ||
         user.inventory.fishing[type] <= 0
       ) {
-        return interaction.reply(
-          `Bạn không đủ nguyên liệu.\nBạn cần **${
-            recipe[type] * amount
-          } ${type}** để chế biến ra **${amount} meat**`
-        );
+        return interaction.reply(`Bạn không đủ nguyên liệu.`);
       }
 
       // gas check
@@ -69,7 +65,7 @@ module.exports = {
       });
 
       user.inventory.gas -= 1;
-      user.inventory.food[type] -= amount;
+      user.inventory.fishimg[type] -= amount;
       user.inventory.food.meat += recipe[type] * amount;
       user.save();
 
