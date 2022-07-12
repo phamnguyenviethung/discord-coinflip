@@ -23,12 +23,16 @@ module.exports = {
       if (user.money < value || user.money <= 0) {
         return interaction.reply("Bạn không đủ tiền");
       }
+      const percentage = value - (value * 90) / 100;
+
       user.money -= value;
-      user.atm += value;
+      user.atm += value - percentage;
       user.save();
 
       return interaction.reply(
-        `💸 Bạn đã nạp **${formatMoney(value)}** vào  tài khoản.`
+        `💸 Bạn đã nạp **${formatMoney(
+          value
+        )}** vào  tài khoản. Phí giao dịch **${formatMoney(percentage)}**`
       );
     } catch (error) {
       console.log(error);
