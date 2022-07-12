@@ -37,7 +37,7 @@ module.exports = {
       fuel: 800,
       shovel: 3000,
       fishingrod: 2000,
-      huntingrifle: 4000,
+      huntingrifle: 3500,
       gas: 500,
     };
     const item = interaction.options.get("item").value;
