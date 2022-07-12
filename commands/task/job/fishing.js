@@ -26,8 +26,8 @@ module.exports = async (client, interaction, data) => {
       { value: "perch", percentage: 35 },
       { value: "carp", percentage: 30 },
       { value: "phattom", percentage: 24 },
-      { value: "empty", percentage: 10 },
-      { value: "shark", percentage: 1 },
+      { value: "empty", percentage: 4 },
+      { value: "shark", percentage: 7 },
     ];
     const randomItem = random(options);
 

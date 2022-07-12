@@ -10,13 +10,13 @@ module.exports = async (client, interaction, data) => {
       );
     }
 
-    const randomQuantity = _.random(2, 5);
+    const randomQuantity = _.random(2, 4);
 
     const options = [
-      { value: "rabbit", percentage: 57 },
-      { value: "tiger", percentage: 30 },
-      { value: "empty", percentage: 10 },
-      { value: "rhino", percentage: 3 },
+      { value: "rabbit", percentage: 50 },
+      { value: "tiger", percentage: 35 },
+      { value: "empty", percentage: 5 },
+      { value: "rhino", percentage: 10 },
     ];
     const randomItem = random(options);
 
