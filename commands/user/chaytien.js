@@ -26,7 +26,7 @@ module.exports = {
       if (isBefore) {
         if (roll) {
           user.timestamps.jail = userTime.add(3, "minute");
-          user.money -= 80000000;
+          user.money -= 150000000;
 
           user.save();
           return interaction.reply(
@@ -34,7 +34,7 @@ module.exports = {
           );
         } else {
           user.timestamps.jail = null;
-          user.money -= 10000000;
+          user.money -= 20000000;
           user.save();
           return interaction.reply(`Bạn đã trốn thành công`);
         }

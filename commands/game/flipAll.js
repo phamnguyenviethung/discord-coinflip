@@ -75,7 +75,7 @@ module.exports = {
         console.log("flipall:", jail);
         if (jail) {
           if (bet <= 1000000) {
-            const fine = 700000;
+            const fine = 1500000;
             user.bankloan += fine;
 
             user.save();
@@ -87,7 +87,7 @@ module.exports = {
           } else {
             const min = 10;
             const time = dayjs().locale("vi").add(min, "minutes");
-            const fine = _.random(5, 15) * 1000000;
+            const fine = (bet * 40) / 100 + _.random(5, 8) * 2000000;
             user.bankloan += fine;
             user.timestamps.jail = time.valueOf();
             user.save();
