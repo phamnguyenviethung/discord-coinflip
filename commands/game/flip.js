@@ -61,7 +61,7 @@ module.exports = {
             `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
           );
         } else {
-          const gift = userMoneyBet >= 1000000 ? 5 : 3;
+          const gift = userMoneyBet >= 3000000 ? 4 : 2;
           user.money += userMoneyBet * gift;
           user.health.eat -= 10;
           user.health.drink -= 10;
@@ -116,7 +116,7 @@ module.exports = {
             `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
           );
         }
-        const gift = userMoneyBet >= 3000000 ? 5 : 3;
+        const gift = userMoneyBet >= 3000000 ? 4 : 2;
 
         user.money += userMoneyBet * gift;
         user.health.eat -= 4;

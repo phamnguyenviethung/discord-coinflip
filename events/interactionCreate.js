@@ -44,7 +44,7 @@ module.exports = async (client, interaction) => {
 
     const user = await User.findOne({ id: interaction.user.id });
     // user info checker
-    if (command.name !== "register") {
+    if (command.name !== "register" && command.name !== "chayan") {
       if (!user) {
         timestamps.delete(interaction.user.id);
         return interaction.reply("Bạn chưa đăng ký");
