@@ -1,4 +1,4 @@
-const { category } = require("../../utils/category");
+const { category } = require("../utils/category");
 
 const choices = [];
 category.fishing.forEach((item) => {
