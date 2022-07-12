@@ -34,11 +34,9 @@ module.exports = {
 
   run: async (client, interaction) => {
     const price = {
-      fuel: 800,
-      shovel: 3200,
-      fishingrod: 3200,
-      huntingrifle: 4000,
-      gas: 500,
+      shovel: 6000,
+      fishingrod: 6000,
+      huntingrifle: 5000,
     };
     const item = interaction.options.get("item").value;
     const amount = interaction.options.get("amount").value;

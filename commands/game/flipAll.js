@@ -56,7 +56,7 @@ module.exports = {
             `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
           );
         } else {
-          const gift = bet >= 1000000 ? 3 : 1.5;
+          const gift = bet >= 3000000 ? 5 : 3;
 
           user.money *= gift;
           user.health.eat -= 10;
@@ -112,11 +112,11 @@ module.exports = {
             `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
           );
         }
-        const gift = bet >= 1000000 ? 3 : 1.5;
+        const gift = bet >= 3000000 ? 5 : 3;
 
         user.money *= gift;
-        user.health.eat -= 10;
-        user.health.drink -= 10;
+        user.health.eat -= 4;
+        user.health.drink -= 4;
         user.save();
 
         await new Promise((resolve) => {

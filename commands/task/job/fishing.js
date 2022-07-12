@@ -24,20 +24,11 @@ module.exports = async (client, interaction, data) => {
 
     const options = [
       { value: "perch", percentage: 35 },
-      { value: "carp", percentage: 35 },
+      { value: "carp", percentage: 30 },
       { value: "phattom", percentage: 20 },
-      { value: "empty", percentage: 9 },
-      { value: "shark", percentage: 1 },
+      { value: "shark", percentage: 15 },
     ];
     const randomItem = random(options);
-
-    if (randomItem === "empty") {
-      user.inventory.tool.fishingrod -= 1;
-      user.save();
-      return interaction.reply(
-        `Thật không may, **${interaction.user.username}** đã không câu được gì.`
-      );
-    }
 
     user.health.eat -= 6;
     user.health.drink -= 6;

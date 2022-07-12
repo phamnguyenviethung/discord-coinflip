@@ -15,20 +15,12 @@ module.exports = async (client, interaction, data) => {
     const options = [
       { value: "rabbit", percentage: 50 },
       { value: "tiger", percentage: 35 },
-      { value: "empty", percentage: 5 },
-      { value: "rhino", percentage: 10 },
+      { value: "rhino", percentage: 15 },
     ];
     const randomItem = random(options);
 
-    if (randomItem === "empty") {
-      user.inventory.tool.huntingrifle -= 1;
-      user.save();
-      return interaction.reply(
-        `Thật không may, **${interaction.user.username}** đã không săn được gì.`
-      );
-    }
-    user.health.eat -= 10;
-    user.health.drink -= 10;
+    user.health.eat -= 6;
+    user.health.drink -= 6;
     user.inventory.tool.huntingrifle -= 1;
     user.inventory.hunting[randomItem] += randomQuantity;
     user.save();
