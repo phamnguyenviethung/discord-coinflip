@@ -91,7 +91,7 @@ module.exports = {
           } else {
             const min = 10;
             const time = dayjs().locale("vi").add(min, "minutes");
-            const fine = _.random(1, 4) * 1000000;
+            const fine = _.random(5, 15) * 1000000;
 
             user.bankloan += fine;
             user.timestamps.jail = time.valueOf();

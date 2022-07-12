@@ -66,9 +66,9 @@ module.exports = async (client, interaction) => {
     }
 
     if (["flip", "flipall"].includes(command.name)) {
-      if (user.bankloan >= 5000000) {
+      if (user.bankloan >= 15000000) {
         return interaction.reply(
-          "Chủ sòng từ chối với người nợ ngân hàng trên **5 triệu đô**"
+          "Chủ sòng từ chối với người nợ ngân hàng trên **15 triệu đô**"
         );
       }
     }
