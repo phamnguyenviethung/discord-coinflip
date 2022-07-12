@@ -36,7 +36,7 @@ module.exports = {
     const price = {
       fuel: 800,
       shovel: 3000,
-      fishingrod: 2000,
+      fishingrod: 3000,
       huntingrifle: 3500,
       gas: 500,
     };

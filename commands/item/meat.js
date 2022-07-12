@@ -35,9 +35,9 @@ module.exports = {
 
     const recipe = {
       perch: 1,
-      carp: 3,
-      phattom: 5,
-      shark: 15,
+      carp: 5,
+      phattom: 10,
+      shark: 30,
     };
 
     try {

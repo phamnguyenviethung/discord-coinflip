@@ -44,10 +44,10 @@ module.exports = {
       }
 
       const price = {
-        perch: 1200,
-        carp: 1500,
-        phattom: 2500,
-        shark: 80000,
+        perch: 3000,
+        carp: 5000,
+        phattom: 15000,
+        shark: 100000,
       };
 
       user.inventory.fishing[type] -= amount;
