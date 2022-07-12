@@ -26,14 +26,15 @@ module.exports = {
       if (isBefore) {
         if (roll) {
           user.timestamps.jail = userTime.add(3, "minute");
-          user.bankloan += 80000000;
+          user.money -= 80000000;
+
           user.save();
           return interaction.reply(
             `Thất bại, bạn bị phạt thêm 3 phút và trả 8 triệu tiền chạy án`
           );
         } else {
           user.timestamps.jail = null;
-          user.bankloan += 20000000;
+          user.money -= 10000000;
           user.save();
           return interaction.reply(`Bạn đã trốn thành công`);
         }
