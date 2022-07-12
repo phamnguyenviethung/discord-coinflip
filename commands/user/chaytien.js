@@ -8,13 +8,13 @@ module.exports = {
   name: "chayan",
   description: "chạy án",
   type: "CHAT_INPUT",
-  cooldown: 30,
+  cooldown: 60,
 
   run: async (client, interaction, user) => {
     try {
-      if (user.money < 10000000) {
+      if (user.money < 20000000) {
         return interaction.reply(
-          "Bạn không đủ tiền để chạy án. **Tối thiểu là 10 triệu**"
+          "Bạn không đủ tiền để chạy án. **Tối thiểu là 20 triệu**"
         );
       }
       const roll = _.random(1, 30) >= 15;
