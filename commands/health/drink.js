@@ -1,5 +1,3 @@
-const User = require("../../app/models/User");
-
 module.exports = {
   name: "drink",
   description: "Uống Sting",
