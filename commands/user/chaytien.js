@@ -1,6 +1,7 @@
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
 const _ = require("underscore");
+const { formatMoney } = require("../../utils/format");
 
 dayjs.extend(relativeTime);
 require("dayjs/locale/vi");
@@ -8,7 +9,7 @@ module.exports = {
   name: "chayan",
   description: "chạy án",
   type: "CHAT_INPUT",
-  cooldown: 60,
+  cooldown: 40,
 
   run: async (client, interaction, user) => {
     try {
@@ -25,20 +26,40 @@ module.exports = {
       const isBefore = now.isBefore(userTime, "DD/MM/YYYY H:mm:ss");
       if (isBefore) {
         if (roll) {
-          user.timestamps.jail = userTime.add(5, "minute");
-          user.money -= 150000000;
+          const fine = 15000000;
+          user.timestamps.jail = userTime.add(3, "minute");
+          user.money -= fine;
 
           user.save();
           return interaction.reply(
-            `Thất bại, bạn bị phạt thêm 5 phút và trả 15 triệu tiền chạy án`
+            `Bạn chi **${formatMoney(
+              fine
+            )}** để chạy nhưng thất bại. Bạn bị phạt thêm **3 phút**`
           );
         } else {
-          user.timestamps.jail = userTime.subtract(2, "minutes");
-          user.money -= 20000000;
-          user.save();
-          return interaction.reply(
-            `Thật không may, bạn chỉ được giảm nhẹ tôi chứ không thoát được. Bạn trả 20 triệu tiền chạy án`
-          );
+          const pick = _.random(1, 10) >= 4;
+
+          if (pick) {
+            const fine = 20000000;
+            user.timestamps.jail = userTime.subtract(2, "minutes");
+            user.money -= fine;
+            user.save();
+            return interaction.reply(
+              `Bạn được giảm nhẹ tội: **giảm 2 phút** tiền án\n Số tiền phải chi là **${formatMoney(
+                fine
+              )}**`
+            );
+          } else {
+            const fine = 40000000;
+            user.timestamps.jail = null;
+            user.money -= 40000000;
+            user.save();
+            return interaction.reply(
+              `Bạn được thoát sạch tội.\nSố tiền phải chi là **${formatMoney(
+                fine
+              )}**`
+            );
+          }
         }
       } else {
         return interaction.reply(`Bạn không trong tù`);
