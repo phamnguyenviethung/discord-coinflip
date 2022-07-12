@@ -12,13 +12,17 @@ module.exports = {
 
   run: async (client, interaction, user) => {
     try {
+      if (user.money < 10000000) {
+        return interaction.reply(
+          "Bạn không đủ tiền để chạy án. **Tối thiểu là 10 triệu**"
+        );
+      }
       const roll = _.random(1, 30) >= 15;
 
       const now = dayjs().locale("vi");
       const userTime = dayjs(user.timestamps.jail);
 
       const isBefore = now.isBefore(userTime, "DD/MM/YYYY H:mm:ss");
-
       if (isBefore) {
         if (roll) {
           user.timestamps.jail = userTime.add(3, "minute");
