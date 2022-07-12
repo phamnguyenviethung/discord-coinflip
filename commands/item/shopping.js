@@ -2,7 +2,7 @@ const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
 
 const choices = [];
-["gas", "fuel", "fishingrod", "shovel", "huntingrifle"].forEach((item) => {
+["fishingrod", "shovel", "huntingrifle"].forEach((item) => {
   choices.push({
     name: item,
     value: item,
