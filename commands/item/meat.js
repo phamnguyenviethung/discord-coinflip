@@ -65,7 +65,7 @@ module.exports = {
       });
 
       user.inventory.gas -= 1;
-      user.inventory.fishimg[type] -= amount;
+      user.inventory.fishing[type] -= amount;
       user.inventory.food.meat += recipe[type] * amount;
       user.save();
 
