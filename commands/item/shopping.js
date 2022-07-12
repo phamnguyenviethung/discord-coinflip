@@ -34,8 +34,8 @@ module.exports = {
 
   run: async (client, interaction) => {
     const price = {
-      shovel: 6000,
-      fishingrod: 6000,
+      shovel: 20000,
+      fishingrod: 20000,
       huntingrifle: 5000,
     };
     const item = interaction.options.get("item").value;

@@ -1,12 +1,10 @@
 const choices = [];
-["metal", "food", "drink", "weapon", "tool", "fishing", "hunting"].forEach(
-  (item) => {
-    choices.push({
-      name: item,
-      value: item,
-    });
-  }
-);
+["metal", "food", "weapon", "tool", "fishing", "hunting"].forEach((item) => {
+  choices.push({
+    name: item,
+    value: item,
+  });
+});
 
 module.exports = {
   name: "bag",

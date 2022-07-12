@@ -6,4 +6,3 @@ module.exports.category = {
   tool: ["huntingrifle", "fishingrod", "shovel", "gas", "maycay", "mask"],
   smuggle: ["tiger", "rhino", "rabbit"],
 };
-
