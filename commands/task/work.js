@@ -1,7 +1,6 @@
 const dig = require("./job/dig");
 const hunting = require("./job/hunting");
 const fishing = require("./job/fishing");
-const farm = require("./job/farm");
 
 module.exports = {
   name: "work",
@@ -57,9 +56,6 @@ module.exports = {
         break;
       case "hunting":
         hunting(client, interaction, data);
-        break;
-      case "farm":
-        farm(client, interaction, data);
         break;
 
       default:

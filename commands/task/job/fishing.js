@@ -24,10 +24,10 @@ module.exports = async (client, interaction, data) => {
 
     const options = [
       { value: "perch", percentage: 35 },
-      { value: "carp", percentage: 30 },
-      { value: "phattom", percentage: 24 },
-      { value: "empty", percentage: 4 },
-      { value: "shark", percentage: 7 },
+      { value: "carp", percentage: 35 },
+      { value: "phattom", percentage: 20 },
+      { value: "empty", percentage: 9 },
+      { value: "shark", percentage: 1 },
     ];
     const randomItem = random(options);
 
