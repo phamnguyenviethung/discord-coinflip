@@ -1,11 +1,11 @@
-const User = require("../../app/models/User");
 const _ = require("underscore");
 const { formatMoney } = require("../../utils/format");
+const dayjs = require("dayjs");
+require("dayjs/locale/vi");
 module.exports = {
   name: "flip",
   description: "Người không all in là người thất bại",
   type: "CHAT_INPUT",
-  cooldown: 15,
   options: [
     {
       name: "side",
@@ -29,13 +29,13 @@ module.exports = {
       type: "INTEGER",
       required: true,
       min_value: 1,
-      max_value: 400000,
     },
   ],
   run: async (client, interaction, user) => {
     const pick = _.random(1, 20) <= 10 ? "Heads" : "Tails";
     const userSide = interaction.options.get("side").value;
     const userMoneyBet = interaction.options.get("money").value;
+    const jail = _.random(100) > 70;
 
     try {
       if (user.health.eat < 25 || user.health.drink < 20) {
@@ -50,29 +50,83 @@ module.exports = {
           userMoneyBet
         )}\` vào **${userSide}**`
       );
+      if (userMoneyBet > 200000) {
+        if (userSide !== pick) {
+          user.money -= userMoneyBet;
+          user.save();
+          await new Promise((resolve) => {
+            setTimeout(resolve, 3200);
+          });
+          await interaction.channel.send(
+            `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
+          );
+        } else {
+          user.money += userMoneyBet * 2.5;
+          user.health.eat -= 10;
+          user.health.drink -= 10;
+          user.save();
+          await new Promise((resolve) => {
+            setTimeout(resolve, 3200);
+          });
+          await interaction.channel.send(
+            `🎉🎉🎉  Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
+              user.money
+            )}\` `
+          );
+        }
 
-      if (userSide !== pick) {
-        user.money -= userMoneyBet;
+        console.log(jail);
+        if (jail) {
+          if (userMoneyBet < 1000000) {
+            const fine = 700000;
+            user.bankloan += fine;
+
+            user.save();
+            return interaction.channel.send(
+              `${interaction.user.username} đã bị phạt **${formatMoney(
+                fine
+              )}** vì đánh bạc sai quy định`
+            );
+          } else {
+            const min = 5;
+            const time = dayjs().locale("vi").add(min, "minutes");
+            const fine = 3000000;
+            user.bankloan += fine;
+            user.timestamps.jail = time.valueOf();
+            user.save();
+            return interaction.channel.send(
+              `🚓🚓🚓 **${
+                interaction.user.username
+              }** đã bị phạt **${formatMoney(
+                fine
+              )}** vì đánh bạc sai quy định và bị giam **${min} phút**`
+            );
+          }
+        }
+      } else {
+        if (userSide !== pick) {
+          user.money -= userMoneyBet;
+          user.save();
+          await new Promise((resolve) => {
+            setTimeout(resolve, 3200);
+          });
+          return await interaction.channel.send(
+            `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
+          );
+        }
+        user.money += userMoneyBet * 2.5;
+        user.health.eat -= 10;
+        user.health.drink -= 10;
         user.save();
         await new Promise((resolve) => {
           setTimeout(resolve, 3200);
         });
         return await interaction.channel.send(
-          `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
+          `🎉🎉🎉  Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
+            user.money
+          )}\` `
         );
       }
-      user.money += userMoneyBet * 2.5;
-      user.health.eat -= 10;
-      user.health.drink -= 10;
-      user.save();
-      await new Promise((resolve) => {
-        setTimeout(resolve, 3200);
-      });
-      return await interaction.channel.send(
-        `🎉🎉🎉  Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
-          user.money
-        )}\` `
-      );
     } catch (error) {
       console.log(error);
       return interaction.reply("Flip:Có lỗi !!");

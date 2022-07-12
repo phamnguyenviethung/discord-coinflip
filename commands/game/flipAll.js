@@ -1,10 +1,11 @@
 const _ = require("underscore");
 const { formatMoney } = require("../../utils/format");
+const dayjs = require("dayjs");
+require("dayjs/locale/vi");
 module.exports = {
   name: "flipall",
   description: "Cùng all in nào các chiến binh",
   type: "CHAT_INPUT",
-  cooldown: 15,
 
   options: [
     {
@@ -28,6 +29,8 @@ module.exports = {
     try {
       const userSide = interaction.options.get("side").value;
       const pick = _.random(1, 30) <= 15 ? "Heads" : "Tails";
+      const jail = _.random(100, 200) < 130;
+      const bet = user.money;
 
       if (user.health.eat < 25 || user.health.drink < 20) {
         return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
@@ -41,31 +44,87 @@ module.exports = {
           user.money
         )}** vào **${userSide}** 🙅‍♂️🙅‍♂️🙅‍♂️`
       );
-      if (userSide !== pick) {
-        user.money = 0;
+      if (bet > 200000) {
+        if (userSide !== pick) {
+          user.money = 0;
+          user.save();
+
+          await new Promise((resolve) => {
+            setTimeout(resolve, 3200);
+          });
+          await interaction.channel.send(
+            `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
+          );
+        } else {
+          user.money *= 2.5;
+          user.health.eat -= 10;
+          user.health.drink -= 10;
+          user.save();
+
+          await new Promise((resolve) => {
+            setTimeout(resolve, 3200);
+          });
+          await interaction.channel.send(
+            `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
+              user.money
+            )}\` `
+          );
+        }
+        console.log("flipall:", jail);
+        if (jail) {
+          if (bet <= 1000000) {
+            const fine = 700000;
+            user.bankloan += fine;
+
+            user.save();
+            return interaction.channel.send(
+              `${interaction.user.username} đã bị phạt **${formatMoney(
+                fine
+              )}** vì đánh bạc sai quy định`
+            );
+          } else {
+            const min = 5;
+            const time = dayjs().locale("vi").add(min, "minutes");
+            const fine = 3000000;
+            user.bankloan += fine;
+            user.timestamps.jail = time.valueOf();
+            user.save();
+            return interaction.channel.send(
+              `🚓🚓🚓 **${
+                interaction.user.username
+              }** đã bị phạt **${formatMoney(
+                fine
+              )}** vì đánh bạc sai quy định và bị giam **${min} phút**`
+            );
+          }
+        }
+      } else {
+        if (userSide !== pick) {
+          user.money = 0;
+          user.save();
+
+          await new Promise((resolve) => {
+            setTimeout(resolve, 3200);
+          });
+          return await interaction.channel.send(
+            `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
+          );
+        }
+
+        user.money *= 2.5;
+        user.health.eat -= 10;
+        user.health.drink -= 10;
         user.save();
 
         await new Promise((resolve) => {
           setTimeout(resolve, 3200);
         });
         return await interaction.channel.send(
-          `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
+          `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
+            user.money
+          )}\` `
         );
       }
-
-      user.money *= 2.5;
-      user.health.eat -= 10;
-      user.health.drink -= 10;
-      user.save();
-
-      await new Promise((resolve) => {
-        setTimeout(resolve, 3200);
-      });
-      return await interaction.channel.send(
-        `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, số tiền hiện tại của bạn là \`${formatMoney(
-          user.money
-        )}\` `
-      );
     } catch (error) {
       console.log(error);
       return interaction.channel.send("Flipall: Có lỗi");

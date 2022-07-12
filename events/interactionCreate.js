@@ -65,6 +65,14 @@ module.exports = async (client, interaction) => {
       }
     }
 
+    if (["flip", "flipall"].includes(command.name)) {
+      if (user.bankloan >= 4000000) {
+        return interaction.reply(
+          "Chủ sòng từ chối với người nợ ngân hàng trên **4 triệu đô**"
+        );
+      }
+    }
+
     command.run(client, interaction, user);
   } catch (error) {
     console.log(error);
