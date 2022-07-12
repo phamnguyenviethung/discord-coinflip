@@ -46,6 +46,9 @@ module.exports = {
       const price = {
         iron: 10000,
         plastic: 8000,
+        wire: 20000,
+        tape: 5000,
+        cloth: 1000,
       };
 
       user.inventory.metal[type] -= amount;
