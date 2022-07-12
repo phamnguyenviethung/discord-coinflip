@@ -32,6 +32,7 @@ module.exports = {
       required: true,
       type: "NUMBER",
       min_value: 1,
+      max_value: 10,
     },
   ],
 
