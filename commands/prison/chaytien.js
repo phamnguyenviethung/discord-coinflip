@@ -9,7 +9,7 @@ module.exports = {
   name: "chayan",
   description: "chạy án",
   type: "CHAT_INPUT",
-  cooldown: 40,
+  cooldown: 60,
 
   run: async (client, interaction, user) => {
     try {
