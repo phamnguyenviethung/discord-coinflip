@@ -1,3 +1,5 @@
+const { formatMoney } = require("../../utils/format");
+
 module.exports = {
   name: "drink",
   description: "Uống Sting",
@@ -31,7 +33,9 @@ module.exports = {
       user.save();
 
       return interaction.reply(
-        `${interaction.user.username} vừa uống  1 chai **sting** giá 2000$`
+        `${
+          interaction.user.username
+        } vừa uống  ${amount} chai **sting** giá **${formatMoney(price)}**`
       );
     } catch (error) {
       console.log(error);
