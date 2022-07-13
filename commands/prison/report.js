@@ -52,14 +52,14 @@ module.exports = {
           ephemeral: true,
         });
       }
-      const pick = _.random(30, 40) <= 32;
+      const pick = _.random(30, 40) <= 34;
       const min = _.random(3, 7);
       interaction.reply({
         content: "Tố cáo thành công",
         ephemeral: true,
       });
       await interaction.channel.send(
-        `Một người ẩn danh đã tố cáo ${username}. Phiên tòa bắt đầu xét xử...`
+        `Một người ẩn danh đã tố cáo **${username}**. Phiên tòa bắt đầu xét xử...`
       );
       await new Promise((resolve) => {
         setTimeout(resolve, 5000);
@@ -82,9 +82,9 @@ module.exports = {
         return await interaction.channel.send(
           `Kết án: **${username}** vô tội và được bồi thường **${formatMoney(
             price * 1.5
-          )}**. Ngoài ra, ${
+          )}**. Ngoài ra, **${
             interaction.user.username
-          } bị phạt **8 phút** vì tội vu khống.`
+          }** bị phạt **8 phút** vì tội vu khống.`
         );
       }
     } catch (error) {
