@@ -119,8 +119,8 @@ module.exports = {
         const gift = userMoneyBet >= 3000000 ? 4 : 2;
 
         user.money += userMoneyBet * gift;
-        user.health.eat -= 4;
-        user.health.drink -= 4;
+        user.health.eat -= 10;
+        user.health.drink -= 10;
         user.save();
         await new Promise((resolve) => {
           setTimeout(resolve, 3200);
