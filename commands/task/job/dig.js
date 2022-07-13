@@ -9,14 +9,15 @@ module.exports = async (client, interaction, data) => {
       return interaction.reply(`Bạn không có xẻng. Hãy sử dụng \`/shopping\``);
     }
 
-    const randomQuantity = _.random(8, 15);
+    const randomQuantity = _.random(5, 12);
 
     const options = [
-      { value: "cloth", percentage: 20 },
       { value: "tape", percentage: 25 },
+      { value: "cloth", percentage: 18 },
       { value: "plastic", percentage: 20 },
-      { value: "iron", percentage: 20 },
-      { value: "wire", percentage: 15 },
+      { value: "iron", percentage: 16 },
+      { value: "empty", percentage: 11 },
+      { value: "wire", percentage: 10 },
     ];
     const randomItem = random(options);
 
