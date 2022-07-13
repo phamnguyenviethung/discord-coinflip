@@ -45,6 +45,7 @@ module.exports = {
       }
       const pick = _.random(20, 30) >= 27;
       const killed = _.random(1, 3);
+      console.log("pick:", pick);
       if (pick) {
         user.inventory.weapon.shotgun -= 1;
         user.profile.kill += killed;
@@ -64,6 +65,7 @@ module.exports = {
         user.inventory.weapon.shotgun -= 1;
         user.timestamps.jail = now.add(5, "minute");
         user.profile.kill += killed;
+        user.profile.jail += 1;
         user.save();
         interaction.reply(
           `🔫🔫🔫 **${interaction.user.username}** vừa bắn hạ ${killed} tên...`
