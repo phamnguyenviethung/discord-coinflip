@@ -32,7 +32,7 @@ module.exports = {
       required: true,
       type: "NUMBER",
       min_value: 1,
-      max_value: 10,
+      max_value: 20,
     },
   ],
 
@@ -48,9 +48,9 @@ module.exports = {
     }
 
     const require = {
-      rabbit: _.random(1 * 1000000, 3 * 1000000),
-      tiger: _.random(5 * 1000000, 25 * 1000000),
-      rhino: _.random(30 * 1000000, 100 * 1000000),
+      rabbit: _.random(10 * 1000000, 30 * 1000000),
+      tiger: _.random(50 * 1000000, 120 * 1000000),
+      rhino: _.random(100 * 1000000, 700 * 1000000),
     };
     const animal = interaction.options.get("animal").value;
     const amount = interaction.options.get("amount").value;
