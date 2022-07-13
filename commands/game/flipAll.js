@@ -56,9 +56,9 @@ module.exports = {
             `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
           );
         } else {
-          const gift = bet >= 3000000 ? 4 : 2;
+          const multiply = 3;
 
-          user.money *= gift;
+          user.money *= multiply;
           user.health.eat -= 10;
           user.health.drink -= 10;
           user.save();
@@ -68,7 +68,7 @@ module.exports = {
           });
           await interaction.channel.send(
             `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, bạn ăn được \`${formatMoney(
-              bet * gift
+              bet * multiply
             )}\` `
           );
         }
@@ -114,9 +114,9 @@ module.exports = {
             `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
           );
         }
-        const gift = bet >= 3000000 ? 4 : 2;
+        const multiply = 3;
 
-        user.money *= gift;
+        user.money *= multiply;
         user.health.eat -= 10;
         user.health.drink -= 10;
         user.save();
@@ -126,7 +126,7 @@ module.exports = {
         });
         return await interaction.channel.send(
           `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, bạn ăn được \`${formatMoney(
-            bet * gift
+            bet * multiply
           )}\` `
         );
       }
