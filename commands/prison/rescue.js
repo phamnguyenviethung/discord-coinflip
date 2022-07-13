@@ -63,13 +63,13 @@ module.exports = {
         user.timestamps.jail = now.add(5, "minute");
         user.profile.kill += killed;
         user.save();
-        interaction.channel.send(
+        interaction.reply(
           `🔫🔫🔫 **${interaction.user.username}** vừa bắn hạ ${killed} tên...`
         );
         await new Promise((resolve) => {
           setTimeout(resolve, 5000);
         });
-        return await interaction.reply(
+        return await interaction.channel.send(
           `📢📢📢 **${interaction.user.username}** đã bị bắt vì hành vi giúp đỡ tù nhân đào tẩu`
         );
       }
