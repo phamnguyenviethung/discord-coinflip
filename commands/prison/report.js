@@ -53,7 +53,7 @@ module.exports = {
         });
       }
       const pick = _.random(30, 40) <= 32;
-      const min = _.random(1, 3);
+      const min = _.random(3, 7);
       interaction.reply({
         content: "Tố cáo thành công",
         ephemeral: true,
