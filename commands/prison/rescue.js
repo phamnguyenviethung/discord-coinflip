@@ -43,7 +43,7 @@ module.exports = {
       if (!isBefore) {
         return interaction.reply(`Người đó không trong tù`);
       }
-      const pick = _.random(0, 10) >= 6;
+      const pick = _.random(20, 30) >= 27;
       const killed = _.random(1, 3);
       if (pick) {
         user.inventory.weapon.shotgun -= 1;
