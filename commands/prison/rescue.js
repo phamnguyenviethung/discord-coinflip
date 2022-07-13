@@ -51,13 +51,15 @@ module.exports = {
         user.save();
         prisoner.timestamps.jail = null;
         prisoner.save();
-        interaction.channel.send(
+        interaction.reply(
           `🔫🔫🔫 ${interaction.user.username} vừa bắn hạ ${killed} tên...`
         );
         await new Promise((resolve) => {
           setTimeout(resolve, 5000);
         });
-        return await interaction.reply(`📢📢📢 Một tù nhân vừa trốn thoát...`);
+        return await interaction.channel.send(
+          `📢📢📢 Một tù nhân vừa trốn thoát...`
+        );
       } else {
         user.inventory.weapon.shotgun -= 1;
         user.timestamps.jail = now.add(5, "minute");
