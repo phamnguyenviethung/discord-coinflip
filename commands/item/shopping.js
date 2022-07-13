@@ -36,7 +36,7 @@ module.exports = {
     const price = {
       shovel: 20000,
       fishingrod: 20000,
-      huntingrifle: 5000,
+      huntingrifle: 20000,
     };
     const item = interaction.options.get("item").value;
     const amount = interaction.options.get("amount").value;
