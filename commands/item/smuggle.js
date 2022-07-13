@@ -48,9 +48,9 @@ module.exports = {
     }
 
     const require = {
-      rabbit: _.random(10 * 1000000, 30 * 1000000),
-      tiger: _.random(50 * 1000000, 120 * 1000000),
-      rhino: _.random(100 * 1000000, 700 * 1000000),
+      rabbit: _.random(50 * 1000000, 200 * 1000000),
+      tiger: _.random(100 * 1000000, 500 * 1000000),
+      rhino: _.random(700 * 1000000, 5000 * 1000000),
     };
     const animal = interaction.options.get("animal").value;
     const amount = interaction.options.get("amount").value;
