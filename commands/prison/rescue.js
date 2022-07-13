@@ -44,18 +44,33 @@ module.exports = {
         return interaction.reply(`Người đó không trong tù`);
       }
       const pick = _.random(0, 10) >= 6;
+      const killed = _.random(1, 3);
       if (pick) {
         user.inventory.weapon.shotgun -= 1;
+        user.profile.kill += killed;
         user.save();
         prisoner.timestamps.jail = null;
         prisoner.save();
-        return interaction.reply(`Một tù nhân vừa trốn thoát...`);
+        interaction.channel.send(
+          `🔫🔫🔫 ${interaction.user.username} vừa bắn hạ ${killed} tên...`
+        );
+        await new Promise((resolve) => {
+          setTimeout(resolve, 5000);
+        });
+        return await interaction.reply(`📢📢📢 Một tù nhân vừa trốn thoát...`);
       } else {
         user.inventory.weapon.shotgun -= 1;
         user.timestamps.jail = now.add(5, "minute");
+        user.profile.kill += killed;
         user.save();
-        return interaction.reply(
-          `Thất bại, bạn phải chịu án chung với người đó`
+        interaction.channel.send(
+          `🔫🔫🔫 **${interaction.user.username}** vừa bắn hạ ${killed} tên...`
+        );
+        await new Promise((resolve) => {
+          setTimeout(resolve, 5000);
+        });
+        return await interaction.reply(
+          `📢📢📢 **${interaction.user.username}** đã bị bắt vì hành vi giúp đỡ tù nhân đào tẩu`
         );
       }
     } catch (error) {

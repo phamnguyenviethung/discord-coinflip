@@ -20,6 +20,21 @@ const UserSchema = new Schema(
       type: Number,
       default: 0,
     },
+    profile: {
+      description: {
+        type: String,
+        default: "Không có",
+        trim: true,
+      },
+      kill: {
+        type: Number,
+        default: 0,
+      },
+      jail: {
+        type: Number,
+        default: 0,
+      },
+    },
     health: {
       eat: {
         type: Number,
