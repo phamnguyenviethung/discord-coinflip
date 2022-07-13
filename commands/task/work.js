@@ -5,7 +5,7 @@ const fishing = require("./job/fishing");
 module.exports = {
   name: "work",
   description: "Cùng nhau quậch nào ",
-  cooldown: 20,
+  cooldown: 45,
   type: "CHAT_INPUT",
   options: [
     {

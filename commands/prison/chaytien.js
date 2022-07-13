@@ -26,31 +26,31 @@ module.exports = {
       const isBefore = now.isBefore(userTime, "DD/MM/YYYY H:mm:ss");
       if (isBefore) {
         if (roll) {
-          const fine = 30000000;
-          user.timestamps.jail = userTime.add(3, "minute");
+          const fine = 1000000 * 100;
+          user.timestamps.jail = userTime.add(5, "minute");
           user.money -= fine;
 
           user.save();
           return interaction.reply(
             `Bạn chi **${formatMoney(
               fine
-            )}** để chạy nhưng thất bại. Bạn bị phạt thêm **3 phút**`
+            )}** để chạy nhưng thất bại. Bạn bị phạt thêm **5 phút**`
           );
         } else {
           const pick = _.random(1, 10) >= 4;
 
           if (pick) {
-            const fine = 50000000;
-            user.timestamps.jail = userTime.subtract(2, "minutes");
+            const fine = 1000000 * 150;
+            user.timestamps.jail = userTime.subtract(3, "minutes");
             user.money -= fine;
             user.save();
             return interaction.reply(
-              `Bạn được giảm nhẹ tội: **giảm 2 phút** tiền án\n Số tiền phải chi là **${formatMoney(
+              `Bạn được giảm nhẹ tội: **giảm 3 phút** tiền án\n Số tiền phải chi là **${formatMoney(
                 fine
               )}**`
             );
           } else {
-            const fine = 80000000;
+            const fine = 1000000 * 200;
             user.timestamps.jail = null;
             user.money -= fine;
             user.save();
