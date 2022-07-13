@@ -87,6 +87,7 @@ module.exports = {
         user.inventory.weapon.taser -= 1;
         user.inventory.tool.mask -= 1;
         user.inventory.weapon.knife -= 1;
+
         user.save();
 
         interaction.channel.send(
@@ -101,6 +102,7 @@ module.exports = {
         user.inventory.weapon.taser -= 1;
         user.inventory.tool.mask -= 1;
         user.inventory.weapon.knife -= 1;
+        user.profile.jail += 1;
         user.save();
         interaction.channel.send(
           `🚓🚓🚓 Giao dịch thất bại. Bạn đã bị bắt. Bạn bị giam **8 phút**`

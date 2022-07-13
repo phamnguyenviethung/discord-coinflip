@@ -90,6 +90,8 @@ module.exports = {
             const fine = (bet * 25) / 100;
             user.bankloan += fine;
             user.timestamps.jail = time.valueOf();
+            user.profile.jail += 1;
+
             user.save();
             return interaction.channel.send(
               `🚓🚓🚓 **${

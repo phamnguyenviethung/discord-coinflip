@@ -95,6 +95,8 @@ module.exports = {
 
             user.bankloan += fine;
             user.timestamps.jail = time.valueOf();
+            user.profile.jail += 1;
+
             user.save();
             return interaction.channel.send(
               `🚓🚓🚓 **${
