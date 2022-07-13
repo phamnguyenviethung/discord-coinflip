@@ -67,7 +67,10 @@ module.exports = {
       if (pick) {
         user.money -= price;
         user.save();
-        prisoner.timestamps.jail = prisoner.timestamps.jail.add(min, "minutes");
+        prisoner.timestamps.jail = dayjs(prisoner.timestamps.jail).add(
+          min,
+          "minutes"
+        );
         prisoner.save();
         return await interaction.channel.send(
           `Kết án: **${username}** có tội và phạt thêm **${min} phút**`
@@ -89,7 +92,7 @@ module.exports = {
       }
     } catch (error) {
       console.log(error);
-      return interaction.reply("help: có lỗi");
+      return interaction.followUp("help: có lỗi");
     }
   },
 };
