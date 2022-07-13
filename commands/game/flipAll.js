@@ -118,7 +118,7 @@ module.exports = {
 
         user.money *= multiply;
         user.health.eat -= 10;
-        user.health.drink -= 10;
+        user.health.drink -= 15;
         user.save();
 
         await new Promise((resolve) => {

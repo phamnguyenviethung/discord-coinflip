@@ -18,17 +18,17 @@ module.exports = {
 
   run: async (client, interaction, user) => {
     const amount = interaction.options.get("amount").value;
-    const price = 5000 * amount;
+    const price = 12000 * amount;
     try {
       if (user.health.drink >= 350) {
         return interaction.reply(` Bạn không khát nước.`);
       }
-      if (user.money <= 0 || user.money < price) {
+      if (user.atm <= 0 || user.atm < price) {
         return interaction.reply(` Bạn không đủ tiền`);
       }
 
-      user.money -= price;
-      user.health.drink += 40 * amount;
+      user.atm -= price;
+      user.health.drink += 35 * amount;
 
       user.save();
 

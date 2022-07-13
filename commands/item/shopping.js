@@ -28,25 +28,25 @@ module.exports = {
       type: "INTEGER",
       required: true,
       min_value: 1,
-      max_value: 30,
+      max_value: 20,
     },
   ],
 
   run: async (client, interaction) => {
     const price = {
-      shovel: 20000,
-      fishingrod: 20000,
-      huntingrifle: 20000,
+      shovel: 50000,
+      fishingrod: 50000,
+      huntingrifle: 50000,
     };
     const item = interaction.options.get("item").value;
     const amount = interaction.options.get("amount").value;
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
-      if (user.inventory.tool[item] >= 30) {
-        return interaction.reply(`Bạn đã có 30 cái rồi.`);
+      if (user.inventory.tool[item] >= 20) {
+        return interaction.reply(`Bạn đã có 20 cái rồi.`);
       }
-      if (user.money < price[item] * amount) {
+      if (user.atm < price[item] * amount) {
         return interaction.reply(
           `Bạn không đủ tiền để mua ${amount} cái. Giá bán hiện là **${formatMoney(
             price[item]
@@ -54,7 +54,7 @@ module.exports = {
         );
       }
       user.inventory.tool[item] += amount;
-      user.money -= price[item] * amount;
+      user.atm -= price[item] * amount;
       user.save();
 
       return interaction.reply(

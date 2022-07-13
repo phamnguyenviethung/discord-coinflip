@@ -64,7 +64,7 @@ module.exports = {
           const multiply = 3;
           user.money += userMoneyBet * multiply;
           user.health.eat -= 10;
-          user.health.drink -= 10;
+          user.health.drink -= 15;
           user.save();
           await new Promise((resolve) => {
             setTimeout(resolve, 3200);
