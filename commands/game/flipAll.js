@@ -87,7 +87,7 @@ module.exports = {
           } else {
             const min = 10;
             const time = dayjs().locale("vi").add(min, "minutes");
-            const fine = (bet * 25) / 100;
+            const fine = (bet * 50) / 100;
             user.bankloan += fine;
             user.timestamps.jail = time.valueOf();
             user.profile.jail += 1;
