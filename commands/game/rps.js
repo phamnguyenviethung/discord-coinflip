@@ -13,6 +13,7 @@ module.exports = {
       type: "INTEGER",
       required: true,
       min_value: 1,
+      max_value: 1000000 * 100,
     },
   ],
 
