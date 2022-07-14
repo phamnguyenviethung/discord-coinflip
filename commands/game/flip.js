@@ -103,7 +103,7 @@ module.exports = {
             user.profile.jail += 1;
             user.save();
 
-            const text = isBig
+            const text = fasle
               ? `🚓🚓🚓 **${
                   interaction.user.username
                 }** đã bị phạt **${formatMoney(
