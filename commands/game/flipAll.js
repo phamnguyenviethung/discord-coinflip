@@ -89,10 +89,10 @@ module.exports = {
             const time = dayjs().locale("vi").add(min, "minutes");
             const fine = (bet * 50) / 100;
 
-            const isBig = userMoneyBet >= 1000000000 * 5;
-            if (isBig) {
-              user.money = 0;
-            }
+            // const isBig = userMoneyBet >= 1000000000 * 5;
+            // if (isBig) {
+            //   user.money = 0;
+            // }
             user.bankloan += fine;
             user.timestamps.jail = time.valueOf();
             user.profile.jail += 1;
