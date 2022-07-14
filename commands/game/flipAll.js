@@ -85,21 +85,31 @@ module.exports = {
               )}** vì đánh bạc sai quy định`
             );
           } else {
-            const min = 10;
+            const min = 12;
             const time = dayjs().locale("vi").add(min, "minutes");
             const fine = (bet * 50) / 100;
+
+            const isBig = userMoneyBet >= 1000000000 * 5;
+            if (isBig) {
+              user.money = 0;
+            }
             user.bankloan += fine;
             user.timestamps.jail = time.valueOf();
             user.profile.jail += 1;
 
             user.save();
-            return interaction.channel.send(
-              `🚓🚓🚓 **${
-                interaction.user.username
-              }** đã bị phạt **${formatMoney(
-                fine
-              )}** vì đánh bạc sai quy định và bị giam **${min} phút**`
-            );
+            const text = isBig
+              ? `🚓🚓🚓 **${
+                  interaction.user.username
+                }** đã bị phạt **${formatMoney(
+                  fine
+                )}** vì đánh bạc sai quy định, đồng thời bị thu hồi toàn bộ số tiền trong người để điều tra và bị giam **${min} phút**`
+              : `🚓🚓🚓 **${
+                  interaction.user.username
+                }** đã bị phạt **${formatMoney(
+                  fine
+                )}** vì đánh bạc sai quy định và bị giam **${min} phút**`;
+            return interaction.channel.send(text);
           }
         }
       } else {
