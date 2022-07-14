@@ -9,7 +9,7 @@ module.exports = {
   name: "chayan",
   description: "chạy án",
   type: "CHAT_INPUT",
-  cooldown: 5 * 60,
+  cooldown: 3 * 60,
 
   run: async (client, interaction, user) => {
     try {
@@ -26,7 +26,7 @@ module.exports = {
       const isBefore = now.isBefore(userTime, "DD/MM/YYYY H:mm:ss");
       if (isBefore) {
         if (roll) {
-          const fine = 1000000 * 3000;
+          const fine = 1000000 * 5000;
           user.timestamps.jail = userTime.add(5, "minute");
           user.atm -= fine;
 
@@ -40,7 +40,7 @@ module.exports = {
           const pick = _.random(1, 10) >= 4;
 
           if (pick) {
-            const fine = 1000000 * 5000;
+            const fine = 1000000 * 8000;
             user.timestamps.jail = userTime.subtract(3, "minutes");
             user.atm -= fine;
             user.save();
@@ -50,7 +50,7 @@ module.exports = {
               )}**`
             );
           } else {
-            const fine = 1000000 * 9000;
+            const fine = 1000000 * 10000;
             user.timestamps.jail = null;
             user.atm -= fine;
             user.save();
