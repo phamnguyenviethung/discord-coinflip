@@ -6,7 +6,7 @@ module.exports = async (client, interaction, data) => {
   try {
     const { user } = data;
     const { eat, drink, salary, randomQuantity, percent, exp, level } = job.dig;
-    const basicSalary = 650;
+    const basicSalary = _.random(800, 900) * 1.8;
 
     const randomItem = random(percent);
 
@@ -19,7 +19,7 @@ module.exports = async (client, interaction, data) => {
     user.health.eat -= eat;
     user.health.drink -= drink;
     user.inventory.metal[randomItem] += randomQuantity;
-    user.money += _.random(650 + 150, 650 + 250) * 1.8;
+    user.money += basicSalary;
     user.profile.exp.amount +=
       user.profile.exp.amount < exp && user.profile.exp.level === level ? 1 : 0;
     user.save();
@@ -28,7 +28,7 @@ module.exports = async (client, interaction, data) => {
       `🧑‍🌾 **${
         interaction.user.username
       }** đã đào được **${randomQuantity} ${randomItem}** và kiếm được ${formatMoney(
-        salary
+        basicSalary
       )}`
     );
   } catch (error) {
