@@ -32,7 +32,7 @@ module.exports = {
 
         const gift = 10 * 1000;
         user.profile.exp.amount = 0;
-        user.profile.exp.level = nextLevel;
+        user.profile.exp.level = 2;
         user.money += gift;
         user.save();
         return interaction.reply(
