@@ -34,7 +34,7 @@ module.exports = {
       const price = {
         mouse: 1000,
         keyboard: 3000,
-        case: 10000,
+        case: 8000,
       };
 
       user.inventory.old[type] -= amount;

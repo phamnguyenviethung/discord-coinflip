@@ -30,11 +30,11 @@ module.exports.job = {
 
     percent: [
       { value: "tape", percentage: 30 },
-      { value: "cloth", percentage: 20 },
+      { value: "cloth", percentage: 24 },
       { value: "plastic", percentage: 18 },
       { value: "iron", percentage: 16 },
       { value: "empty", percentage: 11 },
-      { value: "wire", percentage: 5 },
+      { value: "wire", percentage: 1 },
     ],
   },
   farm: {
@@ -70,7 +70,7 @@ module.exports.job = {
     percent: [
       { value: "bird", percentage: 45 },
       { value: "rabbit", percentage: 35 },
-      { value: "empty", percentage: 15 }, 
+      { value: "empty", percentage: 15 },
       { value: "tiger", percentage: 4 },
       { value: "rhino", percentage: 1 },
     ],
