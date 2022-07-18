@@ -1,6 +1,6 @@
-const User = require("../../app/models/User");
-const { formatMoney } = require("../../utils/format");
-const { category } = require("../../utils/category");
+const User = require("../app/models/User");
+const { formatMoney } = require("../utils/format");
+const { category } = require("../utils/category");
 const _ = require("underscore");
 const dayjs = require("dayjs");
 require("dayjs/locale/vi");
