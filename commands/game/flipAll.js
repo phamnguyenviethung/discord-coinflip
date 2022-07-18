@@ -28,7 +28,7 @@ module.exports = {
   run: async (client, interaction, user) => {
     try {
       const userSide = interaction.options.get("side").value;
-      const pick = _.random(1, 30) <= 15 ? "Heads" : "Tails";
+      const pick = _.random(1, 30) % 2 === 0 ? "Heads" : "Tails";
       const bet = user.money;
 
       if (user.health.eat < 20 || user.health.drink < 20) {
@@ -44,7 +44,7 @@ module.exports = {
         )} vào **${userSide}** 🙅‍♂️🙅‍♂️🙅‍♂️`
       );
       if (
-        bet >= 20 * 1000 && _.random(1, 100) >= 90 ? false : userSide !== pick
+        bet >= 20 * 1000 && _.random(1, 100) >= 15 ? true : userSide !== pick
       ) {
         user.money = 0;
         user.health.eat -= 8;

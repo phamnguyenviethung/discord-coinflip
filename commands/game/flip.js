@@ -30,7 +30,7 @@ module.exports = {
     },
   ],
   run: async (client, interaction, user) => {
-    const pick = _.random(1, 20) <= 10 ? "Heads" : "Tails";
+    const pick = _.random(1, 20) % 2 === 0 ? "Heads" : "Tails";
     const userSide = interaction.options.get("side").value;
     const bet = interaction.options.get("money").value;
 
@@ -49,7 +49,7 @@ module.exports = {
       );
 
       if (
-        bet >= 20 * 1000 && _.random(1, 100) >= 90 ? false : userSide !== pick
+        bet >= 20 * 1000 && _.random(1, 100) >= 10 ? true : userSide !== pick
       ) {
         user.money -= bet;
         user.health.eat -= 12;
