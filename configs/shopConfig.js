@@ -1,7 +1,7 @@
 module.exports = {
   sting: {
     price: 800,
-    amount: 20,
+    amount: 15,
   },
   coffee: {
     price: 5000,
@@ -17,10 +17,10 @@ module.exports = {
   },
   hamburger: {
     price: 1300,
-    amount: 25,
+    amount: 20,
   },
   rice: {
-    price: 3000,
+    price: 4000,
     amount: 40,
   },
 };
