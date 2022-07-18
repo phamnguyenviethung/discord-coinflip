@@ -43,9 +43,9 @@ module.exports = {
       }
 
       interaction.reply(
-        `**${interaction.user.username}** đã cược \`${formatMoney(
+        `**${interaction.user.username}** đã cược ${formatMoney(
           bet
-        )}\` vào **${userSide}**`
+        )}vào **${userSide}**`
       );
 
       if (userSide !== pick) {
