@@ -11,7 +11,7 @@ module.exports = async (client, interaction, data) => {
     const randomQuantity = _.random(1, 3);
     user.health.eat -= eat;
     user.health.drink -= drink;
-    user.money += _.random(basicSalary, basicSalary + 100) * 1.5;
+    user.money += _.random(650, 750) * 1.5;
     user.profile.exp.amount +=
       user.profile.exp.amount < exp && user.profile.exp.level === level ? 1 : 0;
     user.save();
