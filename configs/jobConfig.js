@@ -3,13 +3,13 @@ const _ = require("underscore");
 const basicSalary = 650;
 
 const jobSalary = {
-  janitor: _.random(basicSalary, basicSalary + 100) * 1.5,
-  dig: _.random(basicSalary + 150, basicSalary + 250) * 1.8,
-  farm: _.random(basicSalary + 300, basicSalary + 450) * 2,
-  grab: _.random(basicSalary + 800, basicSalary + 1000) * 2.4,
-  hunting: _.random(basicSalary + 1200, basicSalary + 1500) * 2.8,
-  fishing: _.random(basicSalary + 1800, basicSalary + 2000) * 3,
-  chef: _.random(basicSalary + 2500, basicSalary + 3000) * 4,
+  janitor: () => _.random(basicSalary, basicSalary + 100) * 1.5,
+  dig: () => _.random(basicSalary + 150, basicSalary + 250) * 1.8,
+  farm: () => _.random(basicSalary + 300, basicSalary + 450) * 2,
+  grab: () => _.random(basicSalary + 800, basicSalary + 1000) * 2.4,
+  hunting: () => _.random(basicSalary + 1200, basicSalary + 1500) * 2.8,
+  fishing: () => _.random(basicSalary + 1800, basicSalary + 2000) * 3,
+  chef: () => _.random(basicSalary + 2500, basicSalary + 3000) * 4,
 };
 
 module.exports.job = {
@@ -70,7 +70,7 @@ module.exports.job = {
     percent: [
       { value: "bird", percentage: 45 },
       { value: "rabbit", percentage: 35 },
-      { value: "empty", percentage: 15 },
+      { value: "empty", percentage: 15 }, 
       { value: "tiger", percentage: 4 },
       { value: "rhino", percentage: 1 },
     ],

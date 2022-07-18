@@ -12,7 +12,7 @@ module.exports = async (client, interaction, data) => {
 
     user.health.eat -= eat;
     user.health.drink -= drink;
-    user.money += salary;
+    user.money += salary();
     user.profile.exp.amount +=
       user.profile.exp.amount < exp && user.profile.exp.level === level ? 1 : 0;
     user.save();
@@ -21,7 +21,7 @@ module.exports = async (client, interaction, data) => {
       `🧑‍🌾 **${
         interaction.user.username
       }** nấu ăn cho nhà hàng **${randomName}** và kiếm được **${formatMoney(
-        salary
+        salary()
       )}** `
     );
   } catch (error) {

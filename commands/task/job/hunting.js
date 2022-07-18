@@ -27,7 +27,7 @@ module.exports = async (client, interaction, data) => {
     user.health.eat -= eat;
     user.health.drink -= drink;
     user.inventory.tool.huntingrifle -= 1;
-    user.money += salary;
+    user.money += salary();
     user.inventory.hunting[randomItem] += randomQuantity;
     user.profile.exp.amount +=
       user.profile.exp.amount < exp && user.profile.exp.level === level ? 1 : 0;
@@ -37,7 +37,7 @@ module.exports = async (client, interaction, data) => {
       `🧑‍🌾 **${
         interaction.user.username
       }** đã săn được **${randomQuantity} ${randomItem}** và kiếm được ${formatMoney(
-        salary
+        salary()
       )}`
     );
   } catch (error) {

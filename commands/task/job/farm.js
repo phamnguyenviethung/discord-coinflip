@@ -15,14 +15,14 @@ module.exports = async (client, interaction, data) => {
     user.inventory.vegatable[randomItem] += randomQuantity;
     user.profile.exp.amount +=
       user.profile.exp.amount < exp && user.profile.exp.level === level ? 1 : 0;
-    user.money += salary;
+    user.money += salary();
     user.save();
 
     return interaction.reply(
       `🧑‍🌾 **${
         interaction.user.username
       }** đã thu hoạch được **${randomQuantity} ${randomItem}** và kiếm được **${formatMoney(
-        salary
+        salary()
       )}**`
     );
   } catch (error) {

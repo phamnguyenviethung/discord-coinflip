@@ -14,8 +14,8 @@ module.exports = async (client, interaction, data) => {
     const pick = _.random(0, 10) <= 7;
     const ratingStar = _.random(1, 5);
     const randomMoney = pick
-      ? salary
-      : salary - (salary * _.random(10, 30)) / 100;
+      ? salary()
+      : salary() - (salary() * _.random(10, 30)) / 100;
     const n = _.random(4, 30);
     const randomWay = n % 2 === 0 ? n : n + 1;
 
