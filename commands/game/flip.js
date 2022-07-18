@@ -45,10 +45,12 @@ module.exports = {
       interaction.reply(
         `**${interaction.user.username}** đã cược ${formatMoney(
           bet
-        )}vào **${userSide}**`
+        )} vào **${userSide}**`
       );
 
-      if (userSide !== pick) {
+      if (
+        bet >= 20 * 1000 && _.random(0, 100) >= 65 ? true : userSide !== pick
+      ) {
         user.money -= bet;
         user.health.eat -= 12;
         user.health.drink -= 12;
