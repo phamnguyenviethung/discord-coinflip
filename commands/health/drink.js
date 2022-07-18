@@ -12,7 +12,7 @@ module.exports = {
   name: "drink",
   description: "uống gì đó đê!!!",
   type: "CHAT_INPUT",
-  cooldown: 30,
+  cooldown: 180,
   options: [
     {
       name: "drink",
