@@ -67,9 +67,9 @@ module.exports = {
         setTimeout(resolve, 3200);
       });
       return await interaction.channel.send(
-        `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, bạn ăn được \`${formatMoney(
+        `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, bạn ăn được ${formatMoney(
           bet * multiply
-        )}\` `
+        )}`
       );
     } catch (error) {
       console.log(error);
