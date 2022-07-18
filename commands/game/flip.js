@@ -50,8 +50,8 @@ module.exports = {
 
       if (userSide !== pick) {
         user.money -= bet;
-        user.health.eat -= 8;
-        user.health.drink -= 8;
+        user.health.eat -= 12;
+        user.health.drink -= 12;
         user.save();
         await new Promise((resolve) => {
           setTimeout(resolve, 3200);

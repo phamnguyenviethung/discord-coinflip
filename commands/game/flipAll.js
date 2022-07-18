@@ -59,8 +59,8 @@ module.exports = {
       const multiply = 2;
 
       user.money += bet * 2;
-      user.health.eat -= 8;
-      user.health.drink -= 8;
+      user.health.eat -= 12;
+      user.health.drink -= 12;
       user.save();
 
       await new Promise((resolve) => {

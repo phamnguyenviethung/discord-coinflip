@@ -73,7 +73,15 @@ module.exports = {
             }** EXP để level up`
           );
         }
-
+        Object.keys(levelConfig).forEach((item) => {
+          if (job[item].level === level) {
+            console.log(item);
+            for (let key in levelConfig[item].consume) {
+              user.inventory[levelConfig[item].category][key] -=
+                levelConfig[item].consume[key];
+            }
+          }
+        });
         const gift = 10 * 1000;
         user.profile.exp.amount = 0;
         user.profile.exp.level = nextLevel;
