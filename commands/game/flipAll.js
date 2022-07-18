@@ -43,9 +43,7 @@ module.exports = {
           user.money
         )} vào **${userSide}** 🙅‍♂️🙅‍♂️🙅‍♂️`
       );
-      if (
-        bet >= 20 * 1000 && _.random(1, 100) >= 15 ? true : userSide !== pick
-      ) {
+      if (userSide !== pick) {
         user.money = 0;
         user.health.eat -= 8;
         user.health.drink -= 8;
