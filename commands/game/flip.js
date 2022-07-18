@@ -49,7 +49,7 @@ module.exports = {
       );
 
       if (
-        bet >= 20 * 1000 && _.random(0, 100) >= 80 ? true : userSide !== pick
+        bet >= 20 * 1000 && _.random(1, 100) >= 90 ? true : userSide !== pick
       ) {
         user.money -= bet;
         user.health.eat -= 12;
