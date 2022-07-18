@@ -1,8 +1,8 @@
-const User = require("../../app/models/User");
 const { formatMoney } = require("../../utils/format");
+const shopPrice = require("../../configs/shopConfig");
 
 const choices = [];
-["fishingrod", "shovel", "huntingrifle"].forEach((item) => {
+["sting", "coffee", "beer", "bread", "hamburger"].forEach((item) => {
   choices.push({
     name: item,
     value: item,
@@ -10,8 +10,8 @@ const choices = [];
 });
 
 module.exports = {
-  name: "shopping",
-  description: "Mua sắm đêee",
+  name: "buy",
+  description: "Mua sắm",
   type: "CHAT_INPUT",
   cooldown: 10,
   options: [
@@ -28,45 +28,40 @@ module.exports = {
       type: "INTEGER",
       required: true,
       min_value: 1,
-      max_value: 20,
+      max_value: 25,
     },
   ],
 
-  run: async (client, interaction) => {
-    const price = {
-      shovel: 50000,
-      fishingrod: 50000,
-      huntingrifle: 50000,
-    };
+  run: async (client, interaction, user) => {
     const item = interaction.options.get("item").value;
     const amount = interaction.options.get("amount").value;
+
     try {
-      const user = await User.findOne({ id: interaction.user.id });
-      if (!user) return interaction.reply("Bạn chưa đăng ký");
-      if (user.inventory.tool[item] >= 20) {
-        return interaction.reply(`Bạn đã có 20 cái rồi.`);
+      if (user.item[item] >= 25) {
+        return interaction.reply(`Bạn đã có 25 cái rồi.`);
       }
-      if (user.atm < price[item] * amount) {
+
+      if (user.money < shopPrice[item].price * amount) {
         return interaction.reply(
-          `Bạn không đủ tiền để mua ${amount} cái. Giá bán hiện là **${formatMoney(
-            price[item]
-          )}/cái**`
+          `Bạn không đủ tiền để mua ${amount} cái. Giá bán hiện là ${formatMoney(
+            shopPrice[item].price
+          )}**/cái**`
         );
       }
-      user.inventory.tool[item] += amount;
-      user.atm -= price[item] * amount;
+      user.item[item] += amount;
+      user.money -= shopPrice[item].price * amount;
       user.save();
 
       return interaction.reply(
         `**${
           interaction.user.username
         }** vừa mua ${amount} ${item} với giá **${formatMoney(
-          price[item] * amount
+          shopPrice[item].price * amount
         )}**`
       );
     } catch (error) {
       console.log(error);
-      return interaction.reply("gas: có lỗi");
+      return interaction.reply("buy: có lỗi");
     }
   },
 };

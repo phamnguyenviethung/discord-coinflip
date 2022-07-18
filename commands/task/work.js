@@ -1,11 +1,17 @@
 const dig = require("./job/dig");
 const hunting = require("./job/hunting");
 const fishing = require("./job/fishing");
+const farm = require("./job/farm");
+const janitor = require("./job/janitor");
+const chef = require("./job/chef");
+const grab = require("./job/grab");
+const { choicesGenerator } = require("../../utils/choicesGenerator");
+const { job } = require("../../configs/jobConfig");
 
 module.exports = {
   name: "work",
-  description: "Cùng nhau quậch nào ",
-  cooldown: 45,
+  description: "Cùng nhau work nào ",
+  cooldown: 0,
   type: "CHAT_INPUT",
   options: [
     {
@@ -13,33 +19,32 @@ module.exports = {
       description: "Chọn công việc bạn cần làm",
       required: true,
       type: "STRING",
-      choices: [
-        {
-          name: "Dig",
-          value: "dig",
-        },
-        {
-          name: "Fishing",
-          value: "fishing",
-        },
-        {
-          name: "Hunting",
-          value: "hunting",
-        },
-      ],
+      choices: choicesGenerator([
+        "janitor",
+        "dig",
+        "farm",
+        "grab",
+        "hunting",
+        "fishing",
+        "chef",
+      ]),
     },
   ],
   run: async (client, interaction, user) => {
     const jobType = interaction.options.get("job").value;
     const data = { user };
 
-    const limit = 60;
-    if (user.health.eat < limit || user.health.drink < 60) {
+    if (user.profile.exp.level < job[jobType].level) {
+      return interaction.reply(
+        `Bạn cần phải đạt **level ${job[jobType].level}** để làm **${jobType}**. Level của bạn là **${user.profile.exp.level}**`
+      );
+    }
+
+    const limit = 20;
+    if (user.health.eat < limit || user.health.drink < limit) {
       client.cooldowns.get("work").delete(interaction.user.id);
       return interaction.reply(
-        `Bạn đã kiệt sức. Để tiếp tục làm việc, bạn cần có ít nhất **${
-          jobType === "hunting" ? 100 : 60
-        } food và 60 drink**`
+        `Bạn đã kiệt sức. Cần tối thiểu **${limit} eat và drink**`
       );
     }
 
@@ -47,11 +52,23 @@ module.exports = {
       case "dig":
         dig(client, interaction, data);
         break;
+      case "hunting":
+        hunting(client, interaction, data);
+        break;
       case "fishing":
         fishing(client, interaction, data);
         break;
-      case "hunting":
-        hunting(client, interaction, data);
+      case "farm":
+        farm(client, interaction, data);
+        break;
+      case "chef":
+        chef(client, interaction, data);
+        break;
+      case "grab":
+        grab(client, interaction, data);
+        break;
+      case "janitor":
+        janitor(client, interaction, data);
         break;
 
       default:

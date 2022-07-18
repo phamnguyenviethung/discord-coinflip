@@ -1,38 +1,15 @@
-const choices = [];
-["metal", "weapon", "tool", "fishing", "hunting"].forEach((item) => {
-  choices.push({
-    name: item,
-    value: item,
-  });
-});
-
 module.exports = {
   name: "bag",
   description: "Kiếm tra balo",
   type: "CHAT_INPUT",
   cooldown: 0,
-  options: [
-    {
-      name: "type",
-      description: "Chọn thứ cần check",
-      required: true,
-      type: "STRING",
-      choices,
-    },
-  ],
-
   run: async (client, interaction, user) => {
-    const type = interaction.options.get("type").value;
     try {
       let text = "";
-      const keys = Object.keys(user.inventory);
+      const keys = Object.keys(user.item);
       keys.forEach((key) => {
-        if (key === type) {
-          Object.keys(user.inventory[key]).forEach((item) => {
-            const formatKey = item.charAt(0).toUpperCase() + item.slice(1);
-            text += `${formatKey}: **${user.inventory[type][item]}**\n`;
-          });
-        }
+        const formatKey = key.charAt(0).toUpperCase() + key.slice(1);
+        text += `+ **${formatKey}**: ${user.item[key]}\n`;
       });
 
       return interaction.reply({

@@ -1,13 +1,17 @@
 const User = require("../../app/models/User");
 const { MessageEmbed } = require("discord.js");
+const { job } = require("../../configs/jobConfig");
 module.exports = {
   name: "profile",
   description: "Khoe CV với anh em",
   type: "CHAT_INPUT",
 
   run: async (client, interaction, user) => {
-    const { description, kill, jail } = user.profile;
-
+    const { description, kill, jail, exp } = user.profile;
+    let userJobRequireExp;
+    Object.keys(job).forEach((item) => {
+      if (job[item].level === exp.level) userJobRequireExp = job[item].exp;
+    });
     try {
       const exampleEmbed = new MessageEmbed()
         .setColor("#0099ff")
@@ -20,16 +24,17 @@ module.exports = {
         })
         .setDescription(description)
         .setThumbnail(interaction.user.displayAvatarURL())
+
         .addFields(
           { name: "\u200B", value: "\u200B" },
           {
-            name: "Đi tù",
-            value: String(jail),
+            name: "Exp",
+            value: String(exp.amount) + `/${userJobRequireExp}`,
             inline: true,
           },
           {
-            name: "Đã bắn hạ",
-            value: String(kill),
+            name: "Trình độ",
+            value: String(exp.level),
             inline: true,
           }
         )

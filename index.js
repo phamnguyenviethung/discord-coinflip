@@ -13,7 +13,6 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-client.categories = new Collection();
 client.interactions = new Collection();
 client.cooldowns = new Collection();
 
@@ -22,3 +21,5 @@ client.cooldowns = new Collection();
 );
 
 client.login(process.env.TOKEN);
+
+// Janitor => Dig => Farm => Grab => Hunting => Fishing => Chef

@@ -1,7 +1,5 @@
 const _ = require("underscore");
 const { formatMoney } = require("../../utils/format");
-const dayjs = require("dayjs");
-require("dayjs/locale/vi");
 module.exports = {
   name: "flip",
   description: "Người không all in là người thất bại",
@@ -34,115 +32,48 @@ module.exports = {
   run: async (client, interaction, user) => {
     const pick = _.random(1, 20) <= 10 ? "Heads" : "Tails";
     const userSide = interaction.options.get("side").value;
-    const userMoneyBet = interaction.options.get("money").value;
-    const jail = _.random(100) > 70;
+    const bet = interaction.options.get("money").value;
 
     try {
-      if (user.health.eat < 25 || user.health.drink < 20) {
+      if (user.health.eat < 20 || user.health.drink < 20) {
         return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
       }
-      if (user.money < userMoneyBet || user.money <= 0) {
-        return interaction.reply(` Bạn không đủ tiền! =))`);
+      if (user.money < bet || user.money <= 0) {
+        return interaction.reply(`Bạn không đủ tiền! =))`);
       }
 
       interaction.reply(
         `**${interaction.user.username}** đã cược \`${formatMoney(
-          userMoneyBet
+          bet
         )}\` vào **${userSide}**`
       );
-      if (userMoneyBet > 200000) {
-        if (userSide !== pick) {
-          user.money -= userMoneyBet;
-          user.save();
-          await new Promise((resolve) => {
-            setTimeout(resolve, 3200);
-          });
-          await interaction.channel.send(
-            `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
-          );
-        } else {
-          const multiply = 3;
-          user.money += userMoneyBet * multiply;
-          user.health.eat -= 10;
-          user.health.drink -= 15;
-          user.save();
-          await new Promise((resolve) => {
-            setTimeout(resolve, 3200);
-          });
-          await interaction.channel.send(
-            `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, bạn ăn được \`${formatMoney(
-              userMoneyBet * multiply
-            )}\` `
-          );
-        }
 
-        console.log(jail);
-        if (jail) {
-          if (userMoneyBet < 1000000) {
-            const fine = 1500000;
-            user.bankloan += fine;
-
-            user.save();
-            return interaction.channel.send(
-              `${interaction.user.username} đã bị phạt **${formatMoney(
-                fine
-              )}** vì đánh bạc sai quy định`
-            );
-          } else {
-            const min = 12;
-            const time = dayjs().locale("vi").add(min, "minutes");
-            const fine = (userMoneyBet * 50) / 100;
-
-            // const isBig = userMoneyBet >= 1000000000 * 5;
-            // if (isBig) {
-            //   user.money = 0;
-            // }
-
-            user.bankloan += fine;
-            user.timestamps.jail = time.valueOf();
-            user.profile.jail += 1;
-            user.save();
-
-            const text = fasle
-              ? `🚓🚓🚓 **${
-                  interaction.user.username
-                }** đã bị phạt **${formatMoney(
-                  fine
-                )}** vì đánh bạc sai quy định, đồng thời bị thu hồi toàn bộ số tiền trong người để điều tra và bị giam **${min} phút**`
-              : `🚓🚓🚓 **${
-                  interaction.user.username
-                }** đã bị phạt **${formatMoney(
-                  fine
-                )}** vì đánh bạc sai quy định và bị giam **${min} phút**`;
-            return interaction.channel.send(text);
-          }
-        }
-      } else {
-        if (userSide !== pick) {
-          user.money -= userMoneyBet;
-          user.save();
-          await new Promise((resolve) => {
-            setTimeout(resolve, 3200);
-          });
-          return await interaction.channel.send(
-            `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
-          );
-        }
-        const multiply = 3;
-
-        user.money += userMoneyBet * multiply;
-        user.health.eat -= 10;
-        user.health.drink -= 10;
+      if (userSide !== pick) {
+        user.money -= bet;
+        user.health.eat -= 8;
+        user.health.drink -= 8;
         user.save();
         await new Promise((resolve) => {
           setTimeout(resolve, 3200);
         });
         return await interaction.channel.send(
-          `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, bạn ăn được \`${formatMoney(
-            userMoneyBet * multiply
-          )}\` `
+          `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
         );
       }
+      const multiply = 2;
+
+      user.money += bet * multiply;
+      user.health.eat -= 8;
+      user.health.drink -= 8;
+      user.save();
+      await new Promise((resolve) => {
+        setTimeout(resolve, 3200);
+      });
+      return await interaction.channel.send(
+        `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, bạn ăn được \`${formatMoney(
+          bet * multiply
+        )}\` `
+      );
     } catch (error) {
       console.log(error);
       return interaction.reply("Flip:Có lỗi !!");

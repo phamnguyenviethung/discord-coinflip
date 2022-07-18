@@ -1,7 +1,7 @@
-const User = require("../../app/models/User");
+const User = require("../app/models/User");
 const _ = require("underscore");
-const { formatMoney } = require("../../utils/format");
-const { category } = require("../../utils/category");
+const { formatMoney } = require("../utils/format");
+const { category } = require("../utils/category");
 const choices = [];
 category.fishing.forEach((item) => {
   choices.push({

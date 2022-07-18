@@ -1,5 +1,5 @@
-const Craft = require("../../app/models/Craft");
 const User = require("../../app/models/User");
+const craft = require("../../configs/craftConfig");
 
 module.exports = {
   name: "craft",
@@ -17,7 +17,7 @@ module.exports = {
   run: async (client, interaction, user) => {
     const code = interaction.options.get("code").value;
     try {
-      const craftItem = await Craft.findOne({ code, isWorking: true });
+      const craftItem = craft[code];
       if (!craftItem) return interaction.reply("Sai code hoặc không tồn tại");
 
       const require = craftItem.require;

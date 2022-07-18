@@ -1,7 +1,8 @@
-const { category } = require("../../utils/category");
+const shopPrice = require("../../configs/shopConfig");
+
 const choices = [];
 
-category.fishing.forEach((item) =>
+["bread", "hamburger", "rice", "noodle"].forEach((item) =>
   choices.push({
     name: item,
     value: item,
@@ -12,7 +13,7 @@ module.exports = {
   name: "eat",
   description: "Ăn gì đó đê!!!",
   type: "CHAT_INPUT",
-  cooldown: 10,
+  cooldown: 30,
   options: [
     {
       name: "food",
@@ -40,22 +41,13 @@ module.exports = {
         return interaction.reply(` Bạn không đói.`);
       }
 
-      const values = {
-        perch: 10,
-        carp: 20,
-        phattom: 40,
-        shark: 70,
-      };
-
-      if (
-        user.inventory.fishing[food] <= 0 ||
-        user.inventory.fishing[food] < amount
-      ) {
-        return interaction.reply("Bạn không có để ăn. Hãy đi câu");
+      if (user.item[food] <= 0 || user.item[food] < amount) {
+        client.cooldowns.get("eat").delete(interaction.user.id);
+        return interaction.reply("Bạn không có để ăn.");
       }
 
-      user.inventory.fishing[food] -= amount;
-      user.health.eat += values[food] * amount;
+      user.item[food] -= amount;
+      user.health.eat += shopPrice[food].amount * amount;
       user.save();
 
       return interaction.reply(

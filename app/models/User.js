@@ -10,7 +10,7 @@ const UserSchema = new Schema(
 
     money: {
       type: Number,
-      default: 200000,
+      default: 10000,
     },
     bankloan: {
       type: Number,
@@ -20,6 +20,7 @@ const UserSchema = new Schema(
       type: Number,
       default: 0,
     },
+
     profile: {
       description: {
         type: String,
@@ -34,6 +35,16 @@ const UserSchema = new Schema(
         type: Number,
         default: 0,
       },
+      exp: {
+        level: {
+          type: Number,
+          default: 1,
+        },
+        amount: {
+          type: Number,
+          default: 0,
+        },
+      },
     },
     health: {
       eat: {
@@ -44,16 +55,18 @@ const UserSchema = new Schema(
         type: Number,
         default: 150,
       },
-      stress: {
-        type: Number,
-        default: 150,
-      },
     },
     inventory: {
+      grab: {
+        ratingStar: {
+          type: Number,
+          default: 0,
+        },
+      },
       metal: {
         cloth: {
           type: Number,
-          default: 20,
+          default: 0,
         },
         wire: {
           type: Number,
@@ -61,33 +74,29 @@ const UserSchema = new Schema(
         },
         tape: {
           type: Number,
-          default: 20,
+          default: 0,
         },
         iron: {
           type: Number,
-          default: 15,
+          default: 0,
         },
         plastic: {
           type: Number,
-          default: 20,
+          default: 0,
         },
       },
-      food: {
-        meat: {
+      vegatable: {
+        salad: {
           type: Number,
-          default: 2,
+          default: 0,
         },
-        noodle: {
+        tomato: {
           type: Number,
-          default: 2,
+          default: 0,
         },
-        rice: {
+        peanut: {
           type: Number,
-          default: 2,
-        },
-        bread: {
-          type: Number,
-          default: 2,
+          default: 0,
         },
         corn: {
           type: Number,
@@ -97,31 +106,9 @@ const UserSchema = new Schema(
           type: Number,
           default: 0,
         },
-        salad: {
-          type: Number,
-          default: 0,
-        },
-        peanut: {
-          type: Number,
-          default: 0,
-        },
-        tomato: {
-          type: Number,
-          default: 0,
-        },
-      },
-      drink: {
-        sting: {
-          type: Number,
-          default: 10,
-        },
       },
       weapon: {
         knife: {
-          type: Number,
-          default: 0,
-        },
-        taser: {
           type: Number,
           default: 0,
         },
@@ -133,29 +120,31 @@ const UserSchema = new Schema(
       tool: {
         huntingrifle: {
           type: Number,
-          default: 10,
-        },
-        fishingrod: {
-          type: Number,
-          default: 10,
+          default: 0,
         },
         shovel: {
           type: Number,
-          default: 10,
+          default: 0,
         },
-        gas: {
-          type: Number,
-          default: 10,
-        },
-        fuel: {
-          type: Number,
-          default: 10,
-        },
-        eletricgrid: {
+        fishingrod: {
           type: Number,
           default: 0,
         },
-        mask: {
+      },
+      hunting: {
+        bird: {
+          type: Number,
+          default: 0,
+        },
+        rabbit: {
+          type: Number,
+          default: 0,
+        },
+        tiger: {
+          type: Number,
+          default: 0,
+        },
+        rhino: {
           type: Number,
           default: 0,
         },
@@ -178,39 +167,56 @@ const UserSchema = new Schema(
           default: 0,
         },
       },
-      hunting: {
-        rabbit: {
+      old: {
+        keyboard: {
           type: Number,
           default: 0,
         },
-        tiger: {
+        mouse: {
           type: Number,
           default: 0,
         },
-        rhino: {
-          type: Number,
-          default: 0,
-        },
-      },
-      pill: {
-        marijuana: {
-          type: Number,
-          default: 0,
-        },
-        cocaine: {
-          type: Number,
-          default: 0,
-        },
-        heroin: {
-          type: Number,
-          default: 0,
-        },
-        ecstasy: {
+        case: {
           type: Number,
           default: 0,
         },
       },
     },
+    item: {
+      fuel: {
+        type: Number,
+        default: 50,
+      },
+      sting: {
+        type: Number,
+        default: 0,
+      },
+      coffee: {
+        type: Number,
+        default: 0,
+      },
+      beer: {
+        type: Number,
+        default: 0,
+      },
+      bread: {
+        type: Number,
+        default: 0,
+      },
+      noodle: {
+        type: Number,
+        default: 0,
+      },
+      rice: {
+        type: Number,
+        default: 0,
+      },
+      hamburger: {
+        type: Number,
+        default: 0,
+      },
+    },
+
     timestamps: {
       jail: {
         type: Number,

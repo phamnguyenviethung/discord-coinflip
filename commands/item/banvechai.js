@@ -1,6 +1,6 @@
-const User = require("../../app/models/User");
 const _ = require("underscore");
 const { formatMoney } = require("../../utils/format");
+const { choicesGenerator } = require("../../utils/choicesGenerator");
 module.exports = {
   name: "banvechai",
   description: "Bán ve chai",
@@ -12,20 +12,7 @@ module.exports = {
       description: "Chọn thứ cần bán",
       required: true,
       type: "STRING",
-      choices: [
-        {
-          name: "Plastic",
-          value: "plastic",
-        },
-        {
-          name: "Iron",
-          value: "iron",
-        },
-        {
-          name: "Wire",
-          value: "wire",
-        },
-      ],
+      choices: choicesGenerator(["keyboard", "mouse", "case"]),
     },
     {
       name: "amount",
@@ -40,22 +27,17 @@ module.exports = {
       const type = interaction.options.get("type").value;
       const amount = interaction.options.get("amount").value;
 
-      if (
-        user.inventory.metal[type] <= 0 ||
-        user.inventory.metal[type] < amount
-      ) {
+      if (user.inventory.old[type] <= 0 || user.inventory.old[type] < amount) {
         return interaction.reply("Bạn không có để bán");
       }
 
       const price = {
-        iron: 10000,
-        plastic: 8000,
-        wire: 20000,
-        tape: 5000,
-        cloth: 1000,
+        mouse: 1000,
+        keyboard: 3000,
+        case: 10000,
       };
 
-      user.inventory.metal[type] -= amount;
+      user.inventory.old[type] -= amount;
       user.money += price[type] * amount;
       user.save();
 

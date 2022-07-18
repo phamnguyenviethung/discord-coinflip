@@ -5,33 +5,28 @@ const { formatMoney } = require("../../../utils/format");
 module.exports = async (client, interaction, data) => {
   try {
     const { user } = data;
-    const { eat, drink, salary, randomQuantity, percent, exp, level } = job.dig;
+    const { eat, drink, randomQuantity, salary, percent, exp, level } =
+      job.farm;
 
     const randomItem = random(percent);
 
-    if (randomItem === "empty") {
-      return interaction.reply(
-        `Thật không may, **${interaction.user.username}** đã không đào được gì.`
-      );
-    }
-
     user.health.eat -= eat;
     user.health.drink -= drink;
-    user.inventory.metal[randomItem] += randomQuantity;
-    user.money += salary;
+    user.inventory.vegatable[randomItem] += randomQuantity;
     user.profile.exp.amount +=
       user.profile.exp.amount < exp && user.profile.exp.level === level ? 1 : 0;
+    user.money += salary;
     user.save();
 
     return interaction.reply(
       `🧑‍🌾 **${
         interaction.user.username
-      }** đã đào được **${randomQuantity} ${randomItem}** và kiếm được ${formatMoney(
+      }** đã thu hoạch được **${randomQuantity} ${randomItem}** và kiếm được **${formatMoney(
         salary
-      )}`
+      )}**`
     );
   } catch (error) {
     console.log(error);
-    return interaction.reply("Dig: Có lỗi !!");
+    return interaction.reply("farm: Có lỗi !!");
   }
 };
