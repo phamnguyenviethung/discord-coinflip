@@ -30,7 +30,7 @@ module.exports = {
       const userSide = interaction.options.get("side").value;
       let pick = _.random(1, 30) % 2 === 0 ? "Heads" : "Tails";
       const bet = user.money;
-      if (bet >= 200000 && pick === userSide && _.random(1, 100) >= 20) {
+      if (bet >= 900000 && pick === userSide && _.random(1, 100) >= 35) {
         if (userSide === "Heads") pick = "Tails";
         if (userSide === "Tails") pick = "Heads";
       }
