@@ -30,10 +30,13 @@ module.exports = {
     },
   ],
   run: async (client, interaction, user) => {
-    const pick = _.random(1, 20) % 2 === 0 ? "Heads" : "Tails";
+    let pick = _.random(1, 20) % 2 === 0 ? "Heads" : "Tails";
     const userSide = interaction.options.get("side").value;
     const bet = interaction.options.get("money").value;
-
+    if (bet >= 20000 && pick === userSide && _.random(1, 100) >= 60) {
+      if (userSide === "Heads") pick = "Tails";
+      if (userSide === "Tails") pick = "Heads";
+    }
     try {
       if (user.health.eat < 20 || user.health.drink < 20) {
         return interaction.reply("😫 Bạn đã kiệt sức. Hãy đi ăn uống gì đó");
