@@ -34,13 +34,13 @@ module.exports = {
 
   run: async (client, interaction, user) => {
     const item = interaction.options.get("item").value;
-    const amount = interaction.options.get("amount").value;
+    let amount = interaction.options.get("amount").value;
 
     try {
       if (user.item[item] >= 25) {
         return interaction.reply(`Bạn đã có 25 cái rồi.`);
       }
-
+      if (user.item[item] + amount > 25) amount = 25 - user.item[item];
       if (user.money < shopPrice[item].price * amount) {
         return interaction.reply(
           `Bạn không đủ tiền để mua ${amount} cái. Giá bán hiện là ${formatMoney(
