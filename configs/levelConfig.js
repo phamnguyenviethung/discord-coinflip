@@ -2,7 +2,7 @@ module.exports = {
   janitor: {},
   dig: {
     category: "metal",
-    req: { plastic: 500, iron: 300, wire: 120 },
+    req: { plastic: 250, iron: 150, wire: 100 },
     consume: { plastic: 100, iron: 80, wire: 40 },
   },
   farm: {
