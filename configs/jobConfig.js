@@ -1,6 +1,6 @@
 const _ = require("underscore");
 
-const basicSalary = 800;
+const basicSalary = 1200;
 
 const jobSalary = {
   janitor: () => _.random(basicSalary, basicSalary + 100) * 1.5,
