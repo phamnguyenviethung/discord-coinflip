@@ -12,7 +12,7 @@ module.exports = {
   name: "drink",
   description: "uống gì đó đê!!!",
   type: "CHAT_INPUT",
-  cooldown: 180,
+  cooldown: 3,
   options: [
     {
       name: "drink",
@@ -27,7 +27,6 @@ module.exports = {
       type: "INTEGER",
       required: true,
       min_value: 1,
-      max_value: 5,
     },
   ],
 

@@ -8,7 +8,7 @@ module.exports = {
     amount: 40,
   },
   beer: {
-    price: 9000,
+    price: 10000,
     amount: 80,
   },
   bread: {
@@ -16,8 +16,8 @@ module.exports = {
     amount: 10,
   },
   hamburger: {
-    price: 1300,
-    amount: 20,
+    price: 1500,
+    amount: 25,
   },
   rice: {
     price: 4000,
