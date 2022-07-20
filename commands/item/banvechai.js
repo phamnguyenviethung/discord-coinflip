@@ -12,7 +12,7 @@ module.exports = {
       description: "Chọn thứ cần bán",
       required: true,
       type: "STRING",
-      choices: choicesGenerator(["keyboard", "mouse", "case"]),
+      choices: choicesGenerator(["cloth", "tape", "plastic", "iron", "wire"]),
     },
     {
       name: "amount",
@@ -27,17 +27,22 @@ module.exports = {
       const type = interaction.options.get("type").value;
       const amount = interaction.options.get("amount").value;
 
-      if (user.inventory.old[type] <= 0 || user.inventory.old[type] < amount) {
+      if (
+        user.inventory.metal[type] <= 0 ||
+        user.inventory.metal[type] < amount
+      ) {
         return interaction.reply("Bạn không có để bán");
       }
 
       const price = {
-        mouse: 1000,
-        keyboard: 3000,
-        case: 8000,
+        cloth: 2000,
+        tape: 2000,
+        plastic: 10000,
+        iron: 40000,
+        wire: 60000,
       };
 
-      user.inventory.old[type] -= amount;
+      user.inventory.metal[type] -= amount;
       user.money += price[type] * amount;
       user.save();
 
