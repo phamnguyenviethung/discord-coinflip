@@ -59,7 +59,7 @@ module.exports = {
           `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
         );
       }
-      const multiply = 2;
+      const multiply = 3;
 
       user.money += bet * 2;
       user.health.eat -= 12;
