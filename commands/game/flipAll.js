@@ -61,7 +61,7 @@ module.exports = {
       }
       const multiply = 3;
 
-      user.money += bet * 2;
+      user.money += bet * multiply;
       user.health.eat -= 12;
       user.health.drink -= 12;
       user.save();
