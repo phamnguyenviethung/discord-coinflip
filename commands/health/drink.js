@@ -35,8 +35,8 @@ module.exports = {
     try {
       const drink = interaction.options.get("drink").value;
       const amount = interaction.options.get("amount").value;
-
-      if (user.health.drink >= 350) {
+      const max = 350;
+      if (user.health.drink >= max) {
         return interaction.reply(` Bạn không khát...`);
       }
 
@@ -44,8 +44,13 @@ module.exports = {
         return interaction.reply("Bạn không đủ nước uống. Hãy đi mua");
       }
 
+      const drinkValue =
+        user.health.drink + shopPrice[drink].amount * amount > max
+          ? max
+          : user.health.drink + shopPrice[drink].amount * amount;
+
       user.item[drink] -= amount;
-      user.health.drink += shopPrice[drink].amount * amount;
+      user.health.drink = drinkValue;
       user.save();
 
       return interaction.reply(

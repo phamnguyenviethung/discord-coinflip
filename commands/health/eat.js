@@ -36,8 +36,8 @@ module.exports = {
     try {
       const food = interaction.options.get("food").value;
       const amount = interaction.options.get("amount").value;
-
-      if (user.health.eat >= 350) {
+      const max = 350;
+      if (user.health.eat >= max) {
         return interaction.reply(` Bạn không đói.`);
       }
 
@@ -45,9 +45,12 @@ module.exports = {
         client.cooldowns.get("eat").delete(interaction.user.id);
         return interaction.reply("Bạn không có để ăn.");
       }
-
+      const eatValue =
+        user.health.eat + shopPrice[food].amount * amount > max
+          ? max
+          : user.health.eat + shopPrice[food].amount * amount;
       user.item[food] -= amount;
-      user.health.eat += shopPrice[food].amount * amount;
+      user.health.eat = eatValue;
       user.save();
 
       return interaction.reply(
