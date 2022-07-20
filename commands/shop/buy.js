@@ -43,9 +43,9 @@ module.exports = {
       if (user.item[item] + amount > 25) amount = 25 - user.item[item];
       if (user.money < shopPrice[item].price * amount) {
         return interaction.reply(
-          `Bạn không đủ tiền để mua ${amount} cái. Giá bán hiện là ${formatMoney(
+          `Bạn không đủ tiền để mua ${amount} ${item}. Giá bán hiện là ${formatMoney(
             shopPrice[item].price
-          )}**/cái**`
+          )}/cái`
         );
       }
       user.item[item] += amount;
