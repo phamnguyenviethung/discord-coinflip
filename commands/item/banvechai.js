@@ -35,11 +35,11 @@ module.exports = {
       }
 
       const price = {
-        cloth: 2000,
-        tape: 2000,
-        plastic: 10000,
-        iron: 40000,
-        wire: 60000,
+        cloth: 8000,
+        tape: 8000,
+        plastic: 20000,
+        iron: 60000,
+        wire: 100000,
       };
 
       user.inventory.metal[type] -= amount;
