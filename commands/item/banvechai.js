@@ -19,7 +19,7 @@ module.exports = {
       description: "Số lượng muốn bán",
       type: "INTEGER",
       required: true,
-      min_value: 1,
+      min_value: 80,
     },
   ],
   run: async (client, interaction, user) => {
