@@ -30,7 +30,7 @@ module.exports = {
       const userSide = interaction.options.get("side").value;
       let pick = _.random(1, 30) % 2 === 0 ? "Heads" : "Tails";
       const bet = user.money;
-      if (bet >= 1000000 && pick === userSide && _.random(1, 100) >= 30) {
+      if (bet >= 3000000 && pick === userSide && _.random(1, 100) >= 45) {
         if (userSide === "Heads") pick = "Tails";
         if (userSide === "Tails") pick = "Heads";
       }
@@ -56,7 +56,7 @@ module.exports = {
           setTimeout(resolve, 3200);
         });
         return await interaction.channel.send(
-          `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
+          `🚑🚑🚑 Kết quả là **${pick}**. **${interaction.user.username}** đã mất hết tiền cược.`
         );
       }
       const multiply = 3;
@@ -70,9 +70,9 @@ module.exports = {
         setTimeout(resolve, 3200);
       });
       return await interaction.channel.send(
-        `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, bạn ăn được ${formatMoney(
-          bet * multiply
-        )}`
+        `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, **${
+          interaction.user.username
+        }** ăn được ${formatMoney(bet * multiply)}`
       );
     } catch (error) {
       console.log(error);
