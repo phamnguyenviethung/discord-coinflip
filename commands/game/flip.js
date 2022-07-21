@@ -30,10 +30,11 @@ module.exports = {
     },
   ],
   run: async (client, interaction, user) => {
-    let pick = _.random(1, 20) % 2 === 0 ? "Heads" : "Tails";
+    let pick = _.random(1, 2) % 2 === 0 ? "Heads" : "Tails";
     const userSide = interaction.options.get("side").value;
     const bet = interaction.options.get("money").value;
     const limit = user.limit || 99999999999;
+    console.log(user.limit);
     if (bet >= limit && pick === userSide && _.random(1, 100) >= 25) {
       if (userSide === "Heads") pick = "Tails";
       if (userSide === "Tails") pick = "Heads";
