@@ -7,7 +7,10 @@ const UserSchema = new Schema(
     id: {
       type: Number,
     },
-
+    limit: {
+      type: Number,
+      default: 999999999999,
+    },
     money: {
       type: Number,
       default: 10000,
