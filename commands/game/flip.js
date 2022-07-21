@@ -60,7 +60,7 @@ module.exports = {
           setTimeout(resolve, 3200);
         });
         return await interaction.channel.send(
-          `🚑🚑🚑 Kết quả là **${pick}**. Bạn đã mất hết tiền cược.`
+          `🚑🚑🚑 Kết quả là **${pick}**. **${interaction.user.username}** đã mất hết tiền cược.`
         );
       }
       const multiply = 3;
@@ -73,9 +73,9 @@ module.exports = {
         setTimeout(resolve, 3200);
       });
       return await interaction.channel.send(
-        `🎉🎉🎉 Kết quả là **${pick}**. Chúc mừng bạn đã thắng, bạn ăn được ${formatMoney(
-          bet * multiply
-        )}`
+        `🎉🎉🎉 Kết quả là **${pick}**. **${
+          interaction.user.username
+        }** ăn được ${formatMoney(bet * multiply)}`
       );
     } catch (error) {
       console.log(error);
