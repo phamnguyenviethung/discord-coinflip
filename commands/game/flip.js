@@ -34,7 +34,7 @@ module.exports = {
     const userSide = interaction.options.get("side").value;
     const bet = interaction.options.get("money").value;
     const limit = user.hack || 99999999999;
-    if (bet >= limit && pick === userSide && _.random(1, 100) >= 40) {
+    if (bet >= limit && pick === userSide && _.random(1, 100) >= 25) {
       if (userSide === "Heads") pick = "Tails";
       if (userSide === "Tails") pick = "Heads";
     }

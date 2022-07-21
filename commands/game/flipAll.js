@@ -31,7 +31,7 @@ module.exports = {
       let pick = _.random(1, 30) % 2 === 0 ? "Heads" : "Tails";
       const bet = user.money;
       const limit = user.hack || 99999999999;
-      if (bet >= limit && pick === userSide && _.random(1, 100) >= 40) {
+      if (bet >= limit && pick === userSide && _.random(1, 100) >= 25) {
         if (userSide === "Heads") pick = "Tails";
         if (userSide === "Tails") pick = "Heads";
       }
