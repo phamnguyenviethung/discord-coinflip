@@ -36,7 +36,7 @@ module.exports = async (client, interaction, data) => {
     return interaction.reply(
       `🧑‍🌾 **${
         interaction.user.username
-      }** đã săn được **${randomQuantity} ${randomItem}** và kiếm được ${formatMoney(
+      }** đã săn được **${randomQuantity()} ${randomItem}** và kiếm được ${formatMoney(
         salary()
       )}`
     );
