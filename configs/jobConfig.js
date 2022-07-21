@@ -21,7 +21,7 @@ module.exports.job = {
     level: 1,
   },
   dig: {
-    randomQuantity: _.random(2, 4),
+    randomQuantity: () => _.random(2, 4),
     salary: jobSalary.dig,
     eat: 3,
     drink: 3,
@@ -38,7 +38,7 @@ module.exports.job = {
     ],
   },
   farm: {
-    randomQuantity: _.random(1, 3),
+    randomQuantity: () => _.random(1, 3),
     salary: jobSalary.farm,
     eat: 3,
     drink: 3,
@@ -61,7 +61,7 @@ module.exports.job = {
     level: 4,
   },
   hunting: {
-    randomQuantity: _.random(2, 4),
+    randomQuantity: () => _.random(2, 4),
     salary: jobSalary.hunting,
     eat: 6,
     drink: 6,
@@ -76,7 +76,7 @@ module.exports.job = {
     ],
   },
   fishing: {
-    randomQuantity: _.random(2, 4),
+    randomQuantity: () => _.random(2, 4),
     salary: jobSalary.fishing,
     eat: 6,
     drink: 6,

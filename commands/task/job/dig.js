@@ -17,7 +17,7 @@ module.exports = async (client, interaction, data) => {
 
     user.health.eat -= eat;
     user.health.drink -= drink;
-    user.inventory.metal[randomItem] += randomQuantity;
+    user.inventory.metal[randomItem] += randomQuantity();
     user.money += salary();
     user.profile.exp.amount +=
       user.profile.exp.amount < exp && user.profile.exp.level === level ? 1 : 0;
