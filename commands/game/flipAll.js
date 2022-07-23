@@ -51,6 +51,7 @@ module.exports = {
         user.money = 0;
         user.health.eat -= 8;
         user.health.drink -= 8;
+        user.profile.flip.lose += 1;
         user.save();
 
         await new Promise((resolve) => {
@@ -65,6 +66,7 @@ module.exports = {
       user.money += bet * multiply;
       user.health.eat -= 12;
       user.health.drink -= 12;
+      user.profile.flip.win += 1;
       user.save();
 
       await new Promise((resolve) => {
