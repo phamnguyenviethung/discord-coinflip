@@ -259,7 +259,7 @@ UserSchema.virtual("statics").get(function () {
   const winrate = (win * 100) / total;
   return {
     total,
-    winrate,
+    winrate: winrate.toFixed(1),
   };
 });
 
