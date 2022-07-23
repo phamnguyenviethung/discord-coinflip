@@ -29,12 +29,12 @@ module.exports.job = {
     level: 2,
 
     percent: [
-      { value: "tape", percentage: 30 },
+      { value: "tape", percentage: 28 },
       { value: "cloth", percentage: 24 },
       { value: "plastic", percentage: 18 },
-      { value: "iron", percentage: 16 },
+      { value: "iron", percentage: 14 },
       { value: "empty", percentage: 11 },
-      { value: "wire", percentage: 1 },
+      { value: "wire", percentage: 5 },
     ],
   },
   farm: {
