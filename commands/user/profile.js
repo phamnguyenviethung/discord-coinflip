@@ -38,6 +38,19 @@ module.exports = {
             inline: true,
           }
         )
+        .addFields(
+          { name: "\u200B", value: "\u200B" },
+          {
+            name: "Số trận flip",
+            value: String(user.statics.total),
+            inline: true,
+          },
+          {
+            name: "Tỷ lệ win",
+            value: String(user.statics.winrate) + "%",
+            inline: true,
+          }
+        )
         .setTimestamp()
         .setFooter({
           text: "Code by pnviethung",

@@ -38,6 +38,16 @@ const UserSchema = new Schema(
         type: Number,
         default: 0,
       },
+      flip: {
+        win: {
+          type: Number,
+          default: 0,
+        },
+        lose: {
+          type: Number,
+          default: 0,
+        },
+      },
       exp: {
         level: {
           type: Number,
@@ -237,8 +247,21 @@ const UserSchema = new Schema(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
   }
 );
+
+UserSchema.virtual("statics").get(function () {
+  const { win, lose } = this.profile.flip;
+  const total = win + lose === 0 ? 1 : win + lose;
+  const winrate = (win * 100) / total;
+  return {
+    total,
+    winrate,
+  };
+});
 
 const User = mongoose.model("User", UserSchema);
 module.exports = User;
