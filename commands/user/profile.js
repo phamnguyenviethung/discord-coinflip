@@ -51,6 +51,19 @@ module.exports = {
             inline: true,
           }
         )
+        .addFields(
+          { name: "\u200B", value: "\u200B" },
+          {
+            name: "Rob thành công",
+            value: String(user.statics.robSuccess),
+            inline: true,
+          },
+          {
+            name: "Đi tù",
+            value: String(user.profile.jail),
+            inline: true,
+          }
+        )
         .setTimestamp()
         .setFooter({
           text: "Code by pnviethung",

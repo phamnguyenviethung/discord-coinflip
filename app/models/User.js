@@ -42,6 +42,16 @@ const UserSchema = new Schema(
         type: Number,
         default: 0,
       },
+      rob: {
+        success: {
+          type: Number,
+          default: 0,
+        },
+        fail: {
+          type: Number,
+          default: 0,
+        },
+      },
       flip: {
         win: {
           type: Number,
@@ -249,11 +259,13 @@ const UserSchema = new Schema(
 
 UserSchema.virtual("statics").get(function () {
   const { win, lose } = this.profile.flip;
+  const { success, fail } = this.profile.rob;
   const total = win + lose === 0 ? 1 : win + lose;
   const winrate = (win * 100) / total;
   return {
     total,
     winrate: winrate.toFixed(1),
+    robSuccess: `${success}/${success + fail}`,
   };
 });
 
