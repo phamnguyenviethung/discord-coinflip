@@ -15,7 +15,7 @@ module.exports = {
           "Bạn không đủ đồ nghề. Yêu cầu **shotgun và mask**"
         );
       }
-      const success = _.random(1, 100) <= 40;
+      const success = _.random(1, 100) % 2 === 0;
       const money = _.random(5, 50) * 1000000000 + _.random(100, 5000) * 1.5;
       if (success) {
         user.money += money;
