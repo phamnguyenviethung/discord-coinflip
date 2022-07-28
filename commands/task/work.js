@@ -48,6 +48,16 @@ module.exports = {
       );
     }
 
+    if (user.volunteer > 0) {
+      user.volunteer -= 1;
+      user.health.eat -= 12;
+      user.health.drink -= 12;
+      user.save();
+      return interaction.reply(
+        `Bạn vừa lao động công ích cho xã hội. Bạn cần phải làm **${user.volunteer} lần** nữa`
+      );
+    }
+
     switch (jobType) {
       case "dig":
         dig(client, interaction, data);

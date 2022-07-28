@@ -9,7 +9,7 @@ const choices = [];
 );
 
 module.exports = {
-  name: "storange",
+  name: "storage",
   description: "Kiếm tra kho",
   type: "CHAT_INPUT",
   cooldown: 2,

@@ -51,81 +51,50 @@ module.exports = {
       },
     ],
   },
-  kb: {
+  mask: {
     require: [
       {
-        name: "plastic",
-        amount: 25,
-        category: "metal",
-      },
-      {
-        name: "iron",
-        amount: 5,
-        category: "metal",
-      },
-      {
-        name: "wire",
-        amount: 1,
+        name: "cloth",
+        amount: 60,
         category: "metal",
       },
     ],
     result: [
       {
-        name: "keyboard",
-        amount: 5,
-        category: "old",
+        name: "mask",
+        amount: 1,
+        category: "tool",
       },
     ],
   },
-  ms: {
+  shotgun: {
     require: [
       {
-        name: "plastic",
+        name: "tape",
+        amount: 15,
+        category: "metal",
+      },
+      {
+        name: "iron",
         amount: 10,
         category: "metal",
       },
-      {
-        name: "iron",
-        amount: 3,
-        category: "metal",
-      },
-      {
-        name: "wire",
-        amount: 1,
-        category: "metal",
-      },
-    ],
-    result: [
-      {
-        name: "mouse",
-        amount: 5,
-        category: "old",
-      },
-    ],
-  },
-  case: {
-    require: [
       {
         name: "plastic",
         amount: 20,
         category: "metal",
       },
       {
-        name: "iron",
-        amount: 10,
-        category: "metal",
-      },
-      {
         name: "wire",
-        amount: 2,
+        amount: 5,
         category: "metal",
       },
     ],
     result: [
       {
-        name: "case",
-        amount: 3,
-        category: "old",
+        name: "shotgun",
+        amount: 1,
+        category: "weapon",
       },
     ],
   },

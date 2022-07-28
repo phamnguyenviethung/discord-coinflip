@@ -1,4 +1,4 @@
-const { formatMoney } = require("../utils/format");
+const { formatMoney } = require("../../utils/format");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const _ = require("underscore");
 

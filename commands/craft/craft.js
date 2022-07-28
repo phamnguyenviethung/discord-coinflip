@@ -27,7 +27,7 @@ module.exports = {
       let reportCostText = "";
 
       require.forEach((reqItem) => {
-        reportCostText += `**${reqItem.name}**: ${reqItem.amount}\n`;
+        reportCostText += `+ **${reqItem.name}**: ${reqItem.amount}\n`;
 
         if (
           user.inventory[reqItem.category][reqItem.name] !== undefined &&
@@ -68,7 +68,7 @@ module.exports = {
       interaction.user.send(`Bạn nhận được \n${resultText}`);
 
       return interaction.reply(
-        `Craft thành công. Bạn đã tiêu tốn:\n${reportCostText}`
+        `Craft thành công.\nBạn đã tiêu tốn:\n${reportCostText}`
       );
     } catch (error) {
       console.log(error);

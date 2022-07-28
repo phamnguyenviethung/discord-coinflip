@@ -22,7 +22,8 @@ module.exports = {
   ],
   run: async (client, interaction) => {
     const { value } = interaction.options.get("amount");
-    const { id, username } = interaction.options.getUser("user");
+    const payeeInfo = interaction.options.getUser("user");
+    const { id, username } = payeeInfo;
     try {
       const user = await User.findOne({ id: interaction.user.id });
       if (!user) return interaction.reply("Bạn chưa đăng ký");
@@ -40,6 +41,11 @@ module.exports = {
       user.save();
       payee.save();
 
+      payeeInfo.send(
+        `Bạn nhận được ${formatMoney(value)} từ **${
+          interaction.user.username
+        }**!`
+      );
       return interaction.reply(
         `🤑 **${interaction.user.username}** đã chuyển **${formatMoney(
           value

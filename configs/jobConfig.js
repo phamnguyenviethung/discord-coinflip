@@ -1,6 +1,6 @@
 const _ = require("underscore");
 
-const basicSalary = 1200;
+const basicSalary = 1800;
 
 const jobSalary = {
   janitor: () => _.random(basicSalary, basicSalary + 100) * 1.5,
@@ -21,7 +21,7 @@ module.exports.job = {
     level: 1,
   },
   dig: {
-    randomQuantity: () => _.random(2, 4),
+    randomQuantity: () => _.random(3, 6),
     salary: jobSalary.dig,
     eat: 3,
     drink: 3,
@@ -30,10 +30,10 @@ module.exports.job = {
 
     percent: [
       { value: "tape", percentage: 28 },
-      { value: "cloth", percentage: 24 },
-      { value: "plastic", percentage: 18 },
-      { value: "iron", percentage: 14 },
-      { value: "empty", percentage: 11 },
+      { value: "cloth", percentage: 22 },
+      { value: "plastic", percentage: 20 },
+      { value: "empty", percentage: 14 },
+      { value: "iron", percentage: 11 },
       { value: "wire", percentage: 5 },
     ],
   },

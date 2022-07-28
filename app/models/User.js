@@ -19,6 +19,10 @@ const UserSchema = new Schema(
       type: Number,
       default: 0,
     },
+    volunteer: {
+      type: Number,
+      default: 0,
+    },
     atm: {
       type: Number,
       default: 0,
@@ -143,6 +147,10 @@ const UserSchema = new Schema(
           type: Number,
           default: 0,
         },
+        mask: {
+          type: Number,
+          default: 0,
+        },
       },
       hunting: {
         bird: {
@@ -176,20 +184,6 @@ const UserSchema = new Schema(
           default: 0,
         },
         shark: {
-          type: Number,
-          default: 0,
-        },
-      },
-      old: {
-        keyboard: {
-          type: Number,
-          default: 0,
-        },
-        mouse: {
-          type: Number,
-          default: 0,
-        },
-        case: {
           type: Number,
           default: 0,
         },
