@@ -37,6 +37,8 @@ module.exports = {
         user.profile.jail += 1;
         user.bankloan += fine;
         user.volunteer += volunteer;
+        user.inventory.weapon.shotgun -= 1;
+        user.inventory.tool.mask -= 1;
         user.save();
         return interaction.reply(
           `🚓 **${
