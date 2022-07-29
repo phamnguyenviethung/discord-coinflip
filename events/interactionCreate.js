@@ -72,6 +72,13 @@ module.exports = async (client, interaction) => {
         );
       }
     }
+    if (["flip", "flipall", "bankrob"].includes(command.name)) {
+      if (user.volunteer > 0) {
+        return interaction.reply(
+          `Hãy hoàn thành lao động công ích trước khi làm việc khác. Bạn cần phải work **${user.volunteer} lần** nữa`
+        );
+      }
+    }
 
     command.run(client, interaction, user);
   } catch (error) {
