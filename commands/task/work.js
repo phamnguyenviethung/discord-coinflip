@@ -11,7 +11,7 @@ const { job } = require("../../configs/jobConfig");
 module.exports = {
   name: "work",
   description: "Cùng nhau work nào ",
-  cooldown: 60,
+  cooldown: 45,
   type: "CHAT_INPUT",
   options: [
     {
