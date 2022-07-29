@@ -11,7 +11,6 @@ module.exports = {
   run: async (client, interaction, user) => {
     try {
       if (user.inventory.weapon.shotgun <= 0 || user.inventory.tool.mask <= 0) {
-        client.cooldowns.get("rob").delete(interaction.user.id);
         return interaction.reply(
           "Bạn không đủ đồ nghề. Yêu cầu **shotgun và mask**"
         );
