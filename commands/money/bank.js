@@ -36,20 +36,24 @@ module.exports = {
       if (user.money <= 0 || user.money < value) {
         return interaction.reply("Bạn không đủ tiền! :(");
       }
+
+      const percentage = value - (value * 98.5) / 100;
       user.money -= value;
-      payee.money += value;
+      payee.money += value - percentage;
       user.save();
       payee.save();
 
       payeeInfo.send(
         `Bạn nhận được ${formatMoney(value)} từ **${
           interaction.user.username
-        }**!`
+        }**!. Phí giao dịch (người nhận trả): ${formatMoney(percentage)}`
       );
       return interaction.reply(
         `🤑 **${interaction.user.username}** đã chuyển **${formatMoney(
           value
-        )}** cho **${username}** `
+        )}** cho **${username}**. Phí giao dịch (người nhận trả): ${formatMoney(
+          percentage
+        )}`
       );
     } catch (error) {
       console.log(error);

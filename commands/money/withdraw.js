@@ -23,7 +23,7 @@ module.exports = {
       if (user.atm < value || user.atm <= 0) {
         return interaction.reply("Bạn không đủ tiền");
       }
-      const percentage = value - (value * 99) / 100;
+      const percentage = value - (value * 98.5) / 100;
 
       user.atm -= value;
       user.money += value - percentage;
