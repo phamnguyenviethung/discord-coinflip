@@ -7,7 +7,7 @@ module.exports = {
   name: "bankrob",
   description: "Cướp ngân hàng",
   type: "CHAT_INPUT",
-  cooldown: 180,
+  cooldown: 120,
   run: async (client, interaction, user) => {
     try {
       if (user.inventory.weapon.shotgun <= 0 || user.inventory.tool.mask <= 0) {
@@ -35,7 +35,7 @@ module.exports = {
       } else {
         const lockTime = 6;
         const fine = 5 * 1000000;
-        const volunteer = 10;
+        const volunteer = 5;
         const time = dayjs().locale("vi").add(lockTime, "minutes");
 
         user.timestamps.jail = time.valueOf();

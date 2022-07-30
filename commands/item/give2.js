@@ -37,7 +37,8 @@ module.exports = {
   ],
   run: async (client, interaction, user) => {
     const { value } = interaction.options.get("amount");
-    const { id, username } = interaction.options.getUser("user");
+    const payeeInfo = interaction.options.getUser("user");
+    const { id, username } = payeeInfo;
     const itemName = interaction.options.get("item").value;
 
     try {
@@ -56,7 +57,11 @@ module.exports = {
       payee.item[itemName] += value;
       user.save();
       payee.save();
-
+      payeeInfo.send(
+        `Bạn nhận được **${value + " " + itemName}** từ **${
+          interaction.user.username
+        }**`
+      );
       return interaction.reply(
         `🚚🚚🚚**${interaction.user.username}** đã gửi **${
           value + " " + itemName

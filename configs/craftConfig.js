@@ -55,7 +55,7 @@ module.exports = {
     require: [
       {
         name: "cloth",
-        amount: 60,
+        amount: 20,
         category: "metal",
       },
     ],
