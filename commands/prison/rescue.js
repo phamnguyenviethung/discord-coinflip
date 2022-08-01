@@ -10,6 +10,7 @@ module.exports = {
   name: "rescue",
   description: "Giúp anh em vượt ngục",
   type: "CHAT_INPUT",
+  cooldown: 60,
   options: [
     {
       name: "user",
@@ -31,8 +32,8 @@ module.exports = {
         return interaction.reply("Bạn không thể dùng lên chính mình");
       }
 
-      if (user.inventory.weapon.shotgun <= 0) {
-        return interaction.reply("Bạn không có shotgun");
+      if (user.inventory.weapon.shotgun <= 0 || user.inventory.tool.mask <= 0) {
+        return interaction.reply("Bạn không đủ mask hoặc shotgun");
       }
 
       const now = dayjs().locale("vi");
@@ -43,11 +44,12 @@ module.exports = {
       if (!isBefore) {
         return interaction.reply(`Người đó không trong tù`);
       }
-      const pick = _.random(20, 30) >= 27;
-      const killed = _.random(1, 3);
+      const pick = _.random(1, 100) >= 45;
+      const killed = _.random(2, 8);
       console.log("pick:", pick);
       if (pick) {
         user.inventory.weapon.shotgun -= 1;
+        user.inventory.tool.mask -= 1;
         user.profile.kill += killed;
         user.save();
         prisoner.timestamps.jail = null;
@@ -63,7 +65,8 @@ module.exports = {
         );
       } else {
         user.inventory.weapon.shotgun -= 1;
-        user.timestamps.jail = now.add(5, "minute");
+        user.inventory.tool.mask -= 1;
+        user.timestamps.jail = now.add(8, "minute");
         user.profile.kill += killed;
         user.profile.jail += 1;
         user.save();
@@ -79,7 +82,7 @@ module.exports = {
       }
     } catch (error) {
       console.log(error);
-      return interaction.reply("help: có lỗi");
+      return interaction.reply("rescue: có lỗi");
     }
   },
 };

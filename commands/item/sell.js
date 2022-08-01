@@ -108,7 +108,7 @@ module.exports = {
         const userClickedInfo = collection.first();
 
         if (userClickedInfo?.customId === "yes") {
-          if (customer.money <= 0 || customer.money < price) {
+          if (customer.atm <= 0 || customer.atm < price) {
             interaction.deleteReply();
             return interaction.channel.send({
               content: "Bạn không còn tiền",
@@ -116,10 +116,10 @@ module.exports = {
             });
           }
 
-          user.money += price;
+          user.atm += price;
           user.inventory[key][item] -= amount;
           customer.inventory[key][item] += amount;
-          customer.money -= price;
+          customer.atm -= price;
 
           user.save();
           customer.save();
@@ -155,7 +155,7 @@ module.exports = {
       return interaction.reply({
         content: `${customerInteraction.username} ơi, ${
           interaction.user.username
-        } bán **${amount + " " + item} với giá ${formatMoney(price)}**.`,
+        } bán **${amount + " " + item}** với giá ${formatMoney(price)}.`,
         components: [row],
       });
     } catch (error) {

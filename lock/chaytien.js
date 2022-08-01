@@ -1,7 +1,7 @@
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
 const _ = require("underscore");
-const { formatMoney } = require("../../utils/format");
+const { formatMoney } = require("../utils/format");
 
 dayjs.extend(relativeTime);
 require("dayjs/locale/vi");

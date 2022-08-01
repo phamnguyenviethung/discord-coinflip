@@ -43,7 +43,7 @@ module.exports = {
         const loan = user.bankloan;
 
         if (userClickedInfo?.customId === "yes") {
-          if (user.money <= 0 || user.money < user.bankloan) {
+          if (user.atm <= 0 || user.atm < user.bankloan) {
             interaction.deleteReply();
             return interaction.channel.send({
               content: "Bạn không có đủ tiền",
@@ -51,7 +51,7 @@ module.exports = {
             });
           }
 
-          user.money -= loan;
+          user.atm -= loan;
           user.bankloan = 0;
 
           user.save();

@@ -33,13 +33,13 @@ module.exports = {
       if (user.id === payee.id) {
         return interaction.reply("Bạn không thể dùng lên chính mình");
       }
-      if (user.money <= 0 || user.money < value) {
+      if (user.atm <= 0 || user.atm < value) {
         return interaction.reply("Bạn không đủ tiền! :(");
       }
 
       const percentage = value - (value * 98.5) / 100;
-      user.money -= value;
-      payee.money += value - percentage;
+      user.atm -= value;
+      payee.atm += value - percentage;
       user.save();
       payee.save();
 
