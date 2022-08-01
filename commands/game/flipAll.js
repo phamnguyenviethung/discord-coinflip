@@ -31,6 +31,7 @@ module.exports = {
       let pick = _.random(1, 2) % 2 === 0 ? "Heads" : "Tails";
       const bet = user.money;
       const limit = user.limit || 99999999999;
+
       if (bet >= limit && pick === userSide && _.random(1, 100) >= 25) {
         if (userSide === "Heads") pick = "Tails";
         if (userSide === "Tails") pick = "Heads";
@@ -51,6 +52,7 @@ module.exports = {
         user.money = 0;
         user.health.eat -= 8;
         user.health.drink -= 8;
+        user.health.stress = 100;
         user.profile.flip.lose += 1;
         user.save();
 
@@ -66,6 +68,8 @@ module.exports = {
       user.money += bet * multiply;
       user.health.eat -= 12;
       user.health.drink -= 12;
+      user.health.stress =
+        user.health.stress - 10 > 0 ? user.health.stress - 10 : 0;
       user.profile.flip.win += 1;
       user.save();
 

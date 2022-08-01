@@ -82,6 +82,10 @@ const UserSchema = new Schema(
         type: Number,
         default: 150,
       },
+      stress: {
+        type: Number,
+        default: 10,
+      },
     },
     inventory: {
       grab: {
@@ -229,6 +233,14 @@ const UserSchema = new Schema(
         default: 0,
       },
       hamburger: {
+        type: Number,
+        default: 0,
+      },
+      cigarette: {
+        type: Number,
+        default: 0,
+      },
+      drug: {
         type: Number,
         default: 0,
       },

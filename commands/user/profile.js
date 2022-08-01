@@ -64,12 +64,12 @@ module.exports = {
             inline: true,
           }
         )
+
         .setTimestamp()
         .setFooter({
           text: "Code by pnviethung",
           iconURL: "https://i.imgur.com/AfFp7pu.png",
         });
-
       interaction.reply({ embeds: [exampleEmbed] });
     } catch (error) {
       console.log(error);

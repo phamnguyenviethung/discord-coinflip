@@ -38,7 +38,7 @@ module.exports.job = {
     ],
   },
   farm: {
-    randomQuantity: () => _.random(1, 3),
+    randomQuantity: () => _.random(2, 5),
     salary: jobSalary.farm,
     eat: 3,
     drink: 3,
@@ -46,11 +46,12 @@ module.exports.job = {
     level: 3,
 
     percent: [
-      { value: "salad", percentage: 40 },
-      { value: "tomato", percentage: 35 },
-      { value: "peanut", percentage: 20 },
-      { value: "corn", percentage: 4 },
-      { value: "carrot", percentage: 1 },
+      { value: "salad", percentage: 30 },
+      { value: "tomato", percentage: 25 },
+      { value: "peanut", percentage: 15 },
+      { value: "empty", percentage: 13 },
+      { value: "corn", percentage: 12 },
+      { value: "carrot", percentage: 5 },
     ],
   },
   grab: {

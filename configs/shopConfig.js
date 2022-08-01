@@ -23,4 +23,8 @@ module.exports = {
     price: 4000,
     amount: 40,
   },
+  cigarette: {
+    price: 5000,
+    amount: 15,
+  },
 };

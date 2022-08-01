@@ -2,12 +2,14 @@ const { formatMoney } = require("../../utils/format");
 const shopPrice = require("../../configs/shopConfig");
 
 const choices = [];
-["sting", "coffee", "beer", "bread", "hamburger"].forEach((item) => {
-  choices.push({
-    name: item,
-    value: item,
-  });
-});
+["sting", "coffee", "beer", "bread", "hamburger", "cigarette"].forEach(
+  (item) => {
+    choices.push({
+      name: item,
+      value: item,
+    });
+  }
+);
 
 module.exports = {
   name: "buy",

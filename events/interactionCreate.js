@@ -49,6 +49,12 @@ module.exports = async (client, interaction) => {
         timestamps.delete(interaction.user.id);
         return interaction.reply("Bạn chưa đăng ký");
       }
+      if (["work", "flip", "flipall", "bankrob"].includes(command.name))
+        if (user.health.stress >= 100) {
+          return interaction.reply(
+            "Bạn đang stress, hãy làm gì đó để giải tỏa..."
+          );
+        }
 
       const now = dayjs().locale("vi");
       const userTime = dayjs(user.timestamps.jail);

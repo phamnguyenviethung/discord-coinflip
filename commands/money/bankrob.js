@@ -26,6 +26,7 @@ module.exports = {
         user.inventory.weapon.shotgun -= 1;
         user.inventory.tool.mask -= 1;
         user.profile.rob.success += 1;
+        user.health.stress = 0;
         user.save();
         return interaction.followUp(
           `🤑 **${interaction.user.username}** đã cướp được ${formatMoney(
@@ -42,6 +43,7 @@ module.exports = {
         user.profile.jail += 1;
         user.profile.rob.fail += 1;
         user.bankloan += fine;
+        user.health.stress = 90;
         user.volunteer += volunteer;
         user.inventory.weapon.shotgun -= 1;
         user.inventory.tool.mask -= 1;

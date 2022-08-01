@@ -7,7 +7,7 @@ const chef = require("./job/chef");
 const grab = require("./job/grab");
 const { choicesGenerator } = require("../../utils/choicesGenerator");
 const { job } = require("../../configs/jobConfig");
-
+const _ = require("underscore");
 module.exports = {
   name: "work",
   description: "Cùng nhau work nào ",
@@ -57,6 +57,9 @@ module.exports = {
         `Bạn vừa lao động công ích cho xã hội. Bạn cần phải làm **${user.volunteer} lần** nữa`
       );
     }
+
+    user.health.stress += _.random(1, 3);
+    await user.save();
 
     switch (jobType) {
       case "dig":
