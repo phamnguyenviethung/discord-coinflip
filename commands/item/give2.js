@@ -24,6 +24,8 @@ module.exports = {
         "hamburger",
         "rice",
         "noodle",
+        "cigarette",
+        "drug",
       ]),
       required: true,
     },
