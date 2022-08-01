@@ -66,7 +66,7 @@ module.exports = {
       } else {
         user.inventory.weapon.shotgun -= 1;
         user.inventory.tool.mask -= 1;
-        user.timestamps.jail = now.add(8, "minute");
+        user.timestamps.jail = now.add(10, "minute");
         user.profile.kill += killed;
         user.profile.jail += 1;
         user.save();

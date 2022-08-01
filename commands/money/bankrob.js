@@ -16,7 +16,7 @@ module.exports = {
         );
       }
       const success = _.random(1, 100) % 2 === 0;
-      const money = _.random(10, 150) * 1000000000 + _.random(100, 5000) * 1.5;
+      const money = _.random(1, 250) * 1000000000 + _.random(100, 10000) * 2.5;
       interaction.reply(`🚔🚔🚔 Một vụ cướp vừa xảy ra....`);
       await new Promise((resolve) => {
         setTimeout(resolve, 4000);
@@ -33,7 +33,7 @@ module.exports = {
           )}`
         );
       } else {
-        const lockTime = 6;
+        const lockTime = 10;
         const fine = 5 * 1000000;
         const volunteer = 5;
         const time = dayjs().locale("vi").add(lockTime, "minutes");
