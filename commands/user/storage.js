@@ -1,5 +1,5 @@
 const choices = [];
-["metal", "weapon", "tool", "fishing", "hunting", "vegatable", "old"].forEach(
+["metal", "weapon", "tool", "fishing", "hunting", "vegatable"].forEach(
   (item) => {
     choices.push({
       name: item,

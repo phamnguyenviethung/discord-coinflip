@@ -15,7 +15,7 @@ module.exports = {
   ],
 
   run: async (client, interaction, user) => {
-    const code = interaction.options.get("code").value;
+    const code = interaction.options.get("code").value.toLowerCase();
     try {
       const craftItem = craft[code];
       if (!craftItem) return interaction.reply("Sai code hoặc không tồn tại");

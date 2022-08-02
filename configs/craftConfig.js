@@ -29,25 +29,25 @@ module.exports = {
     require: [
       {
         name: "plastic",
-        amount: 60,
+        amount: 25,
         category: "metal",
       },
       {
         name: "iron",
-        amount: 50,
+        amount: 20,
         category: "metal",
       },
       {
         name: "tape",
-        amount: 10,
+        amount: 30,
         category: "metal",
       },
     ],
     result: [
       {
         name: "huntingrifle",
-        amount: 10,
-        category: "hunting",
+        amount: 3,
+        category: "tool",
       },
     ],
   },

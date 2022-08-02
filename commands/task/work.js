@@ -1,5 +1,4 @@
 const dig = require("./job/dig");
-const hunting = require("./job/hunting");
 const fishing = require("./job/fishing");
 const farm = require("./job/farm");
 const janitor = require("./job/janitor");
@@ -24,7 +23,6 @@ module.exports = {
         "dig",
         "farm",
         "grab",
-        "hunting",
         "fishing",
         "chef",
       ]),
@@ -64,9 +62,6 @@ module.exports = {
     switch (jobType) {
       case "dig":
         dig(client, interaction, data);
-        break;
-      case "hunting":
-        hunting(client, interaction, data);
         break;
       case "fishing":
         fishing(client, interaction, data);

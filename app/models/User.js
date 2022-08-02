@@ -183,6 +183,10 @@ const UserSchema = new Schema(
           type: Number,
           default: 0,
         },
+        elephant: {
+          type: Number,
+          default: 0,
+        },
       },
       fishing: {
         carp: {
