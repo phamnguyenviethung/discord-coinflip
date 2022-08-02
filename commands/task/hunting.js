@@ -37,7 +37,14 @@ module.exports = {
           `Bạn không có súng săn. Hãy dùng code **hrl** để craft`
         );
       }
-
+      if (item === "empty") {
+        user.health.eat -= 15;
+        user.health.drink -= 15;
+        user.health.stress += 5;
+        return interaction.reply(
+          `Thật không may, **${interaction.user.username}** đã không săn được gì.`
+        );
+      }
       interaction.reply(`🚗🚗🚗 Bạn đang đi đến nơi săn...`);
       await new Promise((resolve) => {
         setTimeout(resolve, 4000);
