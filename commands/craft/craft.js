@@ -31,7 +31,7 @@ module.exports = {
 
         if (
           user.inventory[reqItem.category][reqItem.name] !== undefined &&
-          user.inventory[reqItem.category][reqItem.name] > reqItem.amount &&
+          user.inventory[reqItem.category][reqItem.name] >= reqItem.amount &&
           user.inventory[reqItem.category][reqItem.name] > 0
         ) {
           validItem.push(reqItem);
