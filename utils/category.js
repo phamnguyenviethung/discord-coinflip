@@ -1,8 +1,8 @@
 module.exports.category = {
   fishing: ["carp", "perch", "phattom", "shark"],
-  hunting: ["rabbit", "tiger", "rhino"],
+  hunting: ["bird", "rabbit", "tiger", "rhino", "elephant"],
   metal: ["iron", "plastic", "cloth", "wire", "tape"],
   weapon: ["knife", "shotgun"],
   tool: ["huntingrifle", "fishingrod", "shovel", "mask"],
-  smuggle: ["tiger", "rhino", "rabbit"],
+  smuggle: ["bird", "rabbit", "tiger", "rhino", "elephant"],
 };
